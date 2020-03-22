@@ -1,0 +1,48 @@
+<section class="content-header">
+    <h1>
+        {{module}}
+    </h1>
+
+</section>
+
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="top-box">
+                <div class="col-md-10">
+                    <div class="top-button-area">
+                        <div class="col-md-2 col-sm-4 col-xs-4">
+                            <button type="button"  class="dropbtn btn btn-primary hi_btn" ng-click="addForm()" style="width:80%">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 customer-data">
+            <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                <thead >
+                <tr>
+                    <th ng-repeat="key in keyList" >
+                        {{key.field}}
+                    </th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="form in formList">
+                    <td ng-repeat="keys in keyList">{{form[keys.field]}}</td>
+                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="addCall('edit',form)">Edit</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+

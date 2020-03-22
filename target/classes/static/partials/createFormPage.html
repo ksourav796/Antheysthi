@@ -1,0 +1,1515 @@
+<style type="text/css">
+    .preview-area{
+        height: 300px;
+        overflow-y: scroll;
+    }
+    .define-data{
+        height: 300px;
+        overflow-y: scroll;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .nav-tabs-custom>.nav-tabs>li{
+        margin-right: -6px;
+    }
+</style>
+<section class="content-header">
+    <h1>
+        {{operation}} Create Page
+    </h1>
+
+</section>
+
+<section class="content define-data">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                <label  class=" control-label">Module Name<span style="color: red">*</span></label>
+                                <div class="">
+                                    <select id="module" name="module" ng-model="moduleName" ng-change="getSubmoduleList(moduleName)" ng-options="module.moduleName as
+											module.moduleName for module in moduleList" class="form-control">
+                                        <option value="">Create New</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                <label  class=" control-label">Sub-Module Name</label>
+                                <div class="">
+                                    <select id="module" name="module" ng-model="submoduleName" ng-options="submodule.subModuleName as
+											submodule.subModuleName for submodule in subModuleList"  class="form-control">
+                                        <option value="">Create New</option>
+                                    </select>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                <label  class="control-label">Page Name</label>
+                                <div class="">
+                                    <input id="pageName" name="pageName"
+                                           type="text" placeholder="Page Name" alpha-without-space
+                                           ng-model="pageName" maxlength="125"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div ng-repeat="column in NoOfColumnsList" ng-init="parentIndex=$index">
+                                <div class="form-group" style="width: 29%;margin-left: 30px;">
+                                    <label  class="control-label">No.Of Columns<span style="color: red">*</span></label>
+                                    <div class="">
+                                        <input id="columns" name="columns" ng-change="getColumnsList(column.columns,column,$index+1)"
+                                               type="text" placeholder="Enter No.Of Columns" num-with-out-space
+                                               ng-model="column.columns" maxlength="1" readonly
+                                               class="form-control">
+                                        <p class="error" ng-show="column.columns==4" style="color: red">Maximum Columns Reached</p>
+                                    </div>
+
+                                    <div class=""
+                                         ng-hide="column.columns==4" style="float: right;margin-top: -32px;margin-right: -35px;">
+                                        <input type="button" value="+"
+                                               ng-click="increaseColumns(column,$index+1);getColumnsList(column.columns,column,$index+1);preview()">
+                                    </div>
+                                </div>
+                    <div ng-repeat="details in column.detailsList">
+                        <div class="col-sm-4">
+                            <div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Column</label>
+                                    <div class="col-sm-10">
+                                            <input type="email" class="form-control input-md" id="column" readonly  name="email" ng-model="details.noOfColumn">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4" >
+                            <div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Field</label>
+                                    <div class="col-sm-10">
+                                        <input id="field" name="field"
+                                               type="text" placeholder="Enter Field Name" ng-change="preview()" maxlength="30"
+                                               ng-model="details.field" alpha-without-space
+                                               class="form-control input-md">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4" style="margin-top: 15px;">
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Type</label>
+                                <div class="col-sm-10" style="padding: 0px;">
+                                    <div class="col-sm-12" style="padding: 0px;">
+                                        <div class="col-sm-9">
+                                            <select id="typeOfEnquiryList" name="typeOfEnquiryList" ng-model="details.type" ng-change="preview()"   class="form-control input-md">
+                                                <option value="">Select Type</option>
+                                                <option value="date">Date</option>
+                                                <option value="input">Input</option>
+                                                <option value="number">Number</option>
+                                                <option value="password">Password</option>
+                                                <option value="textarea">Textarea</option>
+                                                <option value="radio">Radio</option>
+                                                <option value="checkbox">Checkbox</option>
+                                                <option value="select">Select</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-1" ng-if="details.type" style="margin-left: -20px;margin-top: 5px;" >
+                                            <a><i class="fa fa-cog" aria-hidden="true" ng-click="openSettings(details,parentIndex,$index)"></i></a>
+
+                                        </div>
+                                        <div class="col-sm-1"
+                                             ng-if="column.detailsList.length>1 && $index!=0" style="margin-left: -10px;">
+                                            <input type="button" value="X" ng-click="removedetailsList(column,$index);preview()">
+                                        </div>
+                                        <div class="col-sm-1"
+                                             ng-if="column.detailsList.length-1==$index">
+                                            <input type="button" value="+"
+                                                   ng-click="addNewdetailsList($index,column)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                        data-target=".print-me" ng-click="saveCreatePage()">Save
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeForm()">Close</button>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content" style="background-color: #fff;">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="preview-area">
+                <div class="col-lg-6 col-sm-6 col-xs-6">
+                    <h2>Preview</h2>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-6">
+                    <button type="button" class="btn btn-default" data-toggle="modal" ng-click="openpreview('preview')" style="float: right; margin-top: 30px;background-color: #38586a;color: #fff;">Preview </button>
+                </div>
+                <div class="" ng-repeat="key in previewList">
+                    <!--For Date-->
+                    <div class="{{key.classwidth}}" ng-show="key.type=='date'">
+                        <!-- for Date Top-->
+                        <div class="form-group" ng-show="key.labelposition=='top'" style="margin-top: {{key.margintop}};margin-left: {{key.marginleft}};margin-right: {{key.marginright}};margin-bottom: {{key.marginbottom}}" >
+                            <label class="" for="email" ng-show="key.type=='date'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <div class="">
+                                <input type="date" class="form-control" id="email"  name="email">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Date Left (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(left-aligned)'" style="margin-top: {{key.margintop}};margin-left: {{key.marginleft}};margin-right: {{key.marginright}};margin-bottom: {{key.marginbottom}}">
+                            <label class="" for="email" ng-show="key.type=='date'" style="float: left; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input type="date" class="form-control" id="email"  name="email">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Date Left (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'" style="margin-top: {{key.margintop}};margin-left: {{key.marginleft}};margin-right: {{key.marginright}};margin-bottom: {{key.marginbottom}}" >
+                            <label class="" for="email" ng-show="key.type=='date'" style="float: left; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input type="date" class="form-control" id="email"  name="email">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Date right (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'" style="margin-top: {{key.margintop}};margin-left: {{key.marginleft}};margin-right: {{key.marginright}};margin-bottom: {{key.marginbottom}}">
+                            <label class="" for="email" ng-show="key.type=='date'" style="float: right; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input type="date" class="form-control" id="email"  name="email">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Date right (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'" style="margin-top: {{key.margintop}};margin-left: {{key.marginleft}};margin-right: {{key.marginright}};margin-bottom: {{key.marginbottom}}">
+                            <label class="" for="email" ng-show="key.type=='date'" style="float: right; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input type="date" class="form-control" id="email"  name="email">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Date botton -->
+                        <div class="form-group" ng-show="key.labelposition=='bottom'" style="margin-top: {{key.margintop}};margin-left: {{key.marginleft}};margin-right: {{key.marginright}};margin-bottom: {{key.marginbottom}}">
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input type="date" class="form-control" id="email"  name="email">
+                            </div>
+                            <label class="" for="email" ng-show="key.type=='date'" style="float: right; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                    </div>
+                    <!-- for Input -->
+                    <div class="{{key.classwidth}}" ng-show="key.type=='input'">
+                        <!-- for Input Top-->
+                        <div class="form-group" ng-show="key.labelposition=='top'"  style="margin-top: {{key.margintop}};margin-left: {{key.marginleft}};margin-right: {{key.marginright}};margin-bottom: {{key.marginbottom}}">
+                            <label class="" for="email" ng-show="key.type=='input'" ng-hide="key.hideLabel==true">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="">
+                                <input id="input" name="input"
+                                       type="text" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}" value="{{key.defaultvalue}}"
+                                       class="form-control">
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && (key.customErrorMessage==null|| key.customErrorMessage =='')" style="color: red">Text is required.</p>
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && key.customErrorMessage" style="color: red">{{key.customErrorMessage}}</p>
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Input Left (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(left-aligned)'" style="margin-top: {{key.margintop}};margin-left: {{key.marginleft}};margin-right: {{key.marginright}};margin-bottom: {{key.marginbottom}}">
+                            <label class="" for="email" style="float: left; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label> <span style="color: red" ng-if="key.validate">*</span>
+                            <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input id="input" name="input"
+                                       type="text" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}" value="{{key.defaultvalue}}"
+                                       class="form-control">
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && (key.customErrorMessage==null|| key.customErrorMessage =='')" style="color: red">Text is required.</p>
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && key.customErrorMessage" style="color: red">{{key.customErrorMessage}}</p>                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Input Left (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'" style="margin-top: {{key.margintop}};margin-left: {{key.marginleft}};margin-right: {{key.marginright}};margin-bottom: {{key.marginbottom}}">
+                            <label class="" for="email" style="float: left; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label> <span style="color: red" ng-if="key.validate">*</span>
+                            <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input id="input" name="input"
+                                       type="text" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}" value="{{key.defaultvalue}}"
+                                       class="form-control">
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && (key.customErrorMessage==null|| key.customErrorMessage =='')" style="color: red">Text is required.</p>
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && key.customErrorMessage" style="color: red">{{key.customErrorMessage}}</p>                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Input Right (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(left-aligned)'" style="margin-top: {{key.margintop}};margin-left: {{key.marginleft}};margin-right: {{key.marginright}};margin-bottom: {{key.marginbottom}}">
+                            <label class="" for="email" style="float: right; width: 30%; margin-left: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-right: 33%;">
+                                <input id="input" name="input"
+                                       type="text" placeholder="{{key.placeholder}}" value="{{key.defaultvalue}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && (key.customErrorMessage==null|| key.customErrorMessage =='')" style="color: red">Text is required.</p>
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && key.customErrorMessage" style="color: red">{{key.customErrorMessage}}</p>                                <p class="desc">{{key.changedesc}}</p>
+                            </div>
+                        </div>
+                        <!-- for Input Right (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(right-aligned)'" style="margin-top: {{key.margintop}};margin-left: {{key.marginleft}};margin-right: {{key.marginright}};margin-bottom: {{key.marginbottom}}">
+                            <label class="" for="email" style="float: right; width: 30%; margin-left: 3%; text-align: right;">{{key.field}}:</label> <span style="color: red" ng-if="key.validate">*</span>
+                            <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-right: 33%;">
+                                <input id="input" name="input"
+                                       type="text" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}" value="{{key.defaultvalue}}"
+                                       class="form-control">
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && (key.customErrorMessage==null|| key.customErrorMessage =='')" style="color: red">Text is required.</p>
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && key.customErrorMessage" style="color: red">{{key.customErrorMessage}}</p>                                <p class="desc">{{key.changedesc}}</p>
+                            </div>
+                        </div>
+                        <!-- for Input Bottom-->
+                        <div class="form-group" ng-show="key.labelposition=='bottom'" style="margin-top: {{key.margintop}};margin-left: {{key.marginleft}};margin-right: {{key.marginright}};margin-bottom: {{key.marginbottom}}">
+                            <div class="">
+                                <input id="input" name="input"
+                                       type="text" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && (key.customErrorMessage==null|| key.customErrorMessage =='')" style="color: red">Text is required.</p>
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && key.customErrorMessage" style="color: red">{{key.customErrorMessage}}</p>                            </div>
+                            <label class="" for="email" ng-show="key.type=='input'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                    </div>
+                    <!-- for Number -->
+                    <div class="{{key.classwidth}}"  ng-show="key.type=='number'">
+                        <!-- for Number Top-->
+                        <div class="form-group" ng-show="key.labelposition=='top'" >
+                            <label class="" for="email" ng-show="key.type=='number'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="">
+                                <input id="input" name="input"
+                                       type="number" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Number Left (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(left-aligned)'">
+                            <label class="" for="email" ng-show="key.type=='number'" style="float: left; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input id="input" name="input"
+                                       type="number" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Number Left (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'">
+                            <label class="" for="email" ng-show="key.type=='number'" style="float: left; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input id="input" name="input"
+                                       type="number" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Number Right (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(left-aligned)'">
+                            <label class="" for="email" ng-show="key.type=='number'" style="float: right; width: 30%; margin-left: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-right: 33%;">
+                                <input id="input" name="input"
+                                       type="number" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Number Right (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(right-aligned)'">
+                            <label class="" for="email" ng-show="key.type=='number'" style="float: right; width: 30%; margin-left: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-right: 33%;">
+                                <input id="input" name="input"
+                                       type="number" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Number Bottom-->
+                        <div class="form-group" ng-show="key.labelposition=='bottom'" >
+                            <div class="">
+                                <input id="input" name="input"
+                                       type="number" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                            </div>
+                            <label class="" for="email" ng-show="key.type=='number'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                    </div>
+                    <!--for Password-->
+                    <div class="{{key.classwidth}}" ng-show="key.type=='password'">
+                        <!-- for password Top-->
+                        <div class="form-group" ng-show="key.labelposition=='top'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='password'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="col-sm-10">
+                                <input id="input" name="input"
+                                       type="password" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for password Left (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(left-aligned)'">
+                            <label class="" for="email" ng-show="key.type=='password'" style="float: left; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input id="input" name="input"
+                                       type="number" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for password Left (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'">
+                            <label class="" for="email" ng-show="key.type=='password'" style="float: left; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input id="input" name="input"
+                                       type="number" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for password Right (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(left-aligned)'">
+                            <label class="" for="email" ng-show="key.type=='password'" style="float: right; width: 30%; margin-left: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-right: 33%;">
+                                <input id="input" name="input"
+                                       type="number" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for password Right (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(right-aligned)'">
+                            <label class="" for="email" ng-show="key.type=='password'" style="float: right; width: 30%; margin-left: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-right: 33%;">
+                                <input id="input" name="input"
+                                       type="number" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for password bottom-->
+                        <div class="form-group" ng-show="key.labelposition=='bottom'" >
+                            <div class="col-sm-10">
+                                <input id="input" name="input"
+                                       type="password" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                            </div>
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='password'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip"  title="{{key.tooltip}}" data-placement="right"></i>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                    </div>
+                    <!--For Textarea-->
+                    <div class="{{key.classwidth}}" ng-show="key.type=='textarea'">
+                        <!--For Textarea top-->
+                        <div class="form-group" ng-show="key.labelposition=='top'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='textarea'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <textarea id="input" name="input"
+                                      type="text" placeholder="{{key.placeholder}}"
+                                      ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                      class="form-control">
+                           </textarea>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for textarea Left (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(left-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='textarea'" style="float: left; width: 30%; margin-right: 3%; text-align: left;"> {{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                            <textarea id="input" name="input"
+                                      type="text" placeholder="{{key.placeholder}}"
+                                      ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                      class="form-control">
+                           </textarea>
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for textarea Left (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='textarea'" style="float: left; width: 30%; margin-right: 3%; text-align: right;"> {{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                            <textarea id="input" name="input"
+                                      type="text" placeholder="{{key.placeholder}}"
+                                      ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                      class="form-control">
+                           </textarea>
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for textarea right (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(left-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='textarea'" style="float: right; width: 30%; margin-right: 3%; text-align: left;"> {{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-right: 33%;">
+                            <textarea id="input" name="input"
+                                      type="text" placeholder="{{key.placeholder}}"
+                                      ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                      class="form-control">
+                           </textarea>
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for textarea right (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(right-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='textarea'" style="float: right; width: 30%; margin-right: 3%; text-align: right;"> {{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-right: 33%;">
+                            <textarea id="input" name="input"
+                                      type="text" placeholder="{{key.placeholder}}"
+                                      ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                      class="form-control">
+                           </textarea>
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!--For Textarea bottom-->
+                        <div class="form-group" ng-show="key.labelposition=='bottom'" >
+                            <textarea id="input" name="input"
+                                      type="text" placeholder="{{key.placeholder}}"
+                                      ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                      class="form-control">
+                           </textarea>
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='textarea'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                    </div>
+                    <!--For Radio-->
+                    <div class="{{key.classwidth}}" ng-show="key.type=='radio'">
+                        <!-- for radio Top-->
+                        <div class="form-group" ng-show="key.labelposition=='top'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='radio'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <input id="radio" name="key.values{{$index}}" type="radio" ng-value="val.value"   ng-model="key.values" >{{val.value}}
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for radio Left (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(left-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='radio'" style="float: left; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <input id="radio" name="key.values{{$index}}" type="radio" ng-value="val.value"   ng-model="key.values" style="width: 67%; margin-left: 33%;">{{val.value}}
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for radio Left (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='radio'" style="float: left; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <input id="radio" name="key.values{{$index}}" type="radio" ng-value="val.value"   ng-model="key.values" style="width: 67%; margin-left: 33%;">{{val.value}}
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for radio right (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(left-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='radio'" style="float: right; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <input id="radio" name="key.values{{$index}}" type="radio" ng-value="val.value"   ng-model="key.values" style="width: 67%; margin-right: 33%;">{{val.value}}
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for radio right (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(right-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='radio'" style="float: right; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <input id="radio" name="key.values{{$index}}" type="radio" ng-value="val.value"   ng-model="key.values" style="width: 67%; margin-right: 33%;">{{val.value}}
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for radio Bottom-->
+                        <div class="form-group" ng-show="key.labelposition=='bottom'" >
+                            <input id="radio" name="key.values{{$index}}" type="radio" ng-value="val.value"   ng-model="key.values">{{val.value}}
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='radio'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                    </div>
+                    <!--For Checkbox-->
+                    <div class="{{key.classwidth}}" ng-show="key.type=='checkbox'">
+                        <!-- for checkbox top-->
+                        <div class="form-group" ng-show="key.labelposition=='top'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='checkbox'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <input id="checkbox" name="key.values{{$index}}" type="checkbox" value="val.value"  ng-model="val.values" >{{val.value}}
+                        </div>
+                        <!-- for checkbox Left (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(left-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='checkbox'" style="float: left; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <input id="checkbox" name="key.values{{$index}}" type="checkbox" value="val.value"  ng-model="val.values" style="width: 67%; margin-left: 33%;" >{{val.value}}
+                        </div>
+                        <!-- for checkbox Left (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='checkbox'" style="float: left; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <input id="checkbox" name="key.values{{$index}}" type="checkbox" value="val.value"  ng-model="val.values" style="width: 67%; margin-left: 33%;" >{{val.value}}
+                        </div>
+                        <!-- for checkbox right (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='checkbox'" style="float: right; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <input id="checkbox" name="key.values{{$index}}" type="checkbox" value="val.value"  ng-model="val.values" style="width: 67%; margin-right: 33%;" >{{val.value}}
+                        </div>
+                        <!-- for checkbox right (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='checkbox'" style="float: right; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <input id="checkbox" name="key.values{{$index}}" type="checkbox" value="val.value"  ng-model="val.values" style="width: 67%; margin-right: 33%;" >{{val.value}}
+                        </div>
+                        <!-- for checkbox bottom-->
+                        <div class="form-group" ng-show="key.labelposition=='bottom'" >
+                            <input id="checkbox" name="key.values{{$index}}" type="checkbox" value="val.value"  ng-model="val.values" >{{val.value}}
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='checkbox'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                        </div>
+                    </div>
+                    <!--For Select-->
+                    <div class="{{key.classwidth}}" ng-show="key.type=='select'&&key.valuetype=='static'">
+                        <!--for Select top-->
+                        <div class="form-group" ng-show="key.labelposition=='top'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails"
+                                    ng-options="s.value as s.value for s in key.valueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                        <!--for Select  Left (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(left-aligned)'">
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'" style="float: left; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails" style="width: 67%; margin-left: 33%;"
+                                    ng-options="s.value as s.value for s in key.valueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                        <!--for Select  Left (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'">
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'" style="float: left; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails" style="width: 67%; margin-left: 33%;"
+                                    ng-options="s.value as s.value for s in key.valueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                        <!--for Select  right (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(left-aligned)'">
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'" style="float: right; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails" style="width: 67%; margin-right: 33%;"
+                                    ng-options="s.value as s.value for s in key.valueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                        <!--for Select  right (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(right-aligned)'">
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'" style="float: right; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails" style="width: 67%; margin-right: 33%;"
+                                    ng-options="s.value as s.value for s in key.valueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                        <!--for Select bottom-->
+                        <div class="form-group" ng-show="key.labelposition=='bottom'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails"
+                                    ng-options="s.value as s.value for s in key.valueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="{{key.classwidth}}" ng-show="key.type=='select'&&key.valuetype=='dynamic'">
+                        <!--for select top dynamic-->
+                        <div class="form-group" ng-show="key.labelposition=='top'">
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails"
+                                    ng-options="s as s for s in key.dynamicvalueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="key.value">{{key.value}}</option>
+                            </select>
+                        </div>
+                        <!--for select left(left-aligned) dynamic-->
+                        <div class="form-group" ng-show="key.labelposition=='left(left-aligned)'">
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'" style="float: left; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails" style="width: 67%; margin-left: 33%;"
+                                    ng-options="s as s for s in key.dynamicvalueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="key.value">{{key.value}}</option>
+                            </select>
+                        </div>
+                        <!--for select left(right-aligned) dynamic-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'">
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'" style="float: left; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails" style="width: 67%; margin-left: 33%;"
+                                    ng-options="s as s for s in key.dynamicvalueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="key.value">{{key.value}}</option>
+                            </select>
+                        </div>
+                        <!--for select right(left-aligned) dynamic-->
+                        <div class="form-group" ng-show="key.labelposition=='right(left-aligned)'">
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'" style="float: right; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails" style="width: 67%; margin-right: 33%;"
+                                    ng-options="s as s for s in key.dynamicvalueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="key.value">{{key.value}}</option>
+                            </select>
+                        </div>
+                        <!--for select right(right-aligned) dynamic-->
+                        <div class="form-group" ng-show="key.labelposition=='right(right-aligned)'">
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'" style="float: right; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails" style="width: 67%; margin-right: 33%;"
+                                    ng-options="s as s for s in key.dynamicvalueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="key.value">{{key.value}}</option>
+                            </select>
+                        </div>
+                        <!--for select bottom dynamic-->
+                        <div class="form-group" ng-show="key.labelposition=='bottom'">
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails"
+                                    ng-options="s as s for s in key.dynamicvalueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="key.value">{{key.value}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+</section>
+
+
+<div class="modal fade" id="add_new_open_settings">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="country-title">{{type}}&nbsp; Field &nbsp;Component</h4>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                            <div class="nav-tabs-custom tabs-below" ng-init="selectedTab = 1;">
+                                <ul class="nav nav-tabs">
+                                    <li ng-class="{active: selectedTab == 1}">
+                                        <a href ng-click="selectedTab = 1;">Display</a>
+                                    </li>
+                                    <li ng-class="{active: selectedTab == 2}">
+                                        <a href ng-click="selectedTab = 2;">Data</a>
+                                    </li>
+                                    <li ng-class="{active: selectedTab == 3}">
+                                        <a href ng-click="selectedTab = 3;">Validation</a>
+                                    </li>
+                                    <li ng-class="{active: selectedTab == 4}">
+                                        <a href ng-click="selectedTab = 4;">API</a>
+                                    </li>
+                                    <li ng-class="{active: selectedTab == 5}">
+                                        <a href ng-click="selectedTab = 5;">Layout</a>
+                                    </li>
+                                    <li ng-class="{active: selectedTab == 6}">
+                                        <a href ng-click="selectedTab = 6;">Conditional</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" ng-show="selectedTab == 1">
+                                    <div class="" >
+                                        <!--<div class="col-lg-6 col-md-6 col-sm-6">-->
+                                            <div class="box-body">
+                                                <div class="row" id="cus_step1">
+                                                    <label class="control-label  field-required"> Label <i class="fa fa-question-circle text-muted" title="The label for this field that will appear next to it."></i></label>
+                                                    <input value="" placeholder="Field Label" ng-model="field" class="form-control" type="text" name="label">
+                                                    <div class="checkbox" property="hideLabel">
+                                                        <label for="hideLabel" >
+                                                        <input id="hideLabel" name="hideLabel" type="checkbox" ng-model="settings.hideLabel" property="hideLabel" class="ng-pristine ng-untouched ng-valid ng-empty"> Hide Label  <i class="glyphicon glyphicon-question-sign text-muted"  title="Hide the label of this component. This allows you to show the label in the form builder, but not when it is rendered."></i></label>
+                                                    </div>
+                                                    <div class="">
+                                                        <label class="" for="">List</label>
+                                                            <input type="radio" ng-model="settings.listdisplay" value="yes">Yes
+                                                            <input type="radio" ng-model="settings.listdisplay" value="no">No
+                                                    </div>
+                                                    <label class="control-label  field-required">Label Position <i class="fa fa-question-circle text-muted" title="Position for the label for this field."></i></label>
+                                                    <select class="form-control" name="label" ng-model="settings.labelposition" >
+                                                        <option value="top">Top</option>
+                                                        <option value="left(left-aligned)">Left (Left-aligned)</option>
+                                                        <option value="left(right-aligned)">Left (Right-aligned)</option>
+                                                        <option value="right(left-aligned)">Right (Left-aligned)</option>
+                                                        <option value="right(right-aligned)">Right (Right-aligned)</option>
+                                                        <option value="bottom">Bottom</option>
+                                                    </select>
+                                                    <label class="control-label  field-required">Placeholder <i class="fa fa-question-circle text-muted" title="The placeholder text that will appear when this field is empty."></i></label>
+                                                    <input value="" placeholder="Placeholder" class="form-control" type="text" ng-model="settings.placeholder" name="Placeholder">
+                                                    <label class="control-label  field-required">Description <i class="fa fa-question-circle text-muted" title="The description is text that will appear below the input field."></i></label>
+                                                    <input value="" placeholder="Description for this field." class="form-control" ng-model="settings.changedesc" type="text" name="Description">
+                                                    <div class="">
+                                                    <label class="control-label  field-required">Tooltip <i class="fa fa-question-circle text-muted" title="Adds a tooltip to the side of this field."></i></label>
+                                                    <textarea value="" placeholder="To add a tooltip to this field,enter text here." ng-model="settings.tooltip" class="form-control" type="text" name="Description">
+                                                    </textarea>
+                                                    </div>
+                                                    <div class="">
+                                                    <label class="control-label  field-required">Error Label  <i class="fa fa-question-circle text-muted" title="The label for this field when an error occurs."></i></label>
+                                                    <input value="" placeholder="Error Label" ng-model="settings.errorlabel" class="form-control" type="text" name="errorlabel">
+                                                    </div>
+                                                    <div class="">
+                                                        <label class="control-label field-required" for="prefix"
+                                                               title="The text to show before a field.">Prefix<i
+                                                                class="glyphicon glyphicon-question-sign text-muted"
+                                                                data-original-title=""
+                                                                title="The text to show before a field."></i></label>
+                                                        <input id="prefix" name="prefix" type="text"
+                                                               ng-model="settings.prefix" placeholder="example '$', '@'"
+                                                               property="prefix"
+                                                               class="form-control ng-pristine ng-valid ng-empty ng-touched">
+                                                    </div>
+                                                    <div class="">
+                                                        <label class="control-label field-required" for="suffix">Suffix
+                                                            <i class="glyphicon glyphicon-question-sign text-muted"
+                                                               title="The text to show after a field."></i></label>
+                                                        <input id="suffix" name="suffix" type="text"
+                                                               ng-model="settings.suffix" placeholder="example '$', '@'"
+                                                               property="suffix"
+                                                               class="form-control ng-pristine ng-untouched ng-valid ng-empty">
+                                                    </div>
+                                                    <div class="">
+                                                        <label class="control-label field-required" for="suffix">Custom CSS Class
+                                                            <i class="glyphicon glyphicon-question-sign text-muted"
+                                                               title="Custom CSS class to add to this component."></i></label>
+                                                        <input id="customcss" name="customcss" type="text"
+                                                               ng-model="settings.customcss" placeholder="Custom CSS Class"
+                                                               property="customcss"
+                                                               class="form-control ng-pristine ng-untouched ng-valid ng-empty">
+                                                    </div>
+                                                    <div class="">
+                                                        <label class="control-label field-required" for="suffix">Tab Index
+                                                            <i class="glyphicon glyphicon-question-sign text-muted"
+                                                               title="Sets the tabindex attribute of this component to override the tab order of the form. See the MDN documentation on tabindex for more information."></i></label>
+                                                        <input id="tabindex" name="tabindex" type="text"
+                                                               ng-model="settings.tabindex" placeholder="Tab Index "
+                                                               property="tabindex"
+                                                               class="form-control ng-pristine ng-untouched ng-valid ng-empty">
+                                                    </div>
+                                                    <div class="checkbox" property="multipleValues">
+                                                        <label for="hideLabel" >
+                                                            <input id="multipleValues" name="multipleValues" type="checkbox" ng-model="settings.multipleValues" property="multipleValues" class="ng-pristine ng-untouched ng-valid ng-empty"> Multiple Values <i class="glyphicon glyphicon-question-sign text-muted"  title="Allows multiple values to be entered for this field."></i></label>
+                                                    </div>
+                                                    <div class="checkbox" property="clearValuehidden">
+                                                        <label for="hideLabel" >
+                                                            <input id="clearValuehidden" name="clearValuehidden" type="checkbox" ng-model="settings.clearValuehidden" property="multipleValues" class="ng-pristine ng-untouched ng-valid ng-empty">Clear Value When Hidden  <i class="glyphicon glyphicon-question-sign text-muted"  title="When a field is hidden, clear the value."></i></label>
+                                                    </div>
+                                                    <div class="checkbox" property="enablespellCheck">
+                                                        <label for="hideLabel" >
+                                                            <input id="enablespellCheck" name="enablespellCheck" type="checkbox" ng-model="settings.enablespellCheck" property="enablespellCheck" class="ng-pristine ng-untouched ng-valid ng-empty">Enable Spell Check <i class="glyphicon glyphicon-question-sign text-muted"  title="Check this if you wish to enable spell check."></i></label>
+                                                    </div>
+                                                    <div class="checkbox" property="Protected">
+                                                        <label for="hideLabel" >
+                                                            <input id="Protected" name="Protected" type="checkbox" ng-model="settings.Protected" property="Protected" class="ng-pristine ng-untouched ng-valid ng-empty">Protected <i class="glyphicon glyphicon-question-sign text-muted"  title="A protected field will not be returned when queried via API."></i></label>
+                                                    </div>
+                                                    <div class="checkbox" property="Persistent">
+                                                        <label for="hideLabel" >
+                                                            <input id="Persistent" name="Persistent" type="checkbox" ng-model="settings.Persistent" property="Protected" class="ng-pristine ng-untouched ng-valid ng-empty">Persistent <i class="glyphicon glyphicon-question-sign text-muted"  title="A persistent field will be stored in database when the form is submitted."></i></label>
+                                                    </div>
+                                                    <div class="checkbox" property="Hidden">
+                                                        <label for="hideLabel" >
+                                                            <input id="Hidden" name="Hidden" type="checkbox" ng-model="settings.Hidden" property="Hidden" class="ng-pristine ng-untouched ng-valid ng-empty">Hidden <i class="glyphicon glyphicon-question-sign text-muted"  title="A hidden field is still a part of the form, but is hidden from view."></i></label>
+                                                    </div>
+                                                    <div class="checkbox" property="Hidden">
+                                                        <label for="hideLabel" >
+                                                            <input id="Hidden" name="Hidden" type="checkbox" ng-model="settings.Hidden" property="Hidden" class="ng-pristine ng-untouched ng-valid ng-empty">Initial Focus  <i class="glyphicon glyphicon-question-sign text-muted"  title="A hidden field is still a part of the form, but is hidden from view."></i></label>
+                                                    </div>
+                                                    <div class="checkbox" property="Hidden">
+                                                        <label for="hideLabel" >
+                                                            <input id="Hidden" name="Hidden" type="checkbox" ng-model="settings.Hidden" property="Hidden" class="ng-pristine ng-untouched ng-valid ng-empty">Hide Input <i class="glyphicon glyphicon-question-sign text-muted"  title="A hidden field is still a part of the form, but is hidden from view."></i></label>
+                                                    </div>
+                                                    <div class="checkbox" property="Hidden">
+                                                        <label for="hideLabel" >
+                                                            <input id="Hidden" name="Hidden" type="checkbox" ng-model="settings.Hidden" property="Hidden" class="ng-pristine ng-untouched ng-valid ng-empty">Disabled<i class="glyphicon glyphicon-question-sign text-muted"  title="A hidden field is still a part of the form, but is hidden from view."></i></label>
+                                                    </div>
+                                                    <div class="checkbox" property="Hidden">
+                                                        <label for="hideLabel" >
+                                                            <input id="Hidden" name="Hidden" type="checkbox" ng-model="settings.Hidden" property="Hidden" class="ng-pristine ng-untouched ng-valid ng-empty">Show Label in DataGrid <i class="glyphicon glyphicon-question-sign text-muted"  title="Show the label when in a datagrid."></i></label>
+                                                    </div>
+                                                    <div class="checkbox" property="Hidden">
+                                                        <label for="hideLabel" >
+                                                            <input id="Hidden" name="Hidden" type="checkbox" ng-model="settings.Hidden" property="Hidden" class="ng-pristine ng-untouched ng-valid ng-empty">Table View  <i class="glyphicon glyphicon-question-sign text-muted"  title="Shows this value within the table view of the submissions."></i></label>
+                                                    </div>
+                                                    <div ng-show="type=='select'">
+                                                        <label  class="control-label  field-required" >Value Type</label>
+                                                        <select  class="form-control " id="valuetype" name="valuetype" ng-model="settings.valuetype">
+                                                            <option value="">Select</option>
+                                                            <option value="static">Static</option>
+                                                            <option value="dynamic">Dynamic</option>
+                                                        </select>
+                                                        <div class="form-group" ng-show="settings.valuetype=='dynamic'">
+                                                            <div class="col-sm-12" style="padding: 0px;">
+                                                                <label class="control-label  field-required">Column</label>
+                                                                <select id="field" class="form-control input-md" name="field" ng-model="settings.moduleName"
+                                                                        ng-change="getFeildNames(settings.moduleName)"
+                                                                        ng-options="creator.pageName as creator.pageName for creator in createPageList">
+                                                                    <option value="">Select</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class=" form-group" ng-show="settings.moduleName">
+                                                            <label class="control-label  field-required">Fields</label>
+                                                            <select id="field" name="field"
+                                                                    class="form-control input-md"
+                                                                    ng-model="settings.fieldName"
+                                                                    ng-options="creator.field as creator.field for creator in feildList">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                        <div ng-show="settings.valuetype=='static'">
+                                                            <div ng-repeat="val in settings.valueList">
+                                                                <label class="control-label  field-required">Value</label>
+                                                                <div class="col-sm-12" style="padding: 0px;">
+                                                                    <div class="col-sm-12" style="padding: 0px;">
+                                                                        <div class="col-sm-9" style="margin-bottom: 10px;">
+                                                                            <input id="field" name="field"
+                                                                                   type="text" placeholder="Enter Field Name" maxlength="125"
+                                                                                   ng-model="val.value"
+                                                                                   class="form-control input-md">
+                                                                        </div>
+                                                                        <div class="col-sm-1"
+                                                                             ng-if="settings.valueList.length>1 && $index!=0" style="margin-left: -26px;">
+                                                                            <input type="button" value="X" ng-click="removeValuesList(settings,$index)">
+                                                                        </div>
+                                                                        <div class="col-sm-1"
+                                                                             ng-if="settings.valueList.length-1==$index">
+                                                                            <input type="button" value="+"
+                                                                                   ng-click="addNewValuesList(settings)">
+                                                                        </div>
+                                                                        <div class="col-sm-1">
+                                                                            <input type="button" value="popup"
+                                                                                   ng-click="openPopup(settings)">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <!--</div>-->
+                                    </div>
+                                </div>
+                                <div class="tab-content" ng-show="selectedTab == 2">
+                                    <div class=" " >
+                                        <div class="box-body">
+                                            <div class="row" id="cus_step1">
+                                                <label class="control-label  field-required"> Default Value  <i class="fa fa-question-circle text-muted" title="The will be the value for this field, before user interaction. Having a default value will override the placeholder text."></i></label>
+                                                <input value="" placeholder="Default Value" ng-model="settings.defaultvalue" class="form-control" type="text" name="label">
+                                            </div>
+                                            <div class="row" id="cus_step1">
+                                                <label class="control-label  field-required">Input Format<i class="fa fa-question-circle text-muted" title="The will be the value for this field, before user interaction. Having a default value will override the placeholder text."></i></label>
+                                                <select  ng-model="settings.inputformat" class="form-control" ng-init="settings.inputformat == 'plain'"  name="label">
+                                                    <option value="plain">Plain</option>
+                                                    <option value="html">HTML</option>
+                                                    <option value="raw">Raw(Insecure)</option>
+                                                </select>
+                                            </div>
+                                            <div class="row">
+                                                <div class="box-body">
+                                                    <div class="panel-group" id="accordion">
+                                                        <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                                                        <div class="panel panel-default ">
+                                                            <div class="panel-heading">
+                                                                <h4 class="panel-title">
+                                                                    <a data-toggle="collapse" data-ng-click="accordion1 = !accordion1" aria-expanded="true" class="">
+                                                                        Custom Default Value
+                                                                    </a>
+                                                                </h4>
+                                                            </div>
+                                                            <div data-ng-show="accordion1" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                                                <div class="box-body">
+                                                                    <div class="panel panel-default ">
+                                                                        <div class="panel-heading">
+                                                                            <h4 class="panel-title">
+                                                                                <a data-toggle="collapse" data-ng-click="accordion3 = !accordion3" aria-expanded="true" class="">
+                                                                                    JavaScript Default
+                                                                                </a>
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div data-ng-show="accordion3" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                                                            <div class="box-body">
+                                                                                <textarea class="form-control" rows="5"  placeholder="/*** Example Code ***/value = data['mykey'] + data['anotherKey'];"></textarea>
+                                                                                <small class="ng-scope">
+                                                                                    <p>Enter custom default value code.</p>
+                                                                                    <p>You must assign the <strong>value</strong> variable as the result you want for the default value.</p>
+                                                                                    <p>The global variable <strong>data</strong> is provided, and allows you to access the data of any form component, by using its API key.</p>
+                                                                                    <p>Also <strong>moment</strong> library is available, and allows you to manipulate dates in a convenient way.</p>
+                                                                                    <p>Default Values are only calculated on form load. Use Calculated Value for a value that will update with the form.</p>
+                                                                                </small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="panel panel-default ">
+                                                                        <div class="panel-heading">
+                                                                            <h4 class="panel-title">
+                                                                                <a data-toggle="collapse" data-ng-click="accordion4 = !accordion4" aria-expanded="true" class="">
+                                                                                    JSONLogic Default
+                                                                                </a>
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div data-ng-show="accordion4" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                                                            <div class="box-body">
+                                                                                <small class="ng-scope">
+                                                                                    <p>Execute custom default value using <a href="http://jsonlogic.com/">JSONLogic</a>.</p>
+                                                                                    <p>Submission data is available as JsonLogic variables, with the same api key as your components.</p>
+                                                                                    <p><a href="http://formio.github.io/formio.js/app/examples/calculated.html" target="_blank">Click here for an example</a></p>
+                                                                                </small>
+                                                                                <textarea class="form-control" rows="5"  placeholder="{ ... }"></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="panel panel-default ">
+                                                            <div class="panel-heading">
+                                                                <h4 class="panel-title">
+                                                                    <a data-toggle="collapse" data-ng-click="accordion2 = !accordion2" aria-expanded="true" class="">
+                                                                        Calculated Value
+                                                                    </a>
+                                                                </h4>
+                                                            </div>
+                                                            <div data-ng-show="accordion2" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                                                <div class="box-body">
+                                                                    <div class="panel panel-default ">
+                                                                        <div class="panel-heading">
+                                                                            <h4 class="panel-title">
+                                                                                <a data-toggle="collapse" data-ng-click="accordion5 = !accordion5" aria-expanded="true" class="">
+                                                                                    JavaScript Default
+                                                                                </a>
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div data-ng-show="accordion5" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                                                            <div class="box-body">
+                                                                                <textarea class="form-control" rows="5"  placeholder="/*** Example Code ***/value = data['mykey'] + data['anotherKey'];"></textarea>
+                                                                                <small class="ng-scope">
+                                                                                    <p>Enter custom default value code.</p>
+                                                                                    <p>You must assign the <strong>value</strong> variable as the result you want for the default value.</p>
+                                                                                    <p>The global variable <strong>data</strong> is provided, and allows you to access the data of any form component, by using its API key.</p>
+                                                                                    <p>Also <strong>moment</strong> library is available, and allows you to manipulate dates in a convenient way.</p>
+                                                                                    <p>Default Values are only calculated on form load. Use Calculated Value for a value that will update with the form.</p>
+                                                                                </small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="panel panel-default ">
+                                                                        <div class="panel-heading">
+                                                                            <h4 class="panel-title">
+                                                                                <a data-toggle="collapse" data-ng-click="accordion6 = !accordion6" aria-expanded="true" class="">
+                                                                                    JSONLogic Default
+                                                                                </a>
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div data-ng-show="accordion6" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                                                            <div class="box-body">
+                                                                                <small class="ng-scope">
+                                                                                    <p>Execute custom default value using <a href="http://jsonlogic.com/">JSONLogic</a>.</p>
+                                                                                    <p>Submission data is available as JsonLogic variables, with the same api key as your components.</p>
+                                                                                    <p><a href="http://formio.github.io/formio.js/app/examples/calculated.html" target="_blank">Click here for an example</a></p>
+                                                                                </small>
+                                                                                <textarea class="form-control" rows="5"  placeholder="{ ... }"></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-content" ng-show="selectedTab == 3">
+                                    <div class=" " >
+                                        <div class="box-body">
+                                            <div class="checkbox" property="validate.required"> <input id="required" name="required" type="checkbox" ng-model="settings.validate" property="validate.required" class="ng-pristine ng-valid ng-empty ng-touched"> Required  <i class="glyphicon glyphicon-question-sign text-muted" title="A required field must be filled in before the form can be submitted."></i></div>
+                                            <div class="checkbox" property="validate.unique"> <input id="unique" name="unique" type="checkbox" ng-model="settings.unique" property="validate.required" class="ng-pristine ng-valid ng-empty ng-touched"> Unique  <i class="glyphicon glyphicon-question-sign text-muted" title="Makes sure the data submitted for this field is unique, and has not been submitted before."></i></div>
+                                            <div class="row" >
+                                                <label class="control-label  field-required"> Minimum Length  <i class="fa fa-question-circle text-muted" title="The minimum length requirement this field must meet."></i></label>
+                                                <input value="" placeholder="Minimum Length" ng-model="settings.minlength" class="form-control" type="text" name="label">
+                                            </div>
+                                            <div class="row" >
+                                                <label class="control-label  field-required"> Maximum Length  <i class="fa fa-question-circle text-muted" title="The maximum length requirement this field must meet"></i></label>
+                                                <input value="" placeholder="Maximum Length" ng-model="settings.maxlength" class="form-control" type="text" name="label">
+                                            </div>
+                                            <div class="row" >
+                                                <label class="control-label  field-required">Regular Expression Pattern<i class="fa fa-question-circle text-muted" title="The regular expression pattern test that the field value must pass before the form can be submitted."></i></label>
+                                                <input value="" placeholder="Regular Expression Pattern" ng-model="settings.regularExpressionPattern" class="form-control" type="text" name="label">
+                                            </div>
+                                            <div class="row" >
+                                                <label class="control-label  field-required"> Custom Error Message   <i class="fa fa-question-circle text-muted" title="Error message displayed if any error occured."></i></label>
+                                                <input value="" placeholder="Custom Error Message " ng-model="settings.customErrorMessage" class="form-control" type="text" name="label">
+                                            </div>
+                                            <div class="row">
+                                                <div class="box-body">
+                                                    <div class="panel-group" id="accordion">
+                                                        <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                                                        <div class="panel panel-default ">
+                                                            <div class="panel-heading">
+                                                                <h4 class="panel-title">
+                                                                    <a data-toggle="collapse" data-ng-click="accordion1 = !accordion1" aria-expanded="true" class="">
+                                                                        Custom Validation
+                                                                    </a>
+                                                                </h4>
+                                                            </div>
+                                                            <div data-ng-show="accordion1" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                                                <div class="box-body">
+                                                                    <textarea class="form-control ng-scope ng-empty ng-valid ng-touched" rows="5" id="custom" name="custom" ng-model="component.validate.custom" placeholder="/*** Example Code ***/valid = (input === 3) ? true : 'Must be 3';"></textarea>
+                                                                    <small class="ng-scope">
+                                                                        <p>Enter custom validation code.</p>
+                                                                        <p>You must assign the <strong>valid</strong>
+                                                                            variable as either <strong>true</strong> or
+                                                                            an error message if validation fails.</p>
+                                                                        <p>The global variables <strong>input</strong>,
+                                                                            <strong>component</strong>, and <strong>valid</strong>
+                                                                            are provided.</p>
+                                                                    </small>
+                                                            <div class="well ng-scope">
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" id="private"
+                                                                                  name="private"
+                                                                                  ng-model="component.validate.customPrivate"
+                                                                                  ng-checked="component.validate.customPrivate"
+                                                                                  class="ng-pristine ng-untouched ng-valid ng-empty">
+                                                                        <strong>Secret Validation</strong>
+                                                                    </label>
+                                                                </div>
+                                                                <p>Check this if you wish to perform the validation ONLY
+                                                                    on the server side. This keeps your validation logic
+                                                                    private and secret.</p>
+                                                            </div></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="panel panel-default ">
+                                                            <div class="panel-heading">
+                                                                <h4 class="panel-title">
+                                                                    <a data-toggle="collapse" data-ng-click="accordion2 = !accordion2" aria-expanded="true" class="">
+                                                                        JSON Validation
+                                                                    </a>
+                                                                </h4>
+                                                            </div>
+                                                            <div data-ng-show="accordion2" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                                                <small class="ng-scope">
+                                                                    <p>Execute custom validation logic with JSON and <a
+                                                                            href="http://jsonlogic.com/">JsonLogic</a>.
+                                                                    </p>
+                                                                    <p>Submission data is available as JsonLogic
+                                                                        variables, with the same api key as your
+                                                                        components.</p>
+                                                                    <p>
+                                                                        <a href="http://formio.github.io/formio.js/app/examples/conditions.html"
+                                                                           target="_blank">Click here for an example</a>
+                                                                    </p>
+                                                                </small>
+                                                                <textarea class="form-control ng-pristine ng-untouched ng-valid ng-scope ng-valid-json-input ng-empty" rows="5" id="json" name="json" json-input="" ng-model="component.validate.json" placeholder="{ ... }"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-content" ng-show="selectedTab == 4">
+                                    <div class=" " >
+                                        <div class="box-body">
+                                            <div class="row" id="cus_step1">
+                                                <label class="control-label  field-required"> Property Name  <i class="fa fa-question-circle text-muted" title="The name of this field in the API endpoint."></i></label>
+                                                <input value="" placeholder="Property Name" ng-model="settings.propertyName" class="form-control" type="text" name="label">
+                                            </div>
+                                            <div class="row">
+                                                <label class="control-label"
+                                                       form-builder-tooltip="Tag the field for use in custom logic.">Field
+                                                    Tags <i class="glyphicon glyphicon-question-sign text-muted"
+                                                            data-original-title="" title=""></i></label>
+                                                <tags-input ng-model="tags" on-tag-added="addTag($tag)"
+                                                            on-tag-removed="removeTag($tag)"
+                                                            class="ng-pristine ng-untouched ng-valid ng-isolate-scope ng-empty ng-valid-max-tags ng-valid-min-tags ng-valid-leftover-text">
+                                                    <div class="host" tabindex="-1"
+                                                         ng-click="eventHandlers.host.click()" ti-transclude-append="">
+                                                        <div class="tags" ng-class="{focused: hasFocus}">
+                                                            <ul class="tag-list">
+                                                                <!-- ngRepeat: tag in tagList.items track by track(tag) --></ul>
+                                                            <input class="input ng-pristine ng-untouched ng-valid ng-empty"
+                                                                   autocomplete="off" ng-model="newTag.text"
+                                                                   ng-model-options="{getterSetter: true}"
+                                                                   ng-keydown="eventHandlers.input.keydown($event)"
+                                                                   ng-focus="eventHandlers.input.focus($event)"
+                                                                   ng-blur="eventHandlers.input.blur($event)"
+                                                                   ng-paste="eventHandlers.input.paste($event)"
+                                                                   ng-trim="false"
+                                                                   ng-class="{'invalid-tag': newTag.invalid}"
+                                                                   ng-disabled="disabled"
+                                                                   ti-bind-attrs="{type: options.type, placeholder: options.placeholder, tabindex: options.tabindex, spellcheck: options.spellcheck}"
+                                                                   ti-autosize="" type="text" placeholder="Add a tag"
+                                                                   spellcheck="true">
+                                                            <span class="input" style="visibility: hidden; width: auto; white-space: pre; display: none;">Add a tag</span>
+                                                        </div>
+                                                    </div>
+                                                </tags-input>
+                                            </div>
+                                            <div class="row">
+                                                <div class="box-body">
+                                                    <div class="panel-group" id="accordion">
+                                            <div class="panel panel-default ">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-ng-click="accordion2 = !accordion2" aria-expanded="true" class="">
+                                                            Custom Properties
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div data-ng-show="accordion2" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                                        <div class="form-group ng-scope ng-isolate-scope" data="component.properties" label="Custom Properties" tooltip-text="This allows you to configure any custom properties for this component.">
+                                                            <label form-builder-tooltip="This allows you to configure any custom properties for this component." class="ng-binding">Custom Properties  <i class="glyphicon glyphicon-question-sign text-muted" data-original-title="" title=""></i></label>
+                                                            <table class="table table-condensed">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th class="col-xs-6 ng-binding">Key</th>
+                                                                    <th class="col-xs-4 ng-binding">Value</th>
+                                                                    <th class="col-xs-2"></th>
+                                                                </tr>
+                                                                </thead>
+                                                            </table>
+                                                            <button type="button" class="btn btn-primary ng-binding"
+                                                                    ng-click="addValue()">
+                                                                <span class="glyphicon glyphicon-plus"></span> Add Value
+                                                            </button>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-content" ng-show="selectedTab == 5">
+                                    <div class=" " >
+                                        <div class="box-body">
+                                        <div class="row" >
+                                            <label class="control-label  field-required"> Margin Top<i class="fa fa-question-circle text-muted" title="Sets the top margin of this component. Must be a valid CSS measurement like `10px`."></i></label>
+                                            <input value="" placeholder="0px" ng-model="settings.margintop" class="form-control" type="text" name="label">
+                                        </div>
+                                        <div class="row" >
+                                            <label class="control-label  field-required"> Margin Right<i class="fa fa-question-circle text-muted" title="Sets the right margin of this component. Must be a valid CSS measurement like `10px`."></i></label>
+                                            <input value="" placeholder="0px" ng-model="settings.marginright" class="form-control" type="text" name="label">
+                                        </div>
+                                        <div class="row" >
+                                            <label class="control-label  field-required"> Margin Bottom<i class="fa fa-question-circle text-muted" title="Sets the bottom margin of this component. Must be a valid CSS measurement like `10px`."></i></label>
+                                            <input value="" placeholder="0px" ng-model="settings.marginbottom" class="form-control" type="text" name="label">
+                                        </div>
+                                        <div class="row" >
+                                            <label class="control-label  field-required"> Margin Left<i class="fa fa-question-circle text-muted" title="Sets the left margin of this component. Must be a valid CSS measurement like `10px`."></i></label>
+                                            <input value="" placeholder="0px" ng-model="settings.marginleft" class="form-control" type="text" name="label">
+                                        </div>
+                                            <div class="row">
+                                                <div class="box-body">
+                                                    <div class="panel-group" id="accordion">
+                                                        <div class="panel panel-default ">
+                                                            <div class="panel-heading">
+                                                                <h4 class="panel-title">
+                                                                    <a data-toggle="collapse" data-ng-click="accordion2 = !accordion2" aria-expanded="true" class="">
+                                                                        Overlay
+                                                                    </a>
+                                                                </h4>
+                                                            </div>
+                                                            <div data-ng-show="accordion2" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                                                    <label class="control-label  field-required">Style</label>
+                                                                    <input value="" ng-model="settings.style"
+                                                                           class="form-control" type="text" name="label">
+                                                                    <label class="control-label  field-required">Left</label>
+                                                                    <input value="" ng-model="settings.left"
+                                                                           class="form-control" type="text" name="label">
+                                                                    <label class="control-label  field-required">
+                                                                        Top</label>
+                                                                    <input value="" ng-model="settings.top"
+                                                                           class="form-control" type="text" name="label">
+                                                                    <label class="control-label  field-required">
+                                                                        Width</label>
+                                                                    <input value="" ng-model="settings.width"
+                                                                           class="form-control" type="text" name="label">
+                                                                    <label class="control-label  field-required">
+                                                                        Height</label>
+                                                                    <input value="" ng-model="settings.height"
+                                                                           class="form-control" type="text" name="label">
+                                                                    <label class="control-label  field-required">
+                                                                        Page</label>
+                                                                    <input value="" ng-model="settings.page"
+                                                                           class="form-control" type="text" name="label">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-content" ng-show="selectedTab == 6">
+                                    <div class=" " >
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <h1>6</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="panel panel-default preview-panel" style="margin-top: 40px;">
+                                        <div class="panel-heading ">Preview</div>
+                                        <div class="panel-body">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <!-- for LabelPosition = top-->
+                                                <div class="form-group" ng-show="settings.labelposition=='top'" style="margin-top: {{settings.margintop}};margin-left: {{settings.marginleft}};margin-right: {{settings.marginright}};margin-bottom: {{settings.marginbottom}}">
+                                                    <label class="" for="email" ng-show="settings.labelposition=='top'&& settings.hideLabel==false">{{field}} <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="settings.tooltip" title="{{settings.tooltip}}" data-placement="right"></i></label><span style="color: red" ng-if="settings.validate">*</span>
+                                                    <div class="">{{settings.prefix}}
+                                                        <input type="email" ng-bind="settings.prefix"  class="form-control" id="email" placeholder="Enter" ng-model="settings.placeholder" minlength="{{settings.minlength}}" maxlength="{{settings.maxlength}}" name="email">{{settings.suffix}}
+                                                        <p class="desc">{{settings.changedesc}}</p>
+                                                    </div>
+                                                </div>
+                                                <!-- for LabelPosition = bottom-->
+                                                <div class="form-group" ng-show="settings.labelposition=='bottom'">
+                                                    <div class="" ng-show="settings.labelposition=='bottom'&& settings.hideLabel==false">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">{{settings.prefix}}</span>
+                                                        </div>
+                                                        <input type="email" class="form-control" id="email" placeholder="Enter" ng-model="settings.placeholder" minlength="{{settings.minlength}}" maxlength="{{settings.maxlength}}" name="email" value="settings.suffix">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">{{settings.suffix}}</span>
+                                                        </div>
+                                                        <p class="desc">{{settings.changedesc}}</p>
+                                                    </div>
+                                                    <label class="" for="email">{{field}} <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="settings.tooltip" title="{{settings.tooltip}}" data-placement="right"></i></label><span style="color: red" ng-if="settings.validate">*</span>
+                                                </div>
+                                                <!-- for LabelPosition = left(left-aligned)-->
+                                                <div class="form-group" ng-show="settings.labelposition=='left(left-aligned)'">
+                                                    <label class="" for="email" style="float: left; width: 30%; margin-right: 3%; text-align: left;" ng-show="settings.labelposition=='left(left-aligned)'&& settings.hideLabel==false">{{field}} <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="settings.tooltip" title="{{settings.tooltip}}" data-placement="right"></i></label><span style="color: red" ng-if="settings.validate">*</span>
+                                                    <div class="" style="width: 67%; margin-left: 33%;">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">{{settings.prefix}}</span>
+                                                        </div>
+                                                        <input type="email" class="form-control" id="email" placeholder="Enter" ng-model="settings.placeholder" minlength="{{settings.minlength}}" maxlength="{{settings.maxlength}}" name="email">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">{{settings.suffix}}</span>
+                                                        </div>
+                                                        <p class="desc">{{settings.changedesc}}</p>
+                                                    </div>
+                                                </div>
+                                                <!-- for LabelPosition = left(right-aligned)-->
+                                                <div class="form-group" ng-show="settings.labelposition=='left(right-aligned)'">
+                                                    <label class="" for="email" style="float: left; width: 30%; margin-right: 3%; text-align: right;" ng-show="settings.labelposition=='left(right-aligned)'&& settings.hideLabel==false">{{field}} <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="settings.tooltip" title="{{settings.tooltip}}" data-placement="right"></i></label><span style="color: red" ng-if="settings.validate">*</span>
+                                                    <div class="" style="width: 67%; margin-left: 33%;">
+                                                        <input type="email" class="form-control" id="email" placeholder="Enter" ng-model="settings.placeholder" minlength="{{settings.minlength}}" maxlength="{{settings.maxlength}}" name="email">
+                                                        <p class="desc">{{settings.changedesc}}</p>
+                                                    </div>
+                                                </div>
+                                                <!-- for LabelPosition = right(left-aligned)-->
+                                                <div class="form-group" ng-show="settings.labelposition=='right(left-aligned)'">
+                                                    <label class="" for="email" style="float: right; width: 30%; margin-left: 3%; text-align: left;" ng-show="settings.labelposition=='right(left-aligned)'&& settings.hideLabel==false">{{field}} <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="settings.tooltip" title="{{settings.tooltip}}" data-placement="right"></i></label><span style="color: red" ng-if="settings.validate">*</span>
+                                                    <div class="" style="width: 67%; margin-right: 33%;">
+                                                        <input type="email" class="form-control" id="email" placeholder="Enter" ng-model="settings.placeholder" minlength="{{settings.minlength}}" maxlength="{{settings.maxlength}}" name="email">
+                                                        <p class="desc">{{settings.changedesc}}</p>
+                                                    </div>
+                                                </div>
+                                                <!-- for LabelPosition = right(right-aligned)-->
+                                                <div class="form-group" ng-show="settings.labelposition=='right(right-aligned)'">
+                                                    <label class="" for="email" style="float: right; width: 30%; margin-left: 3%; text-align: right;" ng-show="settings.labelposition=='right(right-aligned)'&& settings.hideLabel==false">{{field}} <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="settings.tooltip" title="{{settings.tooltip}}" data-placement="right"></i></label><span style="color: red" ng-if="settings.validate">*</span>
+                                                    <div class="" style="width: 67%; margin-right: 33%;">
+                                                        <input type="email" class="form-control" id="email" placeholder="Enter" ng-model="settings.placeholder" minlength="{{settings.minlength}}" maxlength="{{settings.maxlength}}" name="email">
+                                                        <p class="desc">{{settings.changedesc}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-success" ng-click="saveSettings()">Save</button>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                    <!--<button type="button" class="btn btn-danger">Remove</button>-->
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!--<div class="modal fade" id="add_new_open_popup">-->
+    <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                    <!--<span aria-hidden="true">&times;</span></button>-->
+                <!--<h4 id="country-title">Select Data</h4>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+                <!--<div class="box-body">-->
+                    <!--<div class="row" id="cus_step1">-->
+                        <!--<div class="row">-->
+                            <!--<div ng-repeat="column in NoOfColumnsListPopup" ng-init="parentIndex=$index">-->
+                                <!--<div class="form-group" style="width: 29%;margin-left: 30px;">-->
+                                    <!--<label  class="control-label">No.Of Columns<span style="color: red">*</span></label>-->
+                                    <!--<div class="">-->
+                                        <!--<input id="columns" name="columns" ng-change="getColumnsListPopup(column.columns,column,$index+1)"-->
+                                               <!--type="text" placeholder="Enter No.Of Columns" num-with-out-space-->
+                                               <!--ng-model="column.columns" maxlength="1" readonly-->
+                                               <!--class="form-control">-->
+                                        <!--<p class="error" ng-show="column.columns==4" style="color: red">Maximum Columns Reached</p>-->
+                                    <!--</div>-->
+
+                                    <!--<div class="" ng-hide="column.columns==4" style="float: right;margin-top: -32px;margin-right: -35px;">-->
+                                        <!--<input type="button" value="+"-->
+                                               <!--ng-click="increaseColumnsPopup(column,$index+1);getColumnsListPopup(column.columns,column,$index+1)">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div ng-repeat="details in column.detailsListPopup">-->
+                                    <!--<div class="col-sm-4">-->
+                                        <!--<div>-->
+                                            <!--<div class="form-group">-->
+                                                <!--<label class="col-sm-2 control-label">Column</label>-->
+                                                <!--<div class="col-sm-10">-->
+                                                    <!--<input type="email" class="form-control input-md" id="column" readonly  name="email" ng-model="details.noOfColumn">-->
+
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-sm-4" >-->
+                                        <!--<div>-->
+                                            <!--<div class="form-group">-->
+                                                <!--<label class="col-sm-2 control-label">Field</label>-->
+                                                <!--<div class="col-sm-10">-->
+                                                    <!--<input id="field" name="field"-->
+                                                           <!--type="text" placeholder="Enter Field Name"  maxlength="30"-->
+                                                           <!--ng-model="details.field" alpha-without-space-->
+                                                           <!--class="form-control input-md">-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-sm-4" style="margin-top: 15px;">-->
+
+                                        <!--<div class="form-group">-->
+                                            <!--<label class="col-sm-2 control-label">Type</label>-->
+                                            <!--<div class="col-sm-10" style="padding: 0px;">-->
+                                                <!--<div class="col-sm-12" style="padding: 0px;">-->
+                                                    <!--<div class="col-sm-9">-->
+                                                        <!--<select id="typeOfEnquiryList" name="typeOfEnquiryList" ng-model="details.type"  class="form-control input-md">-->
+                                                            <!--<option value="">Select Type</option>-->
+                                                            <!--<option value="date">Date</option>-->
+                                                            <!--<option value="input">Input</option>-->
+                                                            <!--<option value="number">Number</option>-->
+                                                            <!--<option value="password">Password</option>-->
+                                                            <!--<option value="textarea">Textarea</option>-->
+                                                            <!--<option value="radio">Radio</option>-->
+                                                            <!--<option value="checkbox">Checkbox</option>-->
+                                                            <!--<option value="select">Select</option>-->
+                                                        <!--</select>-->
+                                                    <!--</div>-->
+                                                    <!--<div class="col-sm-1"-->
+                                                         <!--ng-if="column.detailsListPopup.length>1 && $index!=0" style="margin-left: -10px;">-->
+                                                        <!--<input type="button" value="X" ng-click="removedetailsListPopup(column,$index)">-->
+                                                    <!--</div>-->
+                                                    <!--<div class="col-sm-1"-->
+                                                         <!--ng-if="column.detailsListPopup.length-1==$index">-->
+                                                        <!--<input type="button" value="+"-->
+                                                               <!--ng-click="addNewdetailsListPopup($index,column)">-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                    <!--</div>-->
+
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"-->
+                        <!--data-target=".print-me" ng-click="savePopupData()">Save</button>-->
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>-->
+
+            <!--</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; /.modal-content &ndash;&gt;-->
+    <!--</div>-->
+    <!--&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+<!--</div>-->
+<div class="modal fade" id="add_new_open_popup">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="country-title">Select Data</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+
+                        <div class="form-group" ng-repeat="p in pList">
+                            <label  class="col-sm-3 control-label">Popup Name<span style="color: red">*</span></label>
+                            <div class="col-sm-9">
+                             <select id="" ng-model="p.popupName" ng-options="popup.popupName as popup.popupName for popup in p">
+                                 <option value="">Select</option>
+                             </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                        data-target=".print-me" ng-click="savePopupData()">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+

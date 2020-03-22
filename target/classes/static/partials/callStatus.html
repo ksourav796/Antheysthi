@@ -1,0 +1,179 @@
+<section class="content-header">
+    <h1>
+        Call Status
+    </h1>
+
+</section>
+<style>
+    @media only screen and (max-width: 767px) {
+        .edtper{
+            width: 100%!important;
+        }
+        .table{
+            width: 500px !important;
+        }
+
+        .top-button-area {
+            margin-top: 0px!important;
+        }
+        .top-box{
+            height: 50px;
+        }
+        .mbser{
+            margin-top: 20px;
+        }
+        .customer-data {
+            margin-top: 30px;
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        .top-button-area {
+            margin-top: 0px;
+        }
+
+    }
+
+    @media (min-width: 992px) {
+        .col-md-10 {
+            width: 83.33333333%;
+            margin-top: -8px;
+        }
+    }
+</style>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="top-box">
+                <!--<div class="col-md-2">-->
+                <!--<div class="input-group">-->
+                <!--<input class="form-control" placeholder="Search..." id="textinput" name="textinput"  type="text"-->
+                <!--placeholder="Search " ng-model="SearchText"-->
+                <!--ng-change="getPaginatedUserRoleList(SearchText)">-->
+
+                <!--</div>-->
+                <!--</div>-->
+                <div class="col-md-10">
+                    <div class="top-button-area">
+                        <div class="col-md-2 col-sm-4 col-xs-4">
+                            <button type="button"  class="dropbtn btn btn-primary hi_btn" ng-click="addCallStatus()" style="width:80%">Add</button>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-4">
+                            <button type="button"  class="dropbtn btn btn-primary hi_btn" id="colButnw"  data-toggle="modal"
+                                    ng-model="inactiveStatus" data-target=".print-me"
+                                    ng-click="inactiveButton()">{{ButtonStatus}}</button>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-4">
+                            <button type="button" class="dropbtn btn btn-primary hi_btn" ng-click="goBack()">Back</button>
+                        </div>
+                        <div class="col-sm-4 col-xs-12 input-group">
+                            <input class="form-control mbser" placeholder="Search..." id="textinput" name="textinput"  type="text"
+                                   placeholder="Search " ng-model="SearchText"
+                                   ng-change="getPaginatedList(SearchText)">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 customer-data" style="overflow-x:auto">
+            <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+
+
+                </thead>
+                <tbody>
+                <tr ng-repeat="callStatus in callStatusList| filter:SearchText">
+                    <td>{{callStatus.name}}</td>
+                    <td>{{callStatus.status}}</td>
+
+                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editCallStatus(callStatus)">Edit</button>
+                </tr>
+                </tbody>
+            </table>
+            <!--<div class="col-sm-12 pagination_">-->
+
+                <!--<div class="col-sm-12" style="float:right !important;">-->
+                    <!--<button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}"-->
+                            <!--ng-disabled="first"-->
+                            <!--ng-click="getPaginatedList('firstPage')" ng-model="first">First-->
+                    <!--</button>-->
+                    <!--<button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}"-->
+                            <!--ng-disabled="prev"-->
+                            <!--ng-click="getPaginatedList('prevPage')" ng-model="prev">Prev-->
+                    <!--</button>-->
+                    <!--<button type="button" class="btn btn-default hi_btn" name="next" ng-disabled="next"-->
+                            <!--ng-click="getPaginatedList('nextPage')" value="next"-->
+                            <!--ng-class="{'diabled-class': next}" ng-model="next">Next-->
+                    <!--</button>-->
+                    <!--<button type="button" class="btn btn-default hi_btn"-->
+                            <!--ng-click="getPaginatedList('lastPage')" ng-class="{'diabled-class': last}"-->
+                            <!--ng-disabled="last"-->
+                            <!--ng-model="last">Last-->
+                    <!--</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="add_new_call">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><b>&times;</b></span></button>
+                <h4 id="country-title">Add Call Status</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Call Status Name<span style="color: red">*</span></label>
+                            <div class="col-sm-9">
+                                <input id="name" name="name" alpha-with-space=""
+                                       type="text" placeholder="Name"
+                                       ng-model="name" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Status</label>
+                            <div class="col-sm-9">
+                                <select name="status" id="status" ng-model="status" class="form-control" required>
+                                    <option value="Active">Active</option>
+                                    <option value="InActive">InActive</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal"
+                        data-target=".print-me" ng-click="saveCallStatus()">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+

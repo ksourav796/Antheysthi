@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    .rep_list_info .custom_info {
+        margin: 15px 0px;
+        text-align: center;
+        border: 1px solid #ccc;
+        background: #fff;
+        padding: 20px 10px;
+        height: 136px;
+    }
+    .rep_list_info .custom_info img{
+        width: 30%;
+    }
+    .rep_info {
+        text-align: center;
+        color: #333;
+        font-weight: bold;
+    }
+    @media (min-width: 992px) {
+        .col-md-3 {
+            width: 22% !important;
+        }
+    }
+</style>
+<body>
+<div class="container-fluid" style="width: 100%;">
+    <div class="container cus_main_row">
+
+        <div class="row">
+            <h1>Creator</h1>
+        </div>
+<div class="row">
+    <div class="col-md-3 col-sm-6 rep_list_info" ng-if="permissions.module">
+        <a href="#!/module">
+            <div class="custom_info">
+                <i class="fa fa-globe fa-5x" aria-hidden="true"></i>
+                <div class="rep_info">Module</div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3 col-sm-6 rep_list_info" ng-if="permissions.submodule">
+        <a href="#!/submodule">
+            <div class="custom_info">
+                <i class="fa fa-globe fa-5x" aria-hidden="true"></i>
+                <div class="rep_info">Sub Module</div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3 col-sm-6 rep_list_info" ng-if="permissions.createpage">
+        <a href="#!/createpage">
+            <div class="custom_info">
+                <i class="fa fa-globe fa-5x" aria-hidden="true"></i>
+                <div class="rep_info">Create Page</div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3 col-sm-6 rep_list_info" ng-if="permissions.user" >
+        <a href="#!/users">
+            <div class="custom_info">
+                <i class="fa fa-user fa-5x" aria-hidden="true"></i>
+                <div class="rep_info">User</div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3 col-sm-6 rep_list_info" ng-if="permissions.userRole">
+        <a href="#!/userrole">
+            <div class="custom_info">
+                <i class="fa fa-braille fa-5x"
+                   aria-hidden="true"></i>
+                <div class="rep_info">User Role</div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3 col-sm-6 rep_list_info" ng-if="permissions.company" >
+        <a href="#!/settings">
+            <div class="custom_info">
+                <i class="fa fa-user fa-5x" aria-hidden="true"></i>
+                <div class="rep_info">Company</div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3 col-sm-6 rep_list_info"  >
+        <a href="#!/popup">
+            <div class="custom_info">
+                <i class="fa fa-user fa-5x" aria-hidden="true"></i>
+                <div class="rep_info">Popup Master</div>
+            </div>
+        </a>
+    </div>
+</div>
+    </div>
+</div>
+</body>

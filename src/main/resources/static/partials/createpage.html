@@ -1,0 +1,325 @@
+
+<style>
+
+    .table .thead-dark th {
+        color: #fff !important;
+        background-color: #696969 !important;
+        border-color: #ecf0f5 !important;
+    }
+    .table td{
+        border:1px solid #696969 !important;
+    }
+    table>thead>tr>th {
+        padding: 4px !important;
+        background-color: #696969;
+        color: white;
+        font-size: 13px;
+    }
+    @media only screen and (max-width: 767px) {
+        .top-button-area {
+            margin-top: -10px!important;
+        }
+        .top-box{
+            height: 50px;
+        }
+        .mbser{
+            margin-top: 20px;
+        }
+        .customer-data {
+            margin-top: 30px;
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        .top-button-area {
+            margin-top: 0px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .col-md-10 {
+            width: 83.33333333%;
+            margin-top: -8px;
+        }
+    }
+
+</style>
+
+<section class="content-header">
+    <h1>
+        Create Page
+    </h1>
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="top-box">
+                <div class="col-md-10">
+                    <div class="top-button-area">
+                        <div class="col-md-2 col-sm-4 col-xs-4">
+                            <button type="button"  class="dropbtn btn btn-primary hi_btn" ng-click="createPage('add','')" style="width:80%">Add</button>
+                        </div>
+                        <!--<div class="col-md-2 col-sm-4 col-xs-4 ">-->
+                            <!--<button type="button"  class="dropbtn btn btn-primary hi_btn" id="colButnw"  data-toggle="modal"-->
+                                    <!--ng-model="StatusText" data-target=".print-me"-->
+                                    <!--ng-click="inactiveButton()">{{ButtonStatus}}</button>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2 col-sm-4 col-xs-4">-->
+                            <!--<button type="button" class="dropbtn btn btn-primary hi_btn" ng-click="goBack()">Back</button>-->
+                        <!--</div>-->
+
+                    </div>
+
+                    <div class="col-sm-4 col-xs-12 input-group">
+                        <input class="form-control mbser" placeholder="Search.." id="textinput" name="textinput"  type="text"
+                               ng-model="countrySearchText" ng-model-options="{debounce:500}"
+                               ng-change="getPaginationList(countrySearchText)">
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 customer-data">
+            <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                <thead>
+                <tr>
+                    <th>
+                        Module Name
+                    </th>
+                    <th>
+                       Sub Module Name
+                    </th>
+                    <th>
+                       Page Name
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+
+
+                </thead>
+                <tbody>
+                <tr ng-repeat="create in createPageList">
+                    <td>{{create.moduleName}}</td>
+                    <td>{{create.submoduleName}}</td>
+                    <td>{{create.pageName}}</td>
+
+                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="createPage('edit',create.id)">Edit</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="add_new_create_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="country-title">Add Create Page</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Module Name<span style="color: red">*</span></label>
+                            <div class="col-sm-9">
+                                <input id="moduleName" name="moduleName"
+                                       type="text" placeholder="Module Name" alpha-without-space
+                                       ng-model="moduleName" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">No.Of Columns<span style="color: red">*</span></label>
+                            <div class="col-sm-9">
+                                <input id="columns" name="columns" ng-change="getColumnsList(columns)"
+                                       type="text" placeholder="Enter No.Of Columns" num-with-out-space
+                                       ng-model="columns" maxlength="1"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div ng-repeat="details in detailsList">
+                        <div class="col-sm-4" >
+                            <div  >
+                          <div class="form-group">
+
+                                <label class="col-sm-2 control-label">Column</label>
+                                <div class="col-sm-10">
+                                    <select id="field" class="form-control input-md" name="field" ng-model="details.noOfColumn" ng-options="column as column for column in columnList" >
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!--<div class="col-sm-3 form-group">-->
+                            <!--<div  ng-repeat="details in detailsList" ng-show="details.type=='input'">-->
+                                <!--<label class="col-sm-2 control-label">Validations</label>-->
+                                <!--<div class="col-sm-10">-->
+                                    <!--<select id="validations" name="validations" ng-model="details.validations" >-->
+                                        <!--<option value="">Select</option>-->
+                                        <!--<option value="number">Number</option>-->
+                                        <!--<option value="input">Input</option>-->
+                                    <!--</select>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="col-sm-4" >
+                            <div  >
+                            <div class="form-group">
+
+                                    <label class="col-sm-2 control-label">Field</label>
+                                    <div class="col-sm-10">
+                                        <input id="field" name="field"
+                                               type="text" placeholder="Enter Field Name" maxlength="30"
+                                               ng-model="details.field" alpha-without-space
+                                               class="form-control input-md">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 " >
+                            <div  >
+                            <div class="form-group">
+
+                                <label class="col-sm-2 control-label">Type</label>
+                                <div class="col-sm-12" style="padding: 0px;">
+                                    <div class="col-sm-12" style="padding: 0px;">
+                                        <div class="col-sm-9">
+                                            <select id="typeOfEnquiryList" name="typeOfEnquiryList" ng-model="details.type"  class="form-control input-md">
+                                                <option value="">Select</option>
+                                                <option value="date">Date</option>
+                                                <option value="input">Input</option>
+                                                <option value="number">Number</option>
+                                                <option value="password">Password</option>
+                                                <option value="textarea">Textarea</option>
+                                                <option value="radio">Radio</option>
+                                                <option value="checkbox">Checkbox</option>
+                                                <option value="select">Select</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-1"
+                                             ng-if="detailsList.length>1 && $index!=0" style="margin-left: -22px;">
+                                            <input type="button" value="X" ng-click="removedetailsList($index)">
+                                        </div>
+                                        <div class="col-sm-1"
+                                             ng-if="detailsList.length-1==$index">
+                                            <input type="button" value="+"
+                                                   ng-click="addNewdetailsList($index)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-show="details.type=='select'">
+
+
+                                        <div class="col-sm-12" style="padding: 0px;">
+                                            <div class="form-group">
+
+                                                <!--<label class="col-sm-2 control-label">Value Type</label>-->
+                                                <!--<div class="col-sm-9">-->
+                                                    <!--<select id="valuetype" name="valuetype" ng-model="details.valuetype"-->
+                                                            <!--class="form-control input-md">-->
+                                                        <!--<option value="">Select</option>-->
+                                                        <!--<option value="static">Static</option>-->
+                                                        <!--<option value="dynamic">Dynamic</option>-->
+                                                    <!--</select>-->
+                                                <!--</div>-->
+                                                <label class="col-sm-12 control-label">Value Type</label>
+                                                <div class="col-sm-10">
+                                                    <select  class="form-control input-md" id="valuetype" name="valuetype" ng-model="details.valuetype">
+                                                        <option value="">Select</option>
+                                                        <option value="static">Static</option>
+                                                        <option value="dynamic">Dynamic</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                </div>
+                                <div class="form-group" ng-show="details.valuetype=='dynamic'">
+                                    <!--<div ng-repeat="details in detailsList">-->
+                                    <div class="col-sm-12" style="padding: 0px;">
+
+                                    <label class="col-sm-2 control-label">Column</label>
+                                    <div class="col-sm-10">
+                                        <select id="field" class="form-control input-md" name="field" ng-model="details.moduleName"
+                                                ng-change="getFeildNames(details.moduleName)"
+                                                ng-options="creator.moduleName as creator.moduleName for creator in createPageList">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+
+                                    </div>
+                                    <!--</div>-->
+                                </div>
+                                <div class=" form-group" ng-show="details.moduleName">
+                                    <!--<div ng-repeat="details in detailsList">-->
+                                    <label class="col-sm-2 control-label">Fields</label>
+                                    <div class="col-sm-10">
+                                        <select id="field" name="field" class="form-control input-md" ng-model="details.fieldName"
+                                                ng-options="creator.field as creator.field for creator in feildList">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                    <!--</div>-->
+                                </div>
+                                <div ng-show="details.type=='radio'||details.type=='checkbox'||details.valuetype=='static'">
+                                    <div ng-repeat="val in details.valueList">
+                                        <label class="col-sm-2 control-label">Value</label>
+                                        <div class="col-sm-10" style="padding: 0px;">
+                                            <div class="col-sm-12" style="padding: 0px;">
+                                                <div class="col-sm-9" style="margin-bottom: 10px;">
+                                                    <input id="field" name="field"
+                                                           type="text" placeholder="Enter Field Name" maxlength="125"
+                                                           ng-model="val.value"
+                                                           class="form-control input-md">
+                                                </div>
+                                                <div class="col-sm-1"
+                                                     ng-if="details.valueList.length>1 && $index!=0" style="margin-left: -26px;">
+                                                    <input type="button" value="X" ng-click="removeValuesList(details,$index)">
+                                                </div>
+                                                <div class="col-sm-1"
+                                                     ng-if="details.valueList.length-1==$index">
+                                                    <input type="button" value="+"
+                                                           ng-click="addNewValuesList(details)">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                        data-target=".print-me" ng-click="saveCreatePage()">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+

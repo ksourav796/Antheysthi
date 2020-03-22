@@ -1,0 +1,176 @@
+
+<style>
+    body{
+        background-color: #38586b !important;
+    }
+    .content-wrapper{
+
+        width: 60%;
+        margin: 0 auto !important;
+        background-color: #38586b !important;
+    }
+    .form-group {
+        margin-bottom: 15px !important;
+    }
+    .wrapper{
+        background-color: #38586b !important;
+    }
+    label{
+        color:#fff !important;
+    }
+
+    .login_content img {
+        margin-top: 26px;
+    }
+    @media only screen and (max-width: 768px) {
+        .content-wrapper{
+            width: 80%;
+        }
+    }
+    @media only screen and (max-width: 414px) {
+        .login_content img{
+            margin-top: 10px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .col-md-offset-1 {
+            margin-left:34%;
+        }
+    }
+</style>
+<div class="row">
+    <div id="{{loginId}}" >
+        <div class="login_wrapper" style="margin-top: 246px;
+    margin-bottom: 10px;">
+
+            <!-- Login Form section -->
+            <div class="animate form login_form">
+                <section class="login_content">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <img src="{{logo}}" style="width: 100%;">
+                    </div>
+                    <form name="loginForm"  novalidate>
+
+                        <h1 style="color: white">Login</h1>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="">User Name</label>
+                            <div class="col-md-6" style="position:relative;">
+                                <input id="userName" name="userName"  maxlength="125"
+                                       type="text" placeholder="User Name"
+                                       ng-model="userNameText"
+                                       class="form-control input-md" required>
+                                <div class="help-block text-left" ng-show="loginForm.password.$touched && loginForm.password.$invalid">
+                                    Username should not be empty.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="">Password</label>
+                            <div class="col-md-6" style="position:relative;">
+                                <input id="userPswd" name="userPswd"  maxlength="125"
+                                       type="password" placeholder="Password"
+                                       ng-model="pswdText"
+                                       class="form-control input-md" required>
+                                <div class="help-block text-left" ng-show="loginForm.password.$touched && loginForm.password.$invalid">
+                                    Your password must have a minimum length of 6 characters.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 col-md-offset-1 col-sm-offset-1 col-sm-9 col-xs-3 col-xs-offset-0">
+                                <div style="text-align: left;">
+                                    <td>
+                                        <a>  <button type="submit" class="btn btn-default" ng-disabled="disable" data-toggle="modal"
+                                                     data-target=".print-me" ng-click="saveuservalidate()" style="margin-left: 133px;margin-top: 10px;">Log in
+                                        </button></a>
+                                    </td>
+                                </div>
+                                <!--<div style="margin-top: 15px;color: white">-->
+                                    <!--V-19.0.26-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+
+        <!-- Registration Form section -->
+        <div class="animate form registration_form" ng-if="currentPage == 'license'">
+            <section class="login_content">
+                <form name="registrationForm" ng-submit="register()" novalidate>
+                    <h1>Registration</h1>
+                    <p>Enter your License Key to complete your registration process</p>
+                    <div class="form-group" ng-class="{ 'has-error' : registrationForm.license.$invalid && !registrationForm.license.$pristine }">
+                        <input type="text" name="license" class="form-control" placeholder="Enter your License here..."
+                               ng-model="registrationFormData.license_key"
+                               ng-minlength="25"
+                               ng-pattern="/[a-zA-Z0-9]/" required capitalize-with-dash style="margin: 20px 0px 30px;" />
+                        <!--<span class="asterisk_input">  </span>-->
+                        <div class="help-block text-left" ng-show="registrationForm.license.$touched && registrationForm.license.$invalid">
+                            License should not be empty and it must have atleast 25 characters, contains number and letter only.
+                        </div>
+                    </div>
+
+                    <div style="text-align: right">
+                        <button type="submit" class="btn btn-default btn-primary"
+                                ng-disabled="registrationForm.$invalid" style="text-transform: uppercase;">Submit</button>
+
+
+
+
+                        <a href="http://hiaccounts.in" class="btn btn-default btn-primary"
+                           target="_blank" style="height: 34px;
+                               text-transform: uppercase;
+                                padding: 8px 12px 6px 12px;
+                                margin: 0px 0px 5px 5px;
+                                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;">Buy / Renew</a>
+                    </div>
+
+
+
+
+
+
+                    <div class="clearfix"></div>
+
+                    <div style="margin-top: 26px;">
+                        <img src="resource/images/i_logo_big.png" style="width: 200px;">
+                    </div>
+                </form>
+            </section>
+        </div>
+
+        <!-- Forget Form section -->
+        <div class="animate form forget_pwd_form" ng-if="currentPage == 'login'">
+            <section class="login_content">
+                <form name="forgetPwdForm" ng-submit="forgetPwd()" novalidate style="    width: 98%;">
+                    <h1>Let's get you into your account</h1>
+                    <p>Tell us your Sign-in User Name.</p>
+                    <div class="form-group">
+                        <input type="text" name="userName" class="form-control" placeholder="User Name"
+                               ng-model="forgetPwdFormData.user_name" required />
+
+                    </div>
+
+                    <div>
+                        <button type="submit" class="btn btn-default btn-primary" ng-disabled="forgetPwdForm.$invalid">Submit</button>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="separator">
+                        <p>Already a member ?
+                            <a href="javascript:;" ng-click="changeTab('signin')" class="to_register" style="cursor:pointer;"> Log in </a>
+                        </p>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>

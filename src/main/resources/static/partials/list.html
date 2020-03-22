@@ -1,0 +1,1062 @@
+<section class="content-header">
+    <h1>
+        Appointment  Lists
+    </h1>
+
+</section>
+<div class="col-md-2">
+    <div class="input-group">
+        <input id="searchTextId" name="textinput" type="text" autocomplete="off"
+               placeholder="search name" ng-model="rName"
+               class="form-control input-md"
+               ng-change="getResList(rName) ">
+
+
+    </div>
+</div>
+<div class="col-md-2">
+    <div class="input-group">
+        <input id="searchTextId1" name="textinput" type="text" autocomplete="off"
+               placeholder="search date" ng-model="date"
+               class="form-control input-md"
+               ng-change="getResList(date) ">
+
+    </div>
+</div>
+<div class="col-md-2">
+    <div class="input-group">
+        <input id="searchTextId2" name="textinput" type="text" autocomplete="off"
+               placeholder="search" ng-model="search"
+               class="form-control input-md"
+               ng-change="getResList(search) ">
+
+    </div>
+</div>
+
+<div class="col-md-2">
+    <div class="input-group">
+        <input id="searchTextId3" name="textinput" type="text" autocomplete="off"
+               placeholder="search location" ng-model="location"
+               class="form-control input-md"
+               ng-change="getResList(location) ">
+
+    </div>
+</div>
+</div>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 customer-data">
+            <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                <thead>
+                <tr>
+                    <th>
+                        Check
+                    </th>
+<!--                    <th ng-show="userName =='admin'">-->
+<!--                        Franchise Name-->
+<!--                    </th>-->
+<!--                    <th ng-show="userName !='admin'">-->
+<!--                        User Name-->
+<!--                    </th>-->
+                    <th>
+                         Name
+                    </th>
+                    <th>
+                        Restaurant Name
+                    </th>
+                    <th>
+                        Order Date
+                    </th>
+                    <th>
+                        Location
+                    </th>
+                    <th>
+                        Delete
+                    </th>
+                    <th>
+                       Payment Status
+                    </th>
+                    <th>
+                        Action
+                    </th>
+<!--                    <th>-->
+<!--                        Remark-->
+<!--                    </th>-->
+<!--                    <th ng-show="userAccessRights.assign">-->
+<!--                        Assign To-->
+<!--                    </th>-->
+<!--                    <th>-->
+<!--                        Work Status-->
+<!--                    </th>-->
+<!--                    <th ng-show="userAccessRights.deletebutton">-->
+<!--                       Delete-->
+<!--                    </th>-->
+<!--                    <th ng-show="userAccessRights.approve">-->
+<!--                        Approval-->
+<!--                    </th>-->
+<!--                    <th>-->
+<!--                       Validity-->
+<!--                    </th>-->
+<!--                    <th ng-show="userAccessRights.deletebutton">-->
+<!--                       Delete-->
+<!--                    </th>-->
+<!--                    <th ng-show="userAccessRights.approve">-->
+<!--                        Approval-->
+<!--                    </th>-->
+
+
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr ng-repeat="res in resList">
+<!--                    <div  ng-repeat="g in arrays">-->
+
+                        <td><input type="checkbox"  ng-model="res.checkbox"  class="icheck" ng-click="select(res)"></td>
+
+<!--                    <td ng-show="userName =='admin'">{{res.rName}}</td>-->
+<!--                    <td ng-show="userName !='admin'">{{res.user}}</td>-->
+                        <td>{{res.name}}</td>
+                       <td class="align_right"><a href="" ng-click="restaurentDetails(res)">{{res.rName}}</a> </td>
+                       <td>{{res.date |date:'dd/MM/yyyy'}}</td>
+                        <td>{{res.location}}</td>
+                        <!--<td>{{res.status}}</td>-->
+
+
+                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="deleteList(res.rid)">Delete</button></td>
+                    <td>
+                        <button type="button" class="btn btn-primary hi_btn"  ng-click="pay(res)">{{res.paymentStatus}}</button>
+                    </td>
+
+                    <td>
+                    <div class="dropdown">
+                        <button ng-click="myFunction(res)" class="dropbtn btn btn-primary hi_btn">More</button>
+                        <div id="myDropdown" class="dropdown-content">
+                            <table style="border:none; width:100%;" >
+                                <tr>
+                                    <td style="border:none;">
+                                        <button type="button" class="btn btn-default"  ng-click="upload()"><i class="fa fa-eye" aria-hidden="true"></i> Upload</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border:none;">
+                                        <button type="button" class="btn btn-default" ng-click="Assign(res)"><i class="fa fa-eye" aria-hidden="true"></i>{{res.status}}</button>
+                                    </td>
+                                </tr> <tr>
+                                <td style="border:none;">
+                                    <button type="button" class="btn btn-default"  ng-click="New(res.rid)" ng-hide="WorkStatus"><i class="fa fa-eye" aria-hidden="true">
+                                    </i >WorkStatus</button>
+                                    <button type="button" class="btn btn-default"  ng-click="New(res.rid)"  ng-show="WorkStatus"><i class="fa fa-eye" aria-hidden="true">
+                                    </i >{{WorkStatus}}</button>
+                                </td>
+                            </tr>
+
+                                <tr>
+                                    <td style="border:none;">
+                                        <button type="button" class="btn btn-default" ng-click="Approval(res)" ng-hide="active"><i class="fa fa-eye" aria-hidden="true">Approval</i></button>
+                                        <button type="button" class="btn btn-default" ng-click="Approval(res)" ng-show="active"><i class="fa fa-eye" aria-hidden="true">{{active}}</i></button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="border:none;">
+                                    <button type="button" class="btn btn-default"  ng-click="Validity(res.rid)"><i class="fa fa-eye" aria-hidden="true"></i>Validity</button>
+                                    </td>
+                                </tr>
+                                <tr ng-if="searchText!=''&&(resList|filter:searchText).length==0">
+                                    <td colspan="5" style="color: red; font-weight: bold">No Records Found</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <style>
+
+                            .dropdown {
+                                position: relative;
+                                display: inline-block;
+                            }
+
+                            .dropdown-content {
+                                display: none;
+                                position: absolute;
+                                background-color: #fff;
+                                min-width: 250px;
+                                overflow: auto;
+                                z-index: 1;
+                                border: 1px solid #ccc;
+                                border-color: rgba(0,0,0,.2);
+                                padding:10px;
+                            }
+                            .dropdown-content button{
+                                width:100%;
+                                margin-top:10px;
+                                border-radius: 0px;
+                                padding: 10px 10px;
+                                font-size: 19px;
+                                text-align:left;
+                            }
+
+                            .show {display: block;}
+                        </style>
+                        <script>
+                            /* When the user clicks on the button,
+                            toggle between hiding and showing the dropdown content */
+                            // function myFunction(hr) {
+                            //     document.getElementById("myDropdown").classList.toggle("show");
+                            // }
+
+                            // Close the dropdown if the user clicks outside of it
+                            window.onclick = function(event) {
+                                if (!event.target.matches('.dropbtn')) {
+                                    var dropdowns = document.getElementsByClassName("dropdown-content");
+                                    var i;
+                                    for (i = 0; i < dropdowns.length; i++) {
+                                        var openDropdown = dropdowns[i];
+                                        if (openDropdown.classList.contains('show')) {
+                                            openDropdown.classList.remove('show');
+                                        }
+                                    }
+                                }
+                            }
+                        </script>
+
+
+    <!--                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="upload(res)">Upload</button></td>-->
+    <!--                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="viewdetails(res)">View</button></td>-->
+<!--                    <td ng-show="userAccessRights.assign"><button type="button" class="btn btn-primary hi_btn"  ng-click="Assign(res)">{{res.status}}</button></td>-->
+<!--                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="New(res.rid)">{{res.radioValue}}</button></td>-->
+<!--                    <td ng-show="userAccessRights.deletebutton"><button type="button" class="btn btn-primary hi_btn"  ng-click="deleteList(res.rid)">Delete</button></td>-->
+<!--                    <td ng-show="userAccessRights.approve"><button type="button" class="btn btn-primary hi_btn"  ng-click="Approval(res)">{{res.active}}</button></td>-->
+<!--                    </div>-->
+
+
+                            </table>
+                        </div>
+                    </div>
+</td>
+
+<!--                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="upload(res)">Upload</button></td>-->
+<!--                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="viewdetails(res)">View</button></td>-->
+<!--                    <td ng-show="userAccessRights.assign"><button type="button" class="btn btn-primary hi_btn"  ng-click="Assign(res)">{{res.status}}</button></td>-->
+<!--                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="New(res.rid)">{{res.radioValue}}</button></td>-->
+<!--                    <td ng-show="userAccessRights.deletebutton"><button type="button" class="btn btn-primary hi_btn"  ng-click="deleteList(res.rid)">Delete</button></td>-->
+<!--                    <td ng-show="userAccessRights.approve"><button type="button" class="btn btn-primary hi_btn"  ng-click="Approval(res)">{{res.active}}</button></td>-->
+
+               <!--<td> <div class="form-group">-->
+                    <!--<label class="col-md-3 col-sm-3 control-label"></label>-->
+                    <!--<div class="col-md-6 col-sm-6">-->
+
+                        <!--<select id="countryId" name="countryId" ng-model="user"  ng-click="assigndetails()"ng-options="user.firstName-->
+                                <!--as user.firstName for user in userList" class="form-control input-md">-->
+                            <!--<option value="">Assign</option>-->
+                        <!--</select>-->
+                    <!--</div>-->
+                <!--</div></td>-->
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+<div class="modal fade" id="add_new_res_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="res-title">Add Restaurant</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Product</label>
+                            <div class="col-sm-9 " style="position:relative;">
+                                <select  name="product" ng-model="categoryId" ng-options="category.categoryName
+                                as category.categoryName for category in categoryList"
+                                         ng-change="CategoryBasedOnService(categoryId)"
+                                         class="form-control input-md ng-change='getFirstLevel(currencyId)">
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3  control-label">Service</label>
+                            <div class=" col-sm-9" style="position:relative;">
+                                <select  name="service" ng-model="service" ng-options="service.name
+                                as service.name for service in serviceList"
+                                         class="form-control input-md ng-change='getFirstLevel(currencyId)">
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Name</label>
+                            <div class="col-sm-9">
+                                <input id="Rname" name="Name" alpha-without-space=""
+                                       type="text" placeholder="Restaurant Name"
+                                       ng-model="Name" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">RestaurantName</label>
+                            <div class="col-sm-9">
+                                <input id="Rname" name="Rname" alpha-without-space=""
+                                       type="text" placeholder="Restaurant Name"
+                                       ng-model="Rname" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Email</label>
+                            <div class="col-sm-9">
+                                <input id="Email" name="Email"
+                                       type="text" placeholder="Email"
+                                       ng-model="Emailid" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Contact</label>
+                            <div class="col-sm-9">
+                                <input id="Contact" name="Contact" num-with-out-space=""
+                                       type="text" placeholder="Contact"
+                                       ng-model="Contact" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Country</label>
+                            <div class="col-sm-9">
+                                <select id="countryId" name="countryId" ng-model="country"  ng-change="countryState(country)" ng-options="country.countryId as country.countryName for country in countryList" class="form-control input-md">
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="">State</label>
+                            <div class="col-sm-9" style="position:relative;">
+                                <select id="state" name="state"
+                                        ng-change="stateCity(state)"
+                                        ng-model="state"
+                                        ng-options="Branches.stateId as Branches.stateName for Branches in stateList"
+                                        class="form-control input-md">
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="">City</label>
+                            <div class="col-sm-9" style="position:relative;">
+                                <select id="city" name="city"
+                                        ng-model="city"
+                                        ng-options="Branches.cityName as Branches.cityName for Branches in cityList"
+                                        class="form-control input-md">
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Location</label>
+                            <div class="col-sm-9">
+                                <input id="Location" name="Location" alpha-without-space=""
+                                       type="text" placeholder="Location"
+                                       ng-model="Location" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">AddressLine1</label>
+                            <div class="col-sm-9">
+                                <input id="Address1" name="Address1" alphanum-with-space=""
+                                       type="text" placeholder="Address"
+                                       ng-model="address1" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">AddressLine2</label>
+                            <div class="col-sm-9">
+                                <input id="Address1" name="Address2" alphanum-with-space=""
+                                       type="text" placeholder="Address"
+                                       ng-model="address2" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Zipcode</label>
+                            <div class="col-sm-9">
+                                <input id="Zipcode" name="Zipcode" num-with-out-space=""
+                                       type="text" placeholder="Zipcode"
+                                       ng-model="Zipcode" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                        data-target=".print-me" ng-click="saveRes('add_new_res_modal')">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="removeCountryDetails()">Close</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="add_new_Status_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="status-title">Add Status</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="col-md-8">
+                        <div class="col-md-4">
+                            <input type="radio" id="excel" ng-model="type" name="excel" value="ExcelCreation" checked> ExcelWork
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" id="company" ng-model="type" name="company" value="CompanyCreation"> CompanyCreation
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" id="qrCode" ng-model="type" name="qrCode" value="QRCode"> QRCode
+                        </div>
+
+                    </div>
+                    </fieldset>
+                    </form>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled=""
+                                data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                                ng-click="saveNew()">Save
+                        </button>
+                        <button type="button" class="btn btn-primary hi_btn" ng-click="removeUpload()"
+                                data-dismiss="modal">Close
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="add_new_upload_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="state-title">Attach file</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <form class="form-horizontal" name="form">
+                            <fieldset>
+                                <!--<div class="row">-->
+                                <!--<h2 class="pos-header-new">-->
+                                <!--<div><strong>Upload Logo</strong></div>-->
+                                <!--</h2>-->
+                                <!--</div>-->
+
+                                <div class="form-group">
+                                    <div class="col-md-6" ng-repeat="f in fileList" style="margin-left: 96px !important;">
+                                        <label class="col-md-4 col-sm-4 control-label">File</label>
+                                        <div  class="col-md-4">
+                                            <input type="file" onchange="angular.element(this).scope().showFileName(event)" ng-click="setId(f.id)"/>
+                                            <img class="image-preview"
+                                                 style="width: 61px;height:50px;margin-left: 275px;" src={{files}}>
+                                            <br><br />
+                                        </div>
+                                        <div style="text-align:right; width:155%;" ng-if="fileList.length>1 && $index!=0" >
+                                            <input type="button"  value="remove"  ng-click="removeFile($index)">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="button" value="Add New"
+                                               ng-click="addNewFile()">
+                                    </div>
+                                </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 col-sm-4 control-label" for="">Status</label>
+                                        <div class="col-md-6 col-sm-6" >
+                                        <select name="status" id="status" ng-model="uploadStatus"  class="form-control input-md">
+                                        <option value="Menu">Menu</option>
+                                        <option value="Company Creation">Company Creation</option>
+                                        <option value="QR">QR</option>
+                                        <option value="Excel">Excel</option>
+                                        </select>
+                                        </div>
+                                </div>
+
+                            </fieldset>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled=""
+                        data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                        ng-click="saveUpload('')">Save
+                </button>
+                <button type="button" class="btn btn-primary hi_btn" ng-click="removeUpload()"
+                        data-dismiss="modal">Close
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--<div class="modal fade ExchangeRate" tabindex="-1" id="list_payment_type" role="dialog" data-backdrop="static"-->
+     <!--aria-labelledby="mySmallModalLabel">-->
+    <!--<div class="modal-dialog modal-md">-->
+        <!--<div class="modal-content checkout">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span-->
+                        <!--aria-hidden="true">&times;</span></button>-->
+                <!--<h4 id = "payment-title" class="modal-title">Add payment</h4>-->
+            <!--</div>-->
+            <!--<div class="panel-body">-->
+                <!--<div class="row">-->
+                    <!--<div class="col-md-12 col-sm-12">-->
+                        <!--<form class="form-horizontal" name="mail">-->
+                            <!--<fieldset>-->
+                                <!--<div class="form-group">-->
+                                    <!--<label class="col-md-4 col-sm-4 control-label" for="">Mode Of Payment</label>-->
+                                    <!--<div class="col-md-6 col-sm-6" >-->
+                                        <!--<select name="paymentmode" id="paymentmode" ng-model="paymentmode" class="form-control input-md"-->
+                                                <!--ng-options="paymentMethod.paymentmethodName as paymentMethod.paymentmethodName for paymentMethod in paymentMethodList">-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+
+                                <!--<div class="form-group">-->
+                                    <!--<label class="col-md-4 col-sm-4 control-label" for="">Actual Price</label>-->
+                                    <!--<div class="col-md-6 col-sm-6" style="position:relative;">-->
+                                        <!--<input id="totalAmount" name="actualPrice"-->
+                                               <!--type="text" placeholder="actualPrice"-->
+                                               <!--ng-model="actualPrice" ng-change="getBalTotal()"-->
+                                               <!--class="form-control input-md" autocomplete="off">-->
+
+                                    <!--</div>-->
+                                <!--</div><div class="form-group">-->
+                                <!--<label class="col-md-4 col-sm-4 control-label" for="">Amount Paid</label>-->
+                                <!--<div class="col-md-6 col-sm-6" style="position:relative;">-->
+                                    <!--<input id="totalAmount" name="totalAmount"-->
+                                           <!--type="text" placeholder="totalAmount"-->
+                                           <!--ng-model="totalAmount" ng-change="getBalTotal()"-->
+                                           <!--ng-model-options="{ debounce: 500 }"-->
+                                           <!--class="form-control input-md" autocomplete="off">-->
+
+                                <!--</div>-->
+                            <!--</div>-->
+                                <!--<div class="form-group">-->
+                                    <!--<label class="col-md-4 control-label" for="">Amount Balance</label>-->
+                                    <!--<div class="col-md-6">-->
+                                        <!--<input id="totalAmount" name="balAmount"-->
+                                               <!--type="text" placeholder="balAmount"-->
+                                               <!--ng-model="balAmount"-->
+                                               <!--class="form-control input-md" autocomplete="off">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+
+                                <!--<div class="form-group">-->
+                                    <!--<label class="control-label col-sm-4" for="">Payment Date:</label>-->
+                                    <!--<div class="col-sm-8">-->
+                                        <!--<p class="input-group">-->
+                                            <!--<input type="text" class="form-control" uib-datepicker-Popup="{{format}}" ng-model="transactionDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />-->
+                                            <!--<span class="input-group-btn">-->
+                                     <!--<button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>-->
+                                <!--</span>-->
+                                        <!--</p>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="form-group">-->
+                                    <!--<label class="col-md-4 col-sm-4 control-label" for="">Status</label>-->
+                                    <!--<div class="col-md-6 col-sm-6" >-->
+                                        <!--<select name="status" id="status" ng-model="status" ng-init="status='approved'" class="form-control input-md">-->
+                                            <!--<option value="approved">Approved</option>-->
+                                            <!--<option value="rejected">Rejected</option>-->
+                                            <!--<option value="suspended">Suspended</option>-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</fieldset>-->
+                        <!--</form>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+                <!--<button type="submit" class="btn btn-default" data-toggle="modal"-->
+                        <!--data-target=".print-me"  ng-click="savepayment()">Save-->
+                <!--</button>-->
+                <!--<button type="button" class="btn btn-default" ng-click="removepayments()" data-dismiss="modal">Close</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+
+<div class="modal fade" id="add_validity_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="user-title">Validity</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Name</label>
+                            <div class="col-md-6 col-sm-6">
+
+                                <input id="validity" name="validity" readonly
+
+                                       type="text" placeholder="Validity Name"
+                                       ng-model="validityNm"
+                                       class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="cus_step1">
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Activated On</label>
+                            <div class="col-md-6 col-sm-6">
+
+                                <input id="validity" name="validity" readonly
+
+                                       type="text" placeholder="Activated On"
+                                       ng-model="ActiveOn"
+                                       class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="cus_step1">
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Valid Till</label>
+                            <div class="col-md-6 col-sm-6">
+
+                                <input id="validity" name="validity" readonly
+
+                                       type="text" placeholder="Valid Till"
+                                       ng-model="validityTill"
+                                       class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="cus_step1">
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Validity</label>
+                            <div class="col-md-6 col-sm-6">
+
+                                <input id="validity" name="validity" readonly
+
+                                       type="text" placeholder="Validity"
+                                       ng-model="validity"
+                                       class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    </fieldset>
+                    </form>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled=""
+                                data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                                ng-click="saveValidity()">Save
+                        </button>
+                        <button type="button" class="btn btn-primary hi_btn" ng-click="removeUpload()"
+                                data-dismiss="modal">Close
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="add_new_Assign_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="user-title">Add Assign</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 control-label"></label>
+                            <div class="col-md-6 col-sm-6">
+
+                                <select id="assigneduserId" name="assigneduserId" ng-model="assigneduser"  ng-options="user.userName
+                                as user.userName for user in userAssignedList" class="form-control input-md">
+                                    <option value="">Assign</option>
+                                </select>
+                            </div>
+                        </div></div>
+                    </fieldset>
+                    </form>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled=""
+                                data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                                ng-click="AssignToUser()">Save
+                        </button>
+                        <button type="button" class="btn btn-primary hi_btn" ng-click="removeUpload()"
+                                data-dismiss="modal">Close
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="add_new_payment_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <!--<h4 id="user-title">Add Assign</h4>-->
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <form class="form-horizontal" name="mail">
+                            <input type="hidden" ng-model="setupobj.rid" value="{{setupobj.rid}}"/>
+
+                            <fieldset>
+                                <!--<div class="form-group">-->
+                                    <!--<label class="col-md-4 col-sm-4 control-label" for="">Mode Of Payment</label>-->
+                                    <!--<div class="col-md-6 col-sm-6" >-->
+                                        <!--<select name="paymentmode" id="paymentmode" ng-model="paymentmode" class="form-control input-md"-->
+                                                <!--ng-options="paymentMethod.paymentmethodName as paymentMethod.paymentmethodName for paymentMethod in paymentMethodList">-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <input type="hidden" ng-model="setupobj.rid" value="{{setupobj.rid}}"/>
+                                <div class="form-group">
+
+                                    <label class="col-md-4 col-sm-4 control-label" for="">Actual Price</label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <input id="totalAmount" name="actualPrice"
+                                               type="text" placeholder="actualPrice"
+                                               ng-model="actualPrice" ng-change="getBalTotal()"
+                                               class="form-control input-md" autocomplete="off">
+
+                                    </div>
+                                </div><div class="form-group">
+                                <label class="col-md-4 col-sm-4 control-label" for="">Amount Paid</label>
+                                <div class="col-md-6 col-sm-6" style="position:relative;">
+                                    <input id="totalAmount" name="totalAmount"
+                                           type="text" placeholder="totalAmount"
+                                           ng-model="totalAmount" ng-change="getBalTotal()"
+                                           ng-model-options="{ debounce: 500 }"
+                                           class="form-control input-md" autocomplete="off">
+
+                                </div>
+                            </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="">Amount Balance</label>
+                                    <div class="col-md-6">
+                                        <input id="totalAmount" name="balAmount"
+                                               type="text" placeholder="balAmount"
+                                               ng-model="balAmount"
+                                               class="form-control input-md" autocomplete="off">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" for="">Payment Date:</label>
+                                    <div class="col-sm-8">
+                                        <p class="input-group">
+                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="transactionDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                            <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 col-sm-4 control-label" for="">Status</label>
+                                    <div class="col-md-6 col-sm-6" >
+                                        <select name="status" id="status" ng-model="active" ng-init="active='Approved'" class="form-control input-md">
+                                            <option value="approved">Approved</option>
+                                            <option value="rejected">Rejected</option>
+                                            <option value="suspended">Suspended</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="submit" class="btn btn-default" data-toggle="modal"
+                        data-target=".print-me"  ng-click="savepayment(setupobj.rid)">Save
+                </button>
+                <button type="button" class="btn btn-default" ng-click="removepayments()" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="modal fade" id="list_payment_to">-->
+    <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                    <!--<span aria-hidden="true">&times;</span></button>-->
+                <!--&lt;!&ndash;<h4 id="user-title">Add Assign</h4>&ndash;&gt;-->
+            <!--</div>-->
+            <!--<div class="panel-body">-->
+                <!--<div class="row">-->
+                    <!--<div class="col-md-12 col-sm-12">-->
+                        <!--<form class="form-horizontal" name="mail">-->
+                            <!--<input type="hidden" ng-model="setupobj.rid" value="{{setupobj.rid}}"/>-->
+
+                            <!--<fieldset>-->
+                                <!--<div class="form-group">-->
+                                    <!--<label class="col-md-4 col-sm-4 control-label" for="">PaymentMode</label>-->
+                                    <!--<div class="col-md-6 col-sm-6" >-->
+                                        <!--<select name="status" id="status" ng-model="paymentmode"  class="form-control input-md">-->
+                                            <!--<option value="Cash">Cash</option>-->
+                                            <!--<option value="Card">Card</option>-->
+                                            <!--&lt;!&ndash;<option value="suspended">Suspended</option>&ndash;&gt;-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;<input type="hidden" ng-model="setupobj.rid" value="{{setupobj.rid}}"/>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+
+                                    <!--&lt;!&ndash;<label class="col-md-4 col-sm-4 control-label" for="">Actual Price</label>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<div class="col-md-6 col-sm-6" style="position:relative;">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<input id="totalAmount" name="actualPrice"&ndash;&gt;-->
+                                               <!--&lt;!&ndash;type="text" placeholder="actualPrice"&ndash;&gt;-->
+                                               <!--&lt;!&ndash;ng-model="actualPrice" ng-change="getBalTotal()"&ndash;&gt;-->
+                                               <!--&lt;!&ndash;class="form-control input-md" autocomplete="off">&ndash;&gt;-->
+
+
+                                <!--<div class="form-group">-->
+                                <!--<label class="col-md-4 col-sm-4 control-label" for="">Amount Paid</label>-->
+                                <!--<div class="col-md-6 col-sm-6" style="position:relative;">-->
+                                    <!--<input id="totalAmount" name="totalAmount"-->
+                                           <!--type="text" placeholder="totalAmount"-->
+                                           <!--ng-model="paymentAmount" ng-change="getBalTotal()"-->
+                                           <!--ng-model-options="{ debounce: 500 }"-->
+                                           <!--class="form-control input-md" autocomplete="off">-->
+
+                                <!--</div>-->
+                            <!--</div>-->
+                                <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<label class="col-md-4 control-label" for="">Amount Balance</label>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<div class="col-md-6">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<input id="totalAmount" name="balAmount"&ndash;&gt;-->
+                                               <!--&lt;!&ndash;type="text" placeholder="balAmount"&ndash;&gt;-->
+                                               <!--&lt;!&ndash;ng-model="balAmount"&ndash;&gt;-->
+                                               <!--&lt;!&ndash;class="form-control input-md" autocomplete="off">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                                <!--<div class="form-group">-->
+                                    <!--<label class="control-label col-sm-4" for="">Payment Date:</label>-->
+                                    <!--<div class="col-sm-8">-->
+                                        <!--<p class="input-group">-->
+                                            <!--<input type="text" class="form-control" uib-datepicker-Popup="{{format}}" ng-model="paymentDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />-->
+                                            <!--<span class="input-group-btn">-->
+                                     <!--<button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>-->
+                                <!--</span>-->
+                                        <!--</p>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="form-group">-->
+                                    <!--<label class="col-md-4 col-sm-4 control-label" for="">Status</label>-->
+                                    <!--<div class="col-md-6 col-sm-6" >-->
+                                        <!--<select name="status" id="status" ng-model="paymentStatus" class="form-control input-md">-->
+                                            <!--<option value="ToPay">ToPay</option>-->
+                                            <!--<option value="Paid">Paid</option>-->
+                                            <!--&lt;!&ndash;<option value="suspended">Suspended</option>&ndash;&gt;-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</fieldset>-->
+                        <!--</form>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+
+                <!--<button type="submit" class="btn btn-default" data-toggle="modal"-->
+                        <!--data-target=".print-me"  ng-click="savepayTo()">Save-->
+                <!--</button>-->
+                <!--<button type="button" class="btn btn-default" ng-click="removepayments()" data-dismiss="modal">Close</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+
+<div class="modal fade Student" tabindex="-1" id="View_Details" role="dialog"
+     data-backdrop="static"
+     aria-labelledby="mySmallModalLabel">
+
+    <div class="modal-dialog modal-lg" style="width: 1000px !important;background-color: white !important;">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+        </div>
+        <div align="center">
+
+
+            <br/>
+            <br/>
+
+            <div class="row">
+                <div class="col-lg-9 admission_border">
+
+                    <table class="admission_table_1 table">
+                        <tbody>
+                        <tr>
+                            <td colspan="2" style="padding-left: 20px;text-align:center;
+">
+                                <h3 >Restaurant Details</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="adm_title_half">1.RName</span>
+                                <span class="adm_colon">:</span>
+                                <span class="adm_val_half" style="width: 56%;">{{rName}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="adm_title_half">2.Date </span>
+                                <span class="adm_colon">:</span>
+                                <span class="adm_val_half" style="width: 56%;">{{date}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="adm_title_half">3.Location </span>
+                                <span class="adm_colon">:</span>
+                                <span class="adm_val_half" style="width: 56%;">{{location}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="adm_title_half">4.Email </span>
+                                <span class="adm_colon">:</span>
+                                <span class="adm_val_half" style="width: 56%;">{{email}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="adm_title_half">5.Contact </span>
+                                <span class="adm_colon">:</span>
+                                <span class="adm_val_half" style="width: 56%;">{{contact}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="adm_title_half">6.CName </span>
+                                <span class="adm_colon">:</span>
+                                <span class="adm_val_half" style="width: 56%;">{{cName}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="adm_title_half">7.Address </span>
+                                <span class="adm_colon">:</span>
+                                <span class="adm_val_half" style="width: 56%;">{{address}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="adm_title_half">8.City </span>
+                                <span class="adm_colon">:</span>
+                                <span class="adm_val_half" style="width: 56%;">{{city}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="adm_title_half">9.Zipcode </span>
+                                <span class="adm_colon">:</span>
+                                <span class="adm_val_half" style="width: 56%;">{{zipcode}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="adm_title_half">10.Remarks </span>
+                                <span class="adm_colon">:</span>
+                                <span class="adm_val_half" style="width: 56%;">{{remarks}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="adm_title_half">11.Product </span>
+                                <span class="adm_colon">:</span>
+                                <span class="adm_val_half" style="width: 56%;">{{product}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="adm_title_half">12.Service </span>
+                                <span class="adm_colon">:</span>
+                                <span class="adm_val_half" style="width: 56%;">{{service}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="adm_title_half">13.User </span>
+                                <span class="adm_colon">:</span>
+                                <span class="adm_val_half" style="width: 56%;">{{user}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="adm_title_half">14.GstNo </span>
+                                <span class="adm_colon">:</span>
+                                <span class="adm_val_half" style="width: 56%;">{{gstNo}}</span>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

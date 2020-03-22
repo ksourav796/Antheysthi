@@ -1,0 +1,226 @@
+
+<style>
+
+    .table .thead-dark th {
+        color: #fff !important;
+        background-color: #696969 !important;
+        border-color: #ecf0f5 !important;
+    }
+    .table td{
+        border:1px solid #696969 !important;
+    }
+    table>thead>tr>th {
+        padding: 4px !important;
+        background-color: #696969;
+        color: white;
+        font-size: 13px;
+    }
+    @media only screen and (max-width: 768px) {
+        .top-button-area {
+            margin-top: 25px;
+            margin-left: 188px;
+            margin-top: -36px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .col-md-10 {
+            width: 83.33333333%;
+            margin-top: -8px;
+        }
+    }
+    /*.overSelect {*/
+        /*position: absolute;*/
+        /*left: 0;*/
+        /*right: 0;*/
+        /*top: 0;*/
+        /*bottom: 0;*/
+    /*}*/
+    /*#checkboxes {*/
+        /*display: none;*/
+        /*border: 1px #dadada solid;*/
+    /*}*/
+
+    /*#checkboxes label {*/
+        /*display: block;*/
+    /*}*/
+
+    /*#checkboxes label:hover {*/
+        /*background-color: #1e90ff;*/
+    /*}*/
+
+</style>
+
+<section class="content-header">
+    <h1>
+        Scheduler
+    </h1>
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="top-box">
+                <div class="col-md-2">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="Search..." id="textinput" name="textinput"  type="text"
+                                   placeholder="Search Country" ng-model="countrySearchText"
+                                   ng-change="getPaginationList(countrySearchText)">
+
+                        </div>
+
+                </div>
+                <div class="col-md-10">
+                    <div class="top-button-area">
+                        <div class="col-md-2 col-sm-4">
+                            <button type="button"  class="dropbtn btn btn-primary hi_btn" ng-click="addEScheduler()"style="width:80%">Add</button>
+                        </div>
+                        <div class="col-md-2 col-sm-4">
+                            <button type="button"  class="dropbtn btn btn-primary hi_btn" id="colButnw"  data-toggle="modal"
+                                    ng-model="StatusText" data-target=".print-me"
+                                    ng-click="inactiveButton()">{{ButtonStatus}}</button>
+                        </div>
+                        <div class="col-md-2 col-sm-4">
+                            <button type="button" class="dropbtn btn btn-primary hi_btn" ng-click="goBack()">Back</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 customer-data">
+            <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                <thead>
+                <tr>
+                    <th>
+                        DocumentName
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+
+
+                </thead>
+                <tbody>
+                <tr ng-repeat="scheduler in schedularList| filter:countrySearchText">
+                    <td>{{scheduler.documentName}}</td>
+
+                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editSchedular(scheduler)">Edit</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="add_new_escheduler_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="country-title">Add Scheduler</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step001">
+                        <input type="hidden" ng-model="schedular" value="{{schedular.id}}"/>
+                        <div class="col-lg-4 col-md-4">
+                            <div>
+                                <div class="wrapper">
+                                    <div class="multiselect" style="width: 98%;">
+                                        <label class="col-md-4 col-sm-4 control-label" >Franchise</label>
+                                        <div class="selectBox" ng-click="showCheckboxes()">
+                                            <select style="padding: 7px 0px; width: 100%;">
+                                                <option>Select</option>
+                                            </select>
+                                            <div class="overSelect"></div>
+                                        </div>
+                                        <div id="checkboxes" style="width:83% !important;">
+                                            <label ng-repeat="franch in resList">
+                                                <input type="checkbox"
+                                                       multiple="multiple"
+                                                       ng-change="getDocumentList(document)"
+                                                       ng-click="pushSelectedGrades(franch.rid)"
+                                                       ng-model="franch.franchisettt"
+                                                       ng-value="franch.rid" style="display: inline;width: 30px"/>{{franch.rName}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table data-toggle="table" data-cache="false" data-height="299"
+                               class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                            <thead>
+                            <th data-field="cntryname">
+                                <div class="th-inner"></div>
+                            </th>
+                            <th data-field="cntryname">
+                                <div class="th-inner" align="center">Document Name</div>
+                            </th>
+                            <th data-field="del">
+                                <div class="th-inner" align="center">Date</div>
+                            </th>
+                            <th data-field="edit">
+                                <div class="th-inner" align="center">Time</div>
+                            </th>
+
+                            </tr></thead>
+
+                            <tbody id="parentTable">
+                            <tr ng-repeat="document in documentList">
+                                <td><div><input type="checkbox" ng-model="document.checkBoxValue" ng-change="getDateList11(document)"></div></td>
+                                <td>{{document.documentName}}</td>
+                                <td ng-show="document.checkBoxValue==true">
+                                    <div class="row" id="cus_step1">
+                                        <div class="form-group">
+                                            <div class="col-sm-9">
+                                                <p class="input-group">
+                                                    <input type="text" class="form-control"  ng-change="getDateList(docDate)" uib-datepicker-popup="{{format}}"  readonly ng-model="document.docDate" is-open="popupA.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                                    <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="openA()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td ng-show="document.checkBoxValue==true">
+                                    <div class="form-group">
+                                        <div class="col-md-12 col-sm-6"
+                                             style="position:relative;"><input id="time"
+                                                                               type="text"
+                                                                               placeholder="Time (Ex:00:00)"
+                                                                               ng-readonly="operation=='Edit'"
+                                                                               ng-model="document.docTime"
+                                                                               class="form-control input-md">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                        data-target=".print-me" ng-click="saveschedular('add_new_escheduler_modal')">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="removeCountryDetails()">Close</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+

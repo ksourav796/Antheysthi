@@ -1,0 +1,169 @@
+
+<style>
+
+    .table .thead-dark th {
+        color: #fff !important;
+        background-color: #696969 !important;
+        border-color: #ecf0f5 !important;
+    }
+    .table td{
+        border:1px solid #696969 !important;
+    }
+    table>thead>tr>th {
+        padding: 4px !important;
+        background-color: #696969;
+        color: white;
+        font-size: 13px;
+    }
+    @media only screen and (max-width: 767px) {
+
+
+        .top-button-area {
+            margin-top: 0px!important;
+        }
+        .top-box{
+            height: 50px;
+        }
+        .mbser{
+            margin-top: 20px;
+        }
+        .customer-data {
+            margin-top: 30px;
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        .top-button-area {
+            margin-top: 0px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .col-md-10 {
+            width: 83.33333333%;
+            margin-top: -8px;
+        }
+    }
+
+</style>
+
+<section class="content-header">
+    <h1>
+        PaymentMode
+    </h1>
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="top-box">
+                <!--<div class="col-md-2">-->
+                        <!--<div class="input-group">-->
+                            <!--<input class="form-control" placeholder="Search..." id="textinput" name="textinput"  type="text"-->
+                                   <!--placeholder="Search " ng-model="SearchText"-->
+                                   <!--ng-change="getPaymentModeList(SearchText)">-->
+
+                        <!--</div>-->
+
+                <!--</div>-->
+                <div class="col-md-10">
+                    <div class="top-button-area">
+                        <div class="col-md-2 col-sm-4 col-xs-4 ">
+                            <button type="button"  class="dropbtn btn btn-primary hi_btn" ng-click="addPaymentMode()"style="width:80%">Add</button>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-4">
+                            <button type="button"  class="dropbtn btn btn-primary hi_btn" id="colButnw"  data-toggle="modal"
+                                    ng-model="StatusText" data-target=".print-me"
+                                    ng-click="inactiveButton()">{{ButtonStatus}}</button>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-4">
+                            <button type="button" class="dropbtn btn btn-primary hi_btn" ng-click="goBack()">Back</button>
+                        </div>
+                        <div class="col-sm-4 col-xs-12 input-group">
+                            <input class="form-control mbser" placeholder="Search..." id="textinput" name="textinput"  type="text"
+                                   ng-model="SearchText"
+                                   ng-change="getPaymentModeList(SearchText)">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 customer-data">
+            <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                <thead>
+                <tr>
+                    <th>
+                        PaymentName
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+
+
+                </thead>
+                <tbody>
+                <tr ng-repeat="paymentMode in paymentModeList">
+                    <td>{{paymentMode.paymentName}}</td>
+
+                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editPayment(paymentMode)">Edit</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="add_new_paymentMode_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="country-title">Add PaymentMode</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Name<span style="color: red">*</span></label>
+                            <div class="col-sm-9">
+                                <input id="paymentName" name="paymentName"
+                                       type="text" placeholder="paymentName"
+                                       ng-model="paymentName" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Status</label>
+                            <div class="col-sm-9">
+                                <select name="custStatus" id="custStatus" ng-model="status" class="form-control" required>
+                                    <option value="Active">Active</option>
+                                    <option value="InActive">InActive</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                        data-target=".print-me" ng-click="savePaymentMode('add_new_paymentMode_modal')">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="removePaymentMode()">Close</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+

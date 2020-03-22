@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    .rep_list_info .custom_info {
+        margin: 15px 0px;
+        text-align: center;
+        border: 1px solid #ccc;
+        background: #fff;
+        padding: 20px 10px;
+        height: 136px;
+    }
+    .rep_list_info .custom_info img{
+        width: 30%;
+    }
+    .rep_info {
+        text-align: center;
+        color: #333;
+        font-weight: bold;
+    }
+    @media (min-width: 992px) {
+        .col-md-3 {
+            width: 22% !important;
+        }
+    }
+</style>
+
+<body>
+<div class="container-fluid" style="width: 100%;">
+    <div class="container cus_main_row">
+
+        <div class="row">
+            <h1>Masters</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 rep_list_info" ng-show="userAccessRights.country">
+                <a href="#!/country">
+                    <div class="custom_info">
+                        <i class="fa fa-globe fa-5x" aria-hidden="true"></i>
+                        <div class="rep_info">Country</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6 rep_list_info" ng-show="userAccessRights.state">
+                <a href="#!/state">
+                    <div class="custom_info">
+                        <i class="fa fa-compass fa-5x" aria-hidden="true"></i>
+                        <div class="rep_info">State</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6 rep_list_info" ng-show="userAccessRights.city">
+                <a href="#!/city">
+                    <div class="custom_info">
+                        <i class="fa fa-map-marker fa-5x" aria-hidden="true"></i>
+                        <div class="rep_info">City</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6 rep_list_info" ng-show="userAccessRights.currency">
+            <a href="#!/currency">
+            <div class="custom_info">
+            <i class=" fa fa-money fa-5x" aria-hidden="true"></i>
+            <div class="rep_info">Currency</div>
+            </div>
+            </a>
+            </div>
+            <div class="col-md-3 col-sm-6 rep_list_info" ng-show="userAccessRights.userRole">
+                <a href="#!/userrole">
+                    <div class="custom_info">
+                        <i class="fa fa-braille fa-5x"
+                           aria-hidden="true"></i>
+                        <div class="rep_info">User Role</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6 rep_list_info" ng-show="userAccessRights.users">
+                <a href="#!/users">
+                    <div class="custom_info">
+                        <i class="fa fa-user fa-5x" aria-hidden="true"></i>
+                        <div class="rep_info">User</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6 rep_list_info" ng-show="userAccessRights.typeOfEnq">
+                <a href="#!/typeOfEnquiry">
+                    <div class="custom_info">
+                        <i class="fa  fa-credit-card fa-5x" aria-hidden="true"></i>
+                        <div class="rep_info">Type Of Enquiry</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6 rep_list_info" ng-show="userAccessRights.serviceType">
+                <a href="#!/serviceType">
+                    <div class="custom_info">
+                        <i class="fa  fa-credit-card fa-5x" aria-hidden="true"></i>
+                        <div class="rep_info">Service Type</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6 rep_list_info" ng-show="userAccessRights.sourceOfEnq">
+                <a href="#!/enqsource">
+                    <div class="custom_info">
+                        <i class="fa  fa-credit-card fa-5x" aria-hidden="true"></i>
+                        <div class="rep_info">Source Of Enquiry</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6 rep_list_info" ng-show="userAccessRights.serviceLocation">
+                <a href="#!/serviceLocation">
+                    <div class="custom_info">
+                        <i class="fa  fa-credit-card fa-5x" aria-hidden="true"></i>
+                        <div class="rep_info">Service Location</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6 rep_list_info" ng-show="userAccessRights.smsServer">
+            <a href="#!/smsServer">
+            <div class="custom_info">
+            <i class="fa fa-comments-o fa-5x" aria-hidden="true"></i>
+            <div class="rep_info">Sms Server</div>
+            </div>
+            </a>
+            </div>
+            <div class="col-md-3 col-sm-6 rep_list_info" ng-show="userAccessRights.emailServer">
+            <a href="#!/emailserver">
+            <div class="custom_info">
+            <i class=" fa fa-envelope fa-5x" aria-hidden="true"></i>
+            <div class="rep_info">Email Server</div>
+            </div>
+            </a>
+            </div>
+            <div class="col-md-3 col-sm-6 rep_list_info" ng-show="userAccessRights.supplier">
+            <a href="#!/supplier">
+            <div class="custom_info">
+            <i class=" fa fa-money fa-5x" aria-hidden="true"></i>
+            <div class="rep_info">Supplier</div>
+            </div>
+            </a>
+            </div>
+            <div class="col-md-3 col-sm-6 rep_list_info" ng-show="userAccessRights.callStatus">
+            <a href="#!/callStatus">
+            <div class="custom_info">
+            <i class="fa fa-phone fa-5x" aria-hidden="true"></i>
+            <div class="rep_info">Call Status</div>
+            </div>
+            </a>
+            </div>
+    </div>
+</div>
+</body>
+</html>

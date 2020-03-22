@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    .rep_list_info .custom_info {
+        margin: 15px 0px;
+        text-align: center;
+        border: 1px solid #ccc;
+        background: #fff;
+        padding: 20px 10px;
+        height: 136px;
+    }
+    .rep_list_info .custom_info img{
+        width: 30%;
+    }
+    .rep_info {
+        text-align: center;
+        color: #333;
+        font-weight: bold;
+    }
+    .pos-header-new {
+        border-top: 30px solid #f0ad4e;
+        border-right: 25px solid transparent;
+        color: black;
+        margin: 0;
+        float: left;
+        height: 0;
+        line-height: 24px;
+        padding: 0 35px 0 10px;
+        text-transform: uppercase;
+        -moz-transition: border-bottom-color .4s ease;
+        -o-transition: border-bottom-color .4s ease;
+        -webkit-transition: border-bottom-color .4s ease;
+        transition: border-bottom-color .4s ease;
+        min-width: 202px;
+    }
+    .pos-header-new > div, .pos-header-double > div {
+        margin-top: -25px;
+    }
+    @media (min-width: 992px) {
+        .col-md-3 {
+            width: 22% !important;
+        }
+    }
+</style>
+
+<body>
+<div class="container-fluid" style="width: 100%;">
+    <div class="container cus_main_row">
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>HR Masters</div>
+
+            </h2>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-sm-6 rep_list_info">
+                <a href="#!/hr">
+                    <div class="custom_info">
+                        <i class=" fa fa-globe fa-5x" aria-hidden="true"></i>
+                        <div class="rep_info">Hr Application</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6 rep_list_info">
+                <a href="#!/employee">
+                    <div class="custom_info">
+                        <i class="fa fa-users fa-5x" aria-hidden="true"></i>
+                        <div class="rep_info">Employee</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6 rep_list_info">
+                <a href="#!/teacherobservation">
+                    <div class="custom_info">
+                        <i class=" fa fa-chain-broken fa-5x" aria-hidden="true"></i>
+                        <div class="rep_info">Teacher Observation Form</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

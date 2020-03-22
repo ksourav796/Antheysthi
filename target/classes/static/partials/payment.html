@@ -1,0 +1,690 @@
+
+<style>
+
+    .table .thead-dark th {
+        color: #fff !important;
+        background-color: #696969 !important;
+        border-color: #ecf0f5 !important;
+    }
+    .table td{
+        border:1px solid #696969 !important;
+    }
+    table>thead>tr>th {
+        padding: 4px !important;
+        background-color: #696969;
+        color: white;
+        font-size: 13px;
+    }
+    @media only screen and (max-width: 767px) {
+        .top-button-area {
+            margin-top: 0px!important;
+        }
+        .top-box{
+            height: 50px;
+        }
+        .mbser{
+            margin-top: 20px;
+        }
+        .customer-data {
+            margin-top: 0px;
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        .top-button-area {
+            margin-top: 0px;
+        }
+    }
+
+</style>
+<section class="content-header">
+    <h1>
+        Payments
+    </h1>
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="top-box">
+                <div class="col-md-2">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="Search..." id="textinput" name="textinput"  type="text"
+                                   placeholder="Search" ng-model="searchText"
+                                   ng-change="getPaginationList(searchText)">
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="top-button-area">
+                        <!--<div class="col-md-2 col-sm-4">-->
+                        <!--<button type="button" class="btn btn-block btn-success" ng-click="addNewpayment()">Add</button>-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--<div class="col-md-10">-->
+                            <!--<div class="top-button-area">-->
+                                <!--<div class="col-md-2 col-sm-4">-->
+                                    <!--<button id="" type="button" class="dropbtn btn btn-primary hi_btn"-->
+                                            <!--ng-click="addFranPay()"style="width:80%">Add-->
+                                    <!--</button>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2 col-sm-4">-->
+                        <!--<button type="button" class="btn btn-block btn-success" id="colButnw"  data-toggle="modal"-->
+                        <!--ng-model="inactiveStatus" data-target=".print-me"-->
+                        <!--ng-click="inactiveButton()">{{ButtonStatus}}</button>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2 col-sm-4">-->
+                        <!--<button type="button" class="btn btn-block btn-success" ng-click="importCountry()">Import</button>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 customer-data" style="overflow-x:auto">
+            <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                <thead>
+                <tr>
+                    <!--<th>-->
+                    <!--Activity-->
+                    <!--</th>-->
+                    <!--<th>-->
+                    <!--Employee-->
+                    <!--</th>-->
+                    <th>
+                        Restaurant Name
+                    </th>
+                    <th>
+                        Order Date
+                    </th>
+                    <th>
+                        Subscription Name
+                    </th>
+                    <th>
+                        Amount Paid
+                    </th>
+                    <th>
+                        Expiry
+                    </th>
+                    <th>
+                    Subscription Status
+                </th>
+                    <th>
+                        Wallet Recharge
+                    </th>
+                    <th ng-show="payment.subscriptionStatus=='Live'">
+                        Confirm Status
+                    </th>
+                    <th ng-hide="payment.subscriptionStatus=='Live'">
+                        Confirm Status
+                    </th>
+
+                </tr>
+
+
+                </thead>
+                <tbody>
+                <tr ng-repeat="payment in paymentList">
+                    <td>{{payment.rName}}</td>
+                    <td>{{payment.transactionDate|date:'dd/MM/yyyy'}}</td>
+                    <td>{{payment.subscriptionName}}</td>
+                    <td>{{payment.amount}}</td>
+                    <td>{{payment.expiryDate}}</td>
+                    <td>{{payment.subscriptionStatus}}</td>
+                    <!--<td>{{payment.paymentStatus}}</td>-->
+                    <!--<td class="align_right"><a href="" ng-click="paymentHistory()">paymentHistory</a> </td>-->
+
+
+
+                    <td> <button type="button" class="btn btn-primary hi_btn"  ng-click="wallet(payment)">Wallet</button></td>
+                    <td  ng-show="payment.subscriptionStatus=='Live'"></td>
+                    <td  ng-hide="payment.subscriptionStatus=='Live'"> <button type="button" class="btn btn-primary hi_btn"  ng-click="Confirm(payment)">Confirm</button></td>
+                    </td>
+                    <!--<td>{{payment.due}}</td>-->
+                    <!--<td>{{agency.agencyAddress}}</td>-->
+                    <!--<td>{{agency.agPhone}}</td>-->
+
+                    <!--<td><button type="button" class="btn btn-primary hi_btn"  ng-click="editFranPay(payment)">Edit</button></td>-->
+                    <!--<td><button ng-show="payment.subscriptionStatus=='Expired'" type="button" class="btn btn-primary hi_btn"  ng-click="addFranPay(payment.rName)">Renew</button></td>-->
+                    <!--<button type="button" class="btn btn-primary hi_btn"  ng-click="deletecustomer(customer.customerId)">Delete</button></td>-->
+                </tr>
+                </tbody>
+            </table>
+            <div class="col-sm-12 pagination_">
+
+                <div class="col-sm-12" style="float:right !important;">
+                    <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}"
+                            ng-disabled="first"
+                            ng-click="getPaginationList('firstPage')" ng-model="first">First
+                    </button>
+                    <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}"
+                            ng-disabled="prev"
+                            ng-click="getPaginationList('prevPage')" ng-model="prev">Prev
+                    </button>
+                    <button type="button" class="btn btn-default hi_btn" name="next" ng-disabled="next"
+                            ng-click="getPaginationList('nextPage')" value="next"
+                            ng-class="{'diabled-class': next}" ng-model="next">Next
+                    </button>
+                    <button type="button" class="btn btn-default hi_btn"
+                            ng-click="getPaginationList('lastPage')" ng-class="{'diabled-class': last}"
+                            ng-disabled="last"
+                            ng-model="last">Last
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--<div class="modal fade" id="add_new_payment_modal">-->
+    <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                    <!--<span aria-hidden="true">&times;</span></button>-->
+                <!--<h4 id="country-title">Add Payments</h4>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+                <!--<div class="box-body">-->
+                    <!--<div class="row" id="cus_step1">-->
+                        <!--<div class="form-group">-->
+                            <!--<label class=" col-sm-3 control-label">AgencyName</label>-->
+                            <!--<div class=" col-sm-9">-->
+                                <!--<input id="parent" name="parent" ng-model="parent" readonly  class="form-control input-md"/>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class=" col-sm-3 control-label">Activity Name<span style="color: red">*</span></label>-->
+                            <!--<div class=" col-sm-9">-->
+                                <!--<select id="activity" name="activity" ng-model="activity" ng-options="activity.name as activity.name for activity in activList" class="form-control input-md">-->
+                                    <!--<option value="">Select</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">Employee Name<span style="color: red">*</span></label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<select id="employee" name="employee" ng-model="employee" ng-options="employee.employeeName as employee.employeeName for employee in employList" class="form-control input-md">-->
+                                    <!--<option value="">Select</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label  class="col-sm-3 control-label">Amount<span style="color: red">*</span></label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input id="Name" name="Name"-->
+                                       <!--num-with-out-space=""-->
+                                       <!--ng-pattern=""-->
+                                       <!--type="text" placeholder="Amount"-->
+                                       <!--ng-model="amount" maxlength="125"-->
+                                       <!--class="form-control">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label  class="col-sm-3 control-label">Duedays<span style="color: red">*</span></label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input id="Name" name="Name"-->
+                                       <!--ng-pattern=""-->
+                                       <!--type="text" placeholder="Due Days"-->
+                                       <!--ng-model="due" maxlength="125"-->
+                                       <!--class="form-control">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"-->
+                        <!--data-target=".print-me" ng-click="savePayments()">Save</button>-->
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="removeDetails()">Close</button>-->
+
+            <!--</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; /.modal-content &ndash;&gt;-->
+    <!--</div>-->
+    <!--&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+<!--</div>-->
+<!--<div class="modal fade ExchangeRate" tabindex="-1" id="add_new_modal" role="dialog"-->
+     <!--data-backdrop="static"-->
+     <!--aria-labelledby="mySmallModalLabel">-->
+    <!--<div class="modal-dialog modal-md">-->
+        <!--<div class="modal-content checkout">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span-->
+                        <!--aria-hidden="true">&times;</span></button>-->
+                <!--<h4 id="menu-title" class="modal-title">Add</h4>-->
+            <!--</div>-->
+            <!--<div class="panel-body">-->
+                <!--<div class="row">-->
+                    <!--<div class="col-md-12 col-sm-12">-->
+                        <!--<form ng-submit="addOperation(paymentLists)">-->
+                            <!--<table class="table table-striped table-bordered">-->
+                                <!--<thead>-->
+                                <!--<tr>-->
+                                    <!--<th>FranchiseName</th>-->
+                                    <!--<th>Restaurant Name</th>-->
+                                    <!--<th>Activity</th>-->
+                                    <!--<th>Employee</th>-->
+                                    <!--&lt;!&ndash;<th>Parent Id</th>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<th>HeaderValue</th>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<th>FooterValue</th>&ndash;&gt;-->
+                                    <!--<th>Amount</th>-->
+                                    <!--<th>DueDays</th>-->
+                                <!--</tr>-->
+                                <!--</thead>-->
+                                <!--<tbody>-->
+                                <!--<tr ng-repeat="payments in paymentLists ">-->
+
+                                    <!--<td>-->
+                                        <!--<select name="" ng-model="payments.agencyName"-->
+                                                <!--ng-options="fra.franchiseName as fra.franchiseName for fra in franchiseList"-->
+                                                <!--ng-change='getagencybasedrest(payments.agencyName)' ng-disabled="paymentLists.length>1 && $index>=1"-->
+                                                <!--class="form-control input-md">-->
+                                            <!--<option value="">-Select-</option>-->
+                                        <!--</select>-->
+
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--<select name="" ng-model="payments.rName"-->
+                                                <!--ng-options="res.rName as res.rName for res in agBasedREstLIst" ng-disabled="paymentLists.length>1 && $index>=1"-->
+                                                <!--class="form-control input-md" >-->
+                                            <!--<option value="">-Select-</option>-->
+                                        <!--</select>-->
+
+                                    <!--</td>-->
+                                    <!--&lt;!&ndash;menu Name&ndash;&gt;-->
+                                    <!--<td>-->
+
+                                        <!--<select id="activity" name="activity" ng-model="payments.activity" ng-options="activity.name as activity.name for activity in activList" class="form-control input-md">-->
+                                            <!--<option value="">Select</option>-->
+                                        <!--</select>-->
+                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                    <!--</td>-->
+                                    <!--&lt;!&ndash;Sequence No&ndash;&gt;-->
+                                    <!--<td>-->
+
+                                        <!--<select id="employee" name="employee" ng-model="payments.employee" ng-options="employee.employeeName as employee.employeeName for employee in employList" class="form-control input-md">-->
+                                            <!--<option value="">Select</option>-->
+                                        <!--</select>-->
+
+                                    <!--</td>-->
+
+
+                                    <!--<td>-->
+
+                                        <!--<input id="Name" name="Name"-->
+                                               <!--ng-pattern=""-->
+                                               <!--type="text" placeholder="Amount"-->
+                                               <!--ng-model="payments.amount" maxlength="125"-->
+                                               <!--class="form-control">-->
+
+
+                                    <!--</td>-->
+                                    <!--<td>-->
+
+                                        <!--<input id="Name" name="Name"-->
+                                               <!--ng-pattern=""-->
+                                               <!--type="text" placeholder="due"-->
+                                               <!--ng-model="payments.due" maxlength="125"-->
+                                               <!--class="form-control">-->
+
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--<button type="button" class="btn btn-dagencyNameefault hi_btn"-->
+                                                <!--ng-click="removeaddnew()">X-->
+                                        <!--</button>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
+                                <!--</tbody>-->
+                            <!--</table>-->
+                            <!--<td>-->
+                                <!--<button type="button"-->
+                                        <!--class="btn btn-primary hi_btn"-->
+                                        <!--ng-click="saveNewPayments()">-->
+                                    <!--Save-->
+                                <!--</button>-->
+                            <!--</td>-->
+
+                            <!--<td>-->
+                                <!--<button type="button"-->
+                                        <!--class="btn btn-primary"-->
+                                        <!--ng-click="removeServices()"-->
+                                        <!--data-dismiss="modal">Close-->
+                                <!--</button>-->
+                            <!--</td>-->
+
+                            <!--<div class="form-group">-->
+                                <!--&lt;!&ndash;<input ng-hide="!menuBuilderList.length"&ndash;&gt;-->
+                                <!--&lt;!&ndash;type="button"&ndash;&gt;-->
+                                <!--&lt;!&ndash;class="btn btn-danger pull-right"&ndash;&gt;-->
+                                <!--&lt;!&ndash;ng-click="removefuncOperation()" value="Remove">&ndash;&gt;-->
+                                <!--<input type="submit"-->
+                                       <!--class="btn btn-primary addnew pull-right"-->
+                                       <!--value="Add New">-->
+                            <!--</div>-->
+                        <!--</form>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<div class="modal fade ExchangeRate" tabindex="-1" id="add_new_payment_modal" role="dialog" data-backdrop="static"
+     aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content checkout">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 id = "payment-title" class="modal-title">Add payment</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <form class="form-horizontal" name="mail">
+                            <fieldset>
+
+                                <div class="form-group">
+                                    <label class="col-md-4 col-sm-4 control-label" for="">totalAmount</label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <input id="totalAmount" name="totalAmount"
+                                               type="text" placeholder="totalAmount"
+                                               ng-model="totalAmount"
+                                               class="form-control input-md" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="">order</label>{{sassOrdersId}}
+                                    <div class="col-md-6">
+                                        <select  name="customerId" ng-model="SassOrdersId" ng-options="SassOrders.companyName as SassOrders.companyName  for SassOrders in orderList" class="form-control input-md"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="">customer</label>
+                                    <div class="col-md-6">
+                                        <select  name="customerId" ng-model="customerId"
+                                                 ng-options="customer.customerName as customer.customerName for customer in customerList" class="form-control input-md ng-change='getFirstLevel(customerId)"></select>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" for="">transactionDate:</label>
+                                    <div class="col-sm-8">
+                                        <p class="input-group">
+                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="transactionDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                            <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-default" data-toggle="modal"
+                        data-target=".print-me"  ng-click="savepayment()">Save
+                </button>
+                <button type="button" class="btn btn-default" ng-click="removepayments()" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade Wallet" tabindex="-1" id="add_new_wallet_modal" role="dialog" data-backdrop="static"
+     aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content checkout">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 id = "wallet-title" class="modal-title">Add Wallet</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <form class="form-horizontal" name="mail">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-4 col-sm-4 control-label" for="">Recharge Amount</label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <input id="RechargeAmount" name="RechargeAmount"
+                                               type="text" placeholder="RechargeAmount"
+                                               ng-model="amountPaid"
+                                               class="form-control input-md" autocomplete="off">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-default" data-toggle="modal"
+                        data-target=".print-me"  ng-click="savewallet(rName)">Save
+                </button>
+                <button type="button" class="btn btn-default" ng-click="removepayments()" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="add_FranchisePay_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="res-title">Payment</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <!--<div class="row" id="cus_step1">-->
+                        <!--<div class="form-group">-->
+                            <!--<input type="radio" name="AGN" ng-model="radioValue" value="AGN">Agency<br>-->
+                            <!--<input type="radio" name="FRAN" ng-model="radioValue" value="FRN">Franchise<br>-->
+                        <!--</div>-->
+                        <!--<div class="form-group" ng-show="radioValue=='AGN'">-->
+                            <!--<label class="col-sm-3 control-label">Agency Name<span style="color: red">*</span></label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<select id="agencyName" name="agencyName" ng-model="agId"  ng-options="agencyName.agencyName as agencyName.agencyName for agencyName in agBasedREstLIst" ng-change="getFirstLevel1(agId)"  class="form-control input-md ng-change='getFirstLevel(agId)">-->
+                                    <!--<option value="">Select</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group" ng-show="radioValue=='FRN'">-->
+                            <!--<label class="col-sm-3 control-label">Franchise Name<span style="color: red">*</span></label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<select id="franchise" name="franchise" ng-model="franId"  ng-options="AA.franchiseName as AA.franchiseName for AA in franchiseList" ng-change="getFirstLevel1(franId)"  class="form-control input-md ng-change='getFirstLevel1(currencyId)">-->
+                                    <!--<option value="">Select</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div></div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">RestaurantName<span style="color: red">*</span></label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<select id="rName" name="rName" ng-model="rName" ng-options="country.rName as-->
+											<!--country.rName for country in agBasedREstLIst" ng-change="gerestaurant(rName)" class="form-control input-md">-->
+                                    <!--<option value="">Select</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <div class="form-group">
+                        <label  class="col-sm-3 control-label">RestaurantName</label>
+                        <div class="col-sm-9">
+                            <input id="Rname" name="Name" alphanum-with-space=""
+                                   type="text" placeholder="Amount"
+                                   ng-model="rName" maxlength="125"
+                                   class="form-control">
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Amount</label>
+                            <div class="col-sm-9">
+                                <input id="Rname" name="Name" alphanum-with-space=""
+                                       type="text" placeholder="Amount"
+                                       ng-model="amount" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">PaymentMethod</label>
+                            <div class="col-sm-9">
+                                <select name="custStatus" id="custStatus" ng-model="due" class="form-control" required>
+                                    <option value="Cash">Cash</option>
+                                    <option value="Card">Card</option>
+                                    <option value="Online">Online</option>
+                                </select>
+                            </div>
+                        </div>
+                <!--<div class="form-group">-->
+                <!--<label  class="col-sm-3 control-label">paymentStatus</label>-->
+                <!--<div class="col-sm-9">-->
+                    <!--<input id="Rname" name="Name" alphanum-with-space=""-->
+                           <!--type="text" placeholder="paymentStatus"-->
+                           <!--ng-model="paymentstatus" maxlength="125"-->
+                           <!--class="form-control">-->
+                <!--</div>-->
+            <!--</div>-->
+                <div class="form-group">
+                    <label  class="col-sm-3 control-label">actualPrice</label>
+                    <div class="col-sm-9">
+                        <input id="Rname" name="Name" alphanum-with-space=""
+                               type="text" placeholder="actualPrice"
+                               ng-model="actualprice" maxlength="125"
+                               class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label  class="col-sm-3 control-label">Balance</label>
+                    <div class="col-sm-9">
+                        <input id="Rname" name="Name" alphanum-with-space=""
+                               type="text" placeholder="Balance"
+                               ng-model="balAmountt" maxlength="125"
+                               class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-sm-3 control-label">ExpiryDate</label>
+                    <div class="col-sm-9">
+                        <input id="Rname" name="Name" alphanum-with-space=""
+                               type="text" placeholder="ExpiryDate"
+                               ng-model="expDate" maxlength="125"
+                               class="form-control">
+                    </div>
+                </div>
+                    <div class="form-group">
+                        <label class="col-sm-3  control-label">Subscription<span style="color: red">*</span></label>
+                        <div class=" col-sm-9" style="position:relative;">
+                            <select  name="user" ng-model="subName" ng-options="subscription.subscriptionName
+                                as subscription.subscriptionName for subscription in subscriptionList" ng-change="validitylist(subName)"
+                                     class="form-control input-md ">
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label  class="col-sm-3 control-label">SubscriptionValidity</label>
+                        <div class="col-sm-9">
+                            <input id="Rname" name="Name" alphanum-with-space=""
+                                   type="text" placeholder="Validity"
+                                   ng-model="validity" maxlength="125"
+                                   class="form-control">
+                        </div>
+                    </div>
+                <!--<div class="form-group">-->
+                    <!--<label  class="col-sm-3 control-label">SubscriptionStatus</label>-->
+                    <!--<div class="col-sm-9">-->
+                        <!--<input id="Rname" name="Name" alphanum-with-space=""-->
+                               <!--type="text" placeholder="SubscriptionStatus"-->
+                               <!--ng-model="subStatus" maxlength="125"-->
+                               <!--class="form-control">-->
+                    <!--</div>-->
+                <!--</div>-->
+                    <div class="form-group">
+                        <label  class="col-sm-3 control-label">SubscriptionStatus</label>
+                        <div class="col-sm-9">
+                            <select name="custStatus" id="custStatus" ng-model="subStatus" class="form-control" required>
+                                <option value="Live">Live</option>
+                                <option value="Expiry">Expired</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">PaymentDate</label>
+                        <div class="col-sm-9">
+                            <p class="input-group">
+                                <input type="text" id="fromDate" class="form-control" uib-datepicker-popup="{{format}}" ng-model="transactionDate" is-open="popup1.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" />
+                                <span class="input-group-btn">
+<button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+</span>
+                            </p>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">ApprovalStatus</label>
+                            <div class="col-sm-9">
+                                <select name="approvalStatus" id="approvalStatus" ng-model="approvalStatus" class="form-control" required>
+                                    <option value="Approved">Approved</option>
+                                    <option value="Rejected">Rejected</option>
+
+                                </select>
+                            </div>
+                        </div>
+                </div>
+
+                    <div class="form-group">
+
+                        <div class="col-md-6" ng-repeat="f in fileList" style="margin-left: 96px !important;">
+                            <label class="col-md-4 col-sm-4 control-label">File</label>
+                            <div  class="col-md-4">
+                                <input type="file" onchange="angular.element(this).scope().showFileName(event)" ng-click="setId(f.id)"/>
+                                <img class="image-preview"
+                                     style="width: 61px;height:50px;margin-left: 275px;" src={{files}}>
+                                <br><br />
+                            </div>
+                            <div style="text-align:right; width:155%;" ng-if="fileList.length>1 && $index!=0" >
+                                <input type="button"  value="remove"  ng-click="removeFile($index)">
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <input type="button" value="Add New"
+                                   ng-click="addNewFile()">
+                        </div>
+                    </div></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                                data-target=".print-me" ng-click="saveNewPayments('add_FranchisePay_modal')">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="removepayDetails()">Close</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div></div></div>
+
+
+
+
+

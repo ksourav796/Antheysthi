@@ -1,0 +1,1055 @@
+
+<style>
+
+    .table .thead-dark th {
+        color: #fff !important;
+        background-color: #696969 !important;
+        border-color: #ecf0f5 !important;
+    }
+    .table td{
+        border:1px solid #696969 !important;
+    }
+    table>thead>tr>th {
+        padding: 4px !important;
+        background-color: #696969;
+        color: white;
+        font-size: 13px;
+    }
+    .form-horizontal .control-label{
+        font-size: 12px;
+        text-align: left;
+    }
+    .form-group {
+        margin-bottom: 15px!important;
+    }
+    .mb-15{
+        margin-bottom: 15px;
+    }
+    .mb-25{
+        margin-bottom: 25px;
+    }
+    .customrad {
+        font-weight: 500;
+        display: inline-block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 16px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        margin-right: 15px;
+    }
+
+    /* Hide the browser's default radio button */
+    .customrad input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    /* Create a custom radio button */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border-radius: 50%;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .customrad:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .customrad input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .customrad input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .customrad .checkmark:after {
+        top: 6px;
+        left: 6px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+    }
+    /* Create a custom checkbox */
+
+    .customchk {
+        display: inline-block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 14px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        font-weight: 700;
+        margin-right: 15px;
+    }
+
+    /* Hide the browser's default checkbox */
+    .customchk input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    /* Create a custom checkbox */
+    .checkmarks {
+        position: absolute;
+        top: 0px;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .customchk:hover input ~ .checkmarks {
+        background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .customchk input:checked ~ .checkmarks {
+        background-color: #2196F3;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmarks:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .customchk input:checked ~ .checkmarks:after {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .customchk .checkmarks:after {
+        left: 8px;
+        top: 4px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+    @media only screen and (max-width: 767px) {
+        .top-button-area {
+            margin-top: -10px!important;
+        }
+        .top-box{
+            height: 50px;
+        }
+        .mbser {
+            margin-top: 20px;
+        }
+        @media (min-width: 768px) {
+            .col-sm-9 {
+                width: 83%;
+            }
+        }
+
+        .customer-data {
+            margin-top: 30px;
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        .top-button-area {
+            margin-top: 0px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .col-md-10 {
+            width: 83.33333333%;
+            margin-top: -8px;
+        }
+    }
+
+</style>
+<section class="content-header">
+    <h1>
+        {{module}}
+    </h1>
+
+</section>
+<!--<div class="modal-body">-->
+    <!--<div class="box-body">-->
+        <!--<div class="row" id="cus_step1">-->
+
+            <!--<div class="form-group" ng-repeat="key in columnList">-->
+                <!--&lt;!&ndash;<div class="form-group" ng-repeat="val in keyValuesList">&ndash;&gt;-->
+                <!--<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" ng-show="key.type=='date'">-->
+                    <!--<label>{{key.field}}</label>-->
+                <!--</div>-->
+                <!--<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 input-group date" ng-show="key.type=='date'">-->
+                    <!--<p class="input-group" style="width: 35%;">-->
+                        <!--<input type="text" class="form-control" uib-datepicker-Popup="{{format}}"-->
+                               <!--ng-model="key.values" style="height: 35px;"-->
+                               <!--is-open="popup1.opened" readonly datepicker-options="dateOptions"-->
+                               <!--ng-required="true"-->
+                               <!--close-text="Close" alt-input-formats="altInputFormats"/>-->
+                        <!--<span class="input-group-btn">-->
+                                     <!--<button type="button" class="btn btn-default" ng-click="open1()"><i-->
+                                             <!--class="glyphicon glyphicon-calendar"></i></button>-->
+                                <!--</span>-->
+                    <!--</p>-->
+                <!--</div>-->
+                <!--<div class="col-lg-3 col-md-12 col-sm-3 col-xs-7 input-group date" ng-show="key.type=='input'" >-->
+                    <!--<label>{{key.field}}</label>-->
+                <!--</div>-->
+                <!--<div class="col-sm-9" ng-show="key.type=='input'">-->
+                    <!--<input id="input" name="input"-->
+                           <!--type="text"-->
+                           <!--ng-model="key.values" maxlength="125"-->
+                           <!--class="form-control">-->
+                <!--</div>-->
+                <!--<div class="col-lg-3 col-md-12 col-sm-3 col-xs-7 input-group date" ng-show="key.type=='number'" >-->
+                    <!--<label>{{key.field}}</label>-->
+                <!--</div>-->
+                <!--<div class="col-sm-9" ng-show="key.type=='number'">-->
+                    <!--<input id="input" name="input"-->
+                           <!--type="number"-->
+                           <!--ng-model="key.values" maxlength="125"-->
+                           <!--class="form-control">-->
+                <!--</div>-->
+                <!--<div class="col-lg-3 col-md-12 col-sm-3 col-xs-7 input-group date" ng-show="key.type=='password'" >-->
+                    <!--<label>{{key.field}}</label>-->
+                <!--</div>-->
+                <!--<div class="col-sm-9" ng-show="key.type=='password'">-->
+                    <!--<input id="input" name="input"-->
+                           <!--type="password"-->
+                           <!--ng-model="key.values" maxlength="125"-->
+                           <!--class="form-control">-->
+                <!--</div>-->
+                <!--<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" ng-show="key.type=='textarea'" >-->
+                    <!--<label>{{key.field}}</label>-->
+                <!--</div>-->
+                <!--<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 input-group date" ng-show="key.type=='textarea'">-->
+                                <!--<textarea id="input" name="input"-->
+                                          <!--type="text"-->
+                                          <!--ng-model="key.values" maxlength="125"-->
+                                          <!--class="form-control">-->
+                                <!--</textarea>-->
+                <!--</div>-->
+                <!--<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" ng-show="key.type=='radio'" >-->
+                    <!--<label>{{key.field}}</label>-->
+                <!--</div>-->
+                <!--<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 input-group date" ng-show="key.type=='radio'" ng-repeat="val in key.valueList">-->
+                    <!--<div class=" col-sm-9" >-->
+                        <!--<input id="serviceLift" name="key.values{{$index}}" type="radio" ng-value="val.value"   ng-model="key.values">{{val.value}}-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" ng-show="key.type=='checkbox'" >-->
+                    <!--<label>{{key.field}}</label>-->
+                <!--</div>-->
+                <!--<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 input-group date" ng-show="key.type=='checkbox'" ng-repeat="val in key.valueList">-->
+                    <!--<div class=" col-sm-9">-->
+                        <!--<input id="checkbox" name="key.values{{$index}}" type="checkbox" value="val.value"  ng-model="val.values" >{{val.value}}-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12"  ng-show="key.type=='select'">-->
+                    <!--<label>{{key.field}}</label>-->
+                <!--</div>-->
+                <!--<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 input-group date" ng-show="key.type=='select'">-->
+                    <!--<div class=" col-sm-9">-->
+                        <!--<select name="assistanceDetails" id="assistanceDetails" ng-options="s as s for s in key.raj" ng-model="key.values" class="form-control" required>-->
+                            <!--<option value="">Select</option>-->
+                            <!--<option value="key.value">{{key.value}}</option>-->
+                        <!--</select>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div class="modal-body">&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="box-body">&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="row" id="cus_step1">&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-md-12 col-sm-12">&ndash;&gt;-->
+            <!--<div class="form-group" ng-repeat="key in column2List">-->
+                <!--<div class="col-md-6 col-sm-6 col-xs-12 form-group">-->
+                    <!--<div class="control-label col-sm-3" ng-show="key.type=='date'" >-->
+                    <!--<label class="col-sm-3">{{key.field}}</label>-->
+                <!--</div>-->
+                <!--<div class="col-sm-9"  ng-show="key.type=='date'">-->
+                    <!--<p class="input-group"  style="width: 35%;">-->
+                        <!--<input type="text" class="form-control" uib-datepicker-Popup="{{format}}"-->
+                               <!--ng-model="key.values" style="height: 35px;"-->
+                               <!--is-open="popup1.opened" readonly datepicker-options="dateOptions"-->
+                               <!--ng-required="true"-->
+                               <!--close-text="Close" alt-input-formats="altInputFormats"/>-->
+                        <!--<span class="input-group-btn">-->
+                                     <!--<button type="button" class="btn btn-default" ng-click="open1()"><i-->
+                                             <!--class="glyphicon glyphicon-calendar"></i></button>-->
+                                <!--</span>-->
+                    <!--</p>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-6 col-sm-6 col-xs-12 form-group" style="margin-top: -56px;">-->
+                <!--<div class="control-label col-sm-3" ng-show="key.type=='input'" >-->
+                    <!--<label class="col-sm-3">{{key.field}}</label>-->
+                <!--</div>-->
+                <!--<div class="col-sm-9" ng-show="key.type=='input'">-->
+                    <!--<input id="input" name="input"-->
+                           <!--type="text"-->
+                           <!--ng-model="key.values" maxlength="125"-->
+                           <!--class="form-control">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-lg-3 col-md-12 col-sm-3 col-xs-7 input-group date" ng-show="key.type=='number'" >-->
+                    <!--<label>{{key.field}}</label>-->
+                <!--</div>-->
+                <!--<div class="col-sm-9" ng-show="key.type=='number'">-->
+                    <!--<input id="input" name="input"-->
+                           <!--type="number"-->
+                           <!--ng-model="key.values" maxlength="125"-->
+                           <!--class="form-control">-->
+                <!--</div>-->
+                <!--<div class="col-lg-3 col-md-12 col-sm-3 col-xs-7 input-group date" ng-show="key.type=='password'" >-->
+                    <!--<label>{{key.field}}</label>-->
+                <!--</div>-->
+                <!--<div class="col-sm-9" ng-show="key.type=='password'">-->
+                    <!--<input id="input" name="input"-->
+                           <!--type="password"-->
+                           <!--ng-model="key.values" maxlength="125"-->
+                           <!--class="form-control">-->
+                <!--</div>-->
+                <!--<div class="col-md-6 col-sm-6 col-xs-12 form-group">-->
+                <!--<div class="control-label col-sm-3" ng-show="key.type=='textarea'" >-->
+                    <!--<label class="col-sm-3">{{key.field}}</label>-->
+                <!--</div>-->
+                <!--<div class="col-sm-9" ng-show="key.type=='textarea'">-->
+                                <!--<textarea id="input" name="input"-->
+                                          <!--type="text"-->
+                                          <!--ng-model="key.values" maxlength="125"-->
+                                          <!--class="form-control">-->
+                                <!--</textarea>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-6 col-sm-6 col-xs-12 form-group">-->
+                <!--<div class="control-label col-sm-3" ng-show="key.type=='radio'" >-->
+                    <!--<label class="col-sm-3">{{key.field}}</label>-->
+                <!--</div>-->
+                <!--<div class="col-sm-9" ng-show="key.type=='radio'" ng-repeat="val in key.valueList">-->
+                    <!--<div class=" col-sm-9" >-->
+                        <!--<input id="serviceLift" name="key.values{{$index}}" type="radio" ng-value="val.value"   ng-model="key.values">{{val.value}}-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-6 col-sm-6 col-xs-12 form-group">-->
+                <!--<div class="control-label col-sm-3" ng-show="key.type=='checkbox'" >-->
+                    <!--<label class="col-sm-3">{{key.field}}</label>-->
+                <!--</div>-->
+                <!--<div class="col-sm-9" ng-show="key.type=='checkbox'" ng-repeat="val in key.valueList">-->
+                    <!--<div class=" col-sm-9">-->
+                        <!--<input id="checkbox" name="key.values{{$index}}" type="checkbox" value="val.value"  ng-model="val.values" >{{val.value}}-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-6 col-sm-6 col-xs-12 form-group">-->
+                <!--<div class="control-label col-sm-3"  ng-show="key.type=='select'" >-->
+                    <!--<label class="col-sm-3">{{key.field}}</label>-->
+                <!--</div>-->
+                <!--<div class="col-sm-9" ng-show="key.type=='select'">-->
+                    <!--<div class=" col-sm-9">-->
+                        <!--<select name="assistanceDetails" id="assistanceDetails" ng-options="s as s for s in key.raj" ng-model="key.values" class="form-control" required>-->
+                            <!--<option value="">Select</option>-->
+                            <!--<option value="key.value">{{key.value}}</option>-->
+                        <!--</select>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+        <!--</div>-->
+
+    <!--</div>-->
+<!--</div>-->
+<section class="content" style="background-color: #fff;">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="preview-area">
+                <h2></h2>
+                <div class="" ng-repeat="key in previewList">
+                    <!--For Date-->
+                    <div class="{{key.classwidth}}" ng-show="key.type=='date'">
+                        <!-- for Date Top-->
+                        <div class="form-group" ng-show="key.labelposition=='top'"  >
+                            <label class="" for="email" ng-show="key.type=='date'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <div class="">
+                                <input type="date" class="form-control" id="email"  name="email">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Date Left (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(left-aligned)'" >
+                            <label class="" for="email" ng-show="key.type=='date'" style="float: left; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input type="date" class="form-control" id="email"  name="email">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Date Left (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'" >
+                            <label class="" for="email" ng-show="key.type=='date'" style="float: left; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input type="date" class="form-control" id="email"  name="email">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Date right (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'" >
+                            <label class="" for="email" ng-show="key.type=='date'" style="float: right; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input type="date" class="form-control" id="email"  name="email">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Date right (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'" >
+                            <label class="" for="email" ng-show="key.type=='date'" style="float: right; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input type="date" class="form-control" id="email"  name="email">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Date botton -->
+                        <div class="form-group" ng-show="key.labelposition=='bottom'" >
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input type="date" class="form-control" id="email"  name="email">
+                            </div>
+                            <label class="" for="email" ng-show="key.type=='date'" style="float: right; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                    </div>
+                    <!-- for Input -->
+                    <div class="{{key.classwidth}}" ng-show="key.type=='input'">
+                        <!-- for Input Top-->
+                        <div class="form-group" ng-show="key.labelposition=='top'"  >
+                            <label class="" for="email" ng-show="key.type=='input'" ng-hide="key.hideLabel==true">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="">
+                                <input id="input" name="input"
+                                       type="text" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}" value="{{key.defaultvalue}}"
+                                       class="form-control">
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && (key.customErrorMessage==null|| key.customErrorMessage =='')" style="color: red">Text is required.</p>
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && key.customErrorMessage" style="color: red">{{key.customErrorMessage}}</p>
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Input Left (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(left-aligned)'">
+                            <label class="" for="email" style="float: left; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label> <span style="color: red" ng-if="key.validate">*</span>
+                            <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input id="input" name="input"
+                                       type="text" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}" value="{{key.defaultvalue}}"
+                                       class="form-control">
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && (key.customErrorMessage==null|| key.customErrorMessage =='')" style="color: red">Text is required.</p>
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && key.customErrorMessage" style="color: red">{{key.customErrorMessage}}</p>                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Input Left (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'">
+                            <label class="" for="email" style="float: left; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label> <span style="color: red" ng-if="key.validate">*</span>
+                            <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input id="input" name="input"
+                                       type="text" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}" value="{{key.defaultvalue}}"
+                                       class="form-control">
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && (key.customErrorMessage==null|| key.customErrorMessage =='')" style="color: red">Text is required.</p>
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && key.customErrorMessage" style="color: red">{{key.customErrorMessage}}</p>                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Input Right (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(left-aligned)'">
+                            <label class="" for="email" style="float: right; width: 30%; margin-left: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-right: 33%;">
+                                <input id="input" name="input"
+                                       type="text" placeholder="{{key.placeholder}}" value="{{key.defaultvalue}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && (key.customErrorMessage==null|| key.customErrorMessage =='')" style="color: red">Text is required.</p>
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && key.customErrorMessage" style="color: red">{{key.customErrorMessage}}</p>                                <p class="desc">{{key.changedesc}}</p>
+                            </div>
+                        </div>
+                        <!-- for Input Right (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(right-aligned)'">
+                            <label class="" for="email" style="float: right; width: 30%; margin-left: 3%; text-align: right;">{{key.field}}:</label> <span style="color: red" ng-if="key.validate">*</span>
+                            <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-right: 33%;">
+                                <input id="input" name="input"
+                                       type="text" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}" value="{{key.defaultvalue}}"
+                                       class="form-control">
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && (key.customErrorMessage==null|| key.customErrorMessage =='')" style="color: red">Text is required.</p>
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && key.customErrorMessage" style="color: red">{{key.customErrorMessage}}</p>                                <p class="desc">{{key.changedesc}}</p>
+                            </div>
+                        </div>
+                        <!-- for Input Bottom-->
+                        <div class="form-group" ng-show="key.labelposition=='bottom'" >
+                            <div class="">
+                                <input id="input" name="input"
+                                       type="text" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}" ng-init="{{key.defaultvalue}}"
+                                       class="form-control">
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && (key.customErrorMessage==null|| key.customErrorMessage =='')" style="color: red">Text is required.</p>
+                                <p class="error" ng-if="key.validate && (key.values==null||key.values=='') && key.customErrorMessage" style="color: red">{{key.customErrorMessage}}</p>                            </div>
+                            <label class="" for="email" ng-show="key.type=='input'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                    </div>
+                    <!-- for Number -->
+                    <div class="{{key.classwidth}}"  ng-show="key.type=='number'">
+                        <!-- for Number Top-->
+                        <div class="form-group" ng-show="key.labelposition=='top'" >
+                            <label class="" for="email" ng-show="key.type=='number'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="">
+                                <input id="input" name="input"
+                                type="number" placeholder="{{key.placeholder}}"
+                                ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                class="form-control">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Number Left (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(left-aligned)'">
+                            <label class="" for="email" ng-show="key.type=='number'" style="float: left; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input id="input" name="input"
+                                type="number" placeholder="{{key.placeholder}}"
+                                ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                class="form-control">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Number Left (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'">
+                            <label class="" for="email" ng-show="key.type=='number'" style="float: left; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input id="input" name="input"
+                                type="number" placeholder="{{key.placeholder}}"
+                                ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                class="form-control">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Number Right (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(left-aligned)'">
+                            <label class="" for="email" ng-show="key.type=='number'" style="float: right; width: 30%; margin-left: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-right: 33%;">
+                                <input id="input" name="input"
+                                type="number" placeholder="{{key.placeholder}}"
+                                ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                class="form-control">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Number Right (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(right-aligned)'">
+                            <label class="" for="email" ng-show="key.type=='number'" style="float: right; width: 30%; margin-left: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-right: 33%;">
+                                <input id="input" name="input"
+                                type="number" placeholder="{{key.placeholder}}"
+                                ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                class="form-control">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for Number Bottom-->
+                        <div class="form-group" ng-show="key.labelposition=='bottom'" >
+                            <div class="">
+                                <input id="input" name="input"
+                                type="number" placeholder="{{key.placeholder}}"
+                                ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                class="form-control">
+                            </div>
+                            <label class="" for="email" ng-show="key.type=='number'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                    </div>
+                    <!--for Password-->
+                    <div class="{{key.classwidth}}" ng-show="key.type=='password'">
+                        <!-- for password Top-->
+                        <div class="form-group" ng-show="key.labelposition=='top'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='password'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="col-sm-10">
+                                <input id="input" name="input"
+                                       type="password" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for password Left (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(left-aligned)'">
+                            <label class="" for="email" ng-show="key.type=='password'" style="float: left; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input id="input" name="input"
+                                       type="number" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for password Left (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'">
+                            <label class="" for="email" ng-show="key.type=='password'" style="float: left; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                                <input id="input" name="input"
+                                       type="number" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for password Right (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(left-aligned)'">
+                            <label class="" for="email" ng-show="key.type=='password'" style="float: right; width: 30%; margin-left: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-right: 33%;">
+                                <input id="input" name="input"
+                                       type="number" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for password Right (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(right-aligned)'">
+                            <label class="" for="email" ng-show="key.type=='password'" style="float: right; width: 30%; margin-left: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-right: 33%;">
+                                <input id="input" name="input"
+                                       type="number" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for password bottom-->
+                        <div class="form-group" ng-show="key.labelposition=='bottom'" >
+                            <div class="col-sm-10">
+                                <input id="input" name="input"
+                                       type="password" placeholder="{{key.placeholder}}"
+                                       ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                       class="form-control">
+                            </div>
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='password'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip"  title="{{key.tooltip}}" data-placement="right"></i>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                    </div>
+                    <!--For Textarea-->
+                    <div class="{{key.classwidth}}" ng-show="key.type=='textarea'">
+                        <!--For Textarea top-->
+                        <div class="form-group" ng-show="key.labelposition=='top'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='textarea'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <textarea id="input" name="input"
+                                      type="text" placeholder="{{key.placeholder}}"
+                                      ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                      class="form-control">
+                           </textarea>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for textarea Left (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(left-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='textarea'" style="float: left; width: 30%; margin-right: 3%; text-align: left;"> {{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                            <textarea id="input" name="input"
+                                      type="text" placeholder="{{key.placeholder}}"
+                                      ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                      class="form-control">
+                           </textarea>
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for textarea Left (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='textarea'" style="float: left; width: 30%; margin-right: 3%; text-align: right;"> {{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-left: 33%;">
+                            <textarea id="input" name="input"
+                                      type="text" placeholder="{{key.placeholder}}"
+                                      ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                      class="form-control">
+                           </textarea>
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for textarea right (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(left-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='textarea'" style="float: right; width: 30%; margin-right: 3%; text-align: left;"> {{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-right: 33%;">
+                            <textarea id="input" name="input"
+                                      type="text" placeholder="{{key.placeholder}}"
+                                      ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                      class="form-control">
+                           </textarea>
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for textarea right (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(right-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='textarea'" style="float: right; width: 30%; margin-right: 3%; text-align: right;"> {{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <div class="" style="width: 67%; margin-right: 33%;">
+                            <textarea id="input" name="input"
+                                      type="text" placeholder="{{key.placeholder}}"
+                                      ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                      class="form-control">
+                           </textarea>
+                            </div>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!--For Textarea bottom-->
+                        <div class="form-group" ng-show="key.labelposition=='bottom'" >
+                            <textarea id="input" name="input"
+                                      type="text" placeholder="{{key.placeholder}}"
+                                      ng-model="key.values" minlength="{{key.minlength}}" maxlength="{{key.maxlength}}"
+                                      class="form-control">
+                           </textarea>
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='textarea'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                    </div>
+                    <!--For Radio-->
+                    <div class="{{key.classwidth}}" ng-show="key.type=='radio'">
+                        <!-- for radio Top-->
+                        <div class="form-group" ng-show="key.labelposition=='top'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='radio'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <input id="radio" name="key.values{{$index}}" type="radio" ng-value="val.value"   ng-model="key.values" >{{val.value}}
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                         <!-- for radio Left (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(left-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='radio'" style="float: left; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <input id="radio" name="key.values{{$index}}" type="radio" ng-value="val.value"   ng-model="key.values" style="width: 67%; margin-left: 33%;">{{val.value}}
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for radio Left (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='radio'" style="float: left; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <input id="radio" name="key.values{{$index}}" type="radio" ng-value="val.value"   ng-model="key.values" style="width: 67%; margin-left: 33%;">{{val.value}}
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for radio right (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(left-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='radio'" style="float: right; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <input id="radio" name="key.values{{$index}}" type="radio" ng-value="val.value"   ng-model="key.values" style="width: 67%; margin-right: 33%;">{{val.value}}
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for radio right (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(right-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='radio'" style="float: right; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <input id="radio" name="key.values{{$index}}" type="radio" ng-value="val.value"   ng-model="key.values" style="width: 67%; margin-right: 33%;">{{val.value}}
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                        <!-- for radio Bottom-->
+                        <div class="form-group" ng-show="key.labelposition=='bottom'" >
+                            <input id="radio" name="key.values{{$index}}" type="radio" ng-value="val.value"   ng-model="key.values">{{val.value}}
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='radio'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <p class="desc">{{key.changedesc}}</p>
+                        </div>
+                    </div>
+                    <!--For Checkbox-->
+                    <div class="{{key.classwidth}}" ng-show="key.type=='checkbox'">
+                        <!-- for checkbox top-->
+                        <div class="form-group" ng-show="key.labelposition=='top'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='checkbox'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <input id="checkbox" name="key.values{{$index}}" type="checkbox" value="val.value"  ng-model="val.values" >{{val.value}}
+                        </div>
+                        <!-- for checkbox Left (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(left-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='checkbox'" style="float: left; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <input id="checkbox" name="key.values{{$index}}" type="checkbox" value="val.value"  ng-model="val.values" style="width: 67%; margin-left: 33%;" >{{val.value}}
+                        </div>
+                        <!-- for checkbox Left (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='checkbox'" style="float: left; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <input id="checkbox" name="key.values{{$index}}" type="checkbox" value="val.value"  ng-model="val.values" style="width: 67%; margin-left: 33%;" >{{val.value}}
+                        </div>
+                        <!-- for checkbox right (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='checkbox'" style="float: right; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <input id="checkbox" name="key.values{{$index}}" type="checkbox" value="val.value"  ng-model="val.values" style="width: 67%; margin-right: 33%;" >{{val.value}}
+                        </div>
+                        <!-- for checkbox right (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='checkbox'" style="float: right; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                            <input id="checkbox" name="key.values{{$index}}" type="checkbox" value="val.value"  ng-model="val.values" style="width: 67%; margin-right: 33%;" >{{val.value}}
+                        </div>
+                        <!-- for checkbox bottom-->
+                        <div class="form-group" ng-show="key.labelposition=='bottom'" >
+                            <input id="checkbox" name="key.values{{$index}}" type="checkbox" value="val.value"  ng-model="val.values" >{{val.value}}
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='checkbox'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span><i class="fa fa-question-circle text-muted" data-toggle="tooltip" ng-if="key.tooltip" title="{{key.tooltip}}" data-placement="right"></i>
+                        </div>
+                    </div>
+                    <!--For Select-->
+                    <div class="{{key.classwidth}}" ng-show="key.type=='select'&&key.valuetype=='static'">
+                        <!--for Select top-->
+                        <div class="form-group" ng-show="key.labelposition=='top'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails" ng-change="openpopup(key.value)"
+                                    ng-options="s.value as s.value for s in key.valueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                        <!--for Select  Left (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(left-aligned)'">
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'" style="float: left; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails" style="width: 67%; margin-left: 33%;"
+                                    ng-options="s.value as s.value for s in key.valueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                        <!--for Select  Left (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'">
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'" style="float: left; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails" style="width: 67%; margin-left: 33%;"
+                                    ng-options="s.value as s.value for s in key.valueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                        <!--for Select  right (left-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(left-aligned)'">
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'" style="float: right; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails" style="width: 67%; margin-right: 33%;"
+                                    ng-options="s.value as s.value for s in key.valueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                        <!--for Select  right (right-aligned)-->
+                        <div class="form-group" ng-show="key.labelposition=='right(right-aligned)'">
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'" style="float: right; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails" style="width: 67%; margin-right: 33%;"
+                                    ng-options="s.value as s.value for s in key.valueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                        <!--for Select bottom-->
+                        <div class="form-group" ng-show="key.labelposition=='bottom'" >
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails"
+                                    ng-options="s.value as s.value for s in key.valueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="{{key.classwidth}}" ng-show="key.type=='select'&&key.valuetype=='dynamic'">
+                        <!--for select top dynamic-->
+                        <div class="form-group" ng-show="key.labelposition=='top'">
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails"
+                                    ng-options="s as s for s in key.dynamicvalueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="key.value">{{key.value}}</option>
+                            </select>
+                        </div>
+                        <!--for select left(left-aligned) dynamic-->
+                        <div class="form-group" ng-show="key.labelposition=='left(left-aligned)'">
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'" style="float: left; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails" style="width: 67%; margin-left: 33%;"
+                                    ng-options="s as s for s in key.dynamicvalueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="key.value">{{key.value}}</option>
+                            </select>
+                        </div>
+                        <!--for select left(right-aligned) dynamic-->
+                        <div class="form-group" ng-show="key.labelposition=='left(right-aligned)'">
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'" style="float: left; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails" style="width: 67%; margin-left: 33%;"
+                                    ng-options="s as s for s in key.dynamicvalueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="key.value">{{key.value}}</option>
+                            </select>
+                        </div>
+                        <!--for select right(left-aligned) dynamic-->
+                        <div class="form-group" ng-show="key.labelposition=='right(left-aligned)'">
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'" style="float: right; width: 30%; margin-right: 3%; text-align: left;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails" style="width: 67%; margin-right: 33%;"
+                                    ng-options="s as s for s in key.dynamicvalueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="key.value">{{key.value}}</option>
+                            </select>
+                        </div>
+                        <!--for select right(right-aligned) dynamic-->
+                        <div class="form-group" ng-show="key.labelposition=='right(right-aligned)'">
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'" style="float: right; width: 30%; margin-right: 3%; text-align: right;">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails" style="width: 67%; margin-right: 33%;"
+                                    ng-options="s as s for s in key.dynamicvalueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="key.value">{{key.value}}</option>
+                            </select>
+                        </div>
+                        <!--for select bottom dynamic-->
+                        <div class="form-group" ng-show="key.labelposition=='bottom'">
+                            <label class="control-label col-sm-2" for="email" ng-show="key.type=='select'">{{key.field}}:</label><span style="color: red" ng-if="key.validate">*</span>
+                            <select name="assistanceDetails" id="assistanceDetails"
+                                    ng-options="s as s for s in key.dynamicvalueList" ng-model="key.values"
+                                    class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="key.value">{{key.value}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+ <div class="modal-footer">
+     <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+             data-target=".print-me" ng-click="saveFormData()">Save</button>
+     <button type="button" class="btn btn-default" ng-click="closeData()" data-dismiss="modal">Close</button>
+
+ </div>
+<div class="modal fade" id="add_new_hearse_Van" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="country-title">Hearse Van Service</h4>
+            </div>
+            <div class="form-group" ng-repeat="key in popupList">
+                <!--<div class="form-group" ng-repeat="val in keyValuesList">-->
+                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" ng-show="key.type=='date'">
+                    <label>{{key.field}}</label>
+                </div>
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 input-group date" ng-show="key.type=='date'">
+                    <p class="input-group" style="width: 35%;">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                               ng-model="key.values" style="height: 35px;"
+                               is-open="popup1.opened" readonly datepicker-options="dateOptions"
+                               ng-required="true"
+                               close-text="Close" alt-input-formats="altInputFormats"/>
+                        <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open1()"><i
+                                             class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-12 col-sm-3 col-xs-7 input-group date" ng-show="key.type=='input'" >
+                    <label>{{key.field}}</label>
+                </div>
+                <div class="col-sm-9" ng-show="key.type=='input'">
+                    <input id="input" name="input"
+                           type="text"
+                           ng-model="key.values" maxlength="125"
+                           class="form-control">
+                </div>
+                <div class="col-lg-3 col-md-12 col-sm-3 col-xs-7 input-group date" ng-show="key.type=='number'" >
+                    <label>{{key.field}}</label>
+                </div>
+                <div class="col-sm-9" ng-show="key.type=='number'">
+                    <input id="input" name="input"
+                           type="number"
+                           ng-model="key.values" maxlength="125"
+                           class="form-control">
+                </div>
+                <div class="col-lg-3 col-md-12 col-sm-3 col-xs-7 input-group date" ng-show="key.type=='password'" >
+                    <label>{{key.field}}</label>
+                </div>
+                <div class="col-sm-9" ng-show="key.type=='password'">
+                    <input id="input" name="input"
+                           type="password"
+                           ng-model="key.values" maxlength="125"
+                           class="form-control">
+                </div>
+                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" ng-show="key.type=='textarea'" >
+                    <label>{{key.field}}</label>
+                </div>
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 input-group date" ng-show="key.type=='textarea'">
+                                <textarea id="input" name="input"
+                                          type="text"
+                                          ng-model="key.values" maxlength="125"
+                                          class="form-control">
+                                </textarea>
+                </div>
+                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" ng-show="key.type=='radio'" >
+                    <label>{{key.field}}</label>
+                </div>
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 input-group date" ng-show="key.type=='radio'" ng-repeat="val in key.valueList">
+                    <div class=" col-sm-9" >
+                        <input id="serviceLift" name="key.values{{$index}}" type="radio" ng-value="val.value"   ng-model="key.values">{{val.value}}
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" ng-show="key.type=='checkbox'" >
+                    <label>{{key.field}}</label>
+                </div>
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 input-group date" ng-show="key.type=='checkbox'" ng-repeat="val in key.valueList">
+                    <div class=" col-sm-9">
+                        <input id="checkbox" name="key.values{{$index}}" type="checkbox" value="val.value"  ng-model="val.values" >{{val.value}}
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12"  ng-show="key.type=='select'">
+                    <label>{{key.field}}</label>
+                </div>
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 input-group date" ng-show="key.type=='select'">
+                    <div class=" col-sm-9">
+                        <select name="assistanceDetails" id="assistanceDetails" ng-options="s as s for s in key.raj" ng-model="key.values" class="form-control" required>
+                            <option value="">Select</option>
+                            <option value="key.value">{{key.value}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                        data-target=".print-me" ng-click="saveHearseVan()">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

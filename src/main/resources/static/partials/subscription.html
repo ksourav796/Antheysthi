@@ -1,0 +1,259 @@
+<style>
+    @media only screen and (max-width: 767px) {
+        .top-button-area {
+            margin-top: 0px!important;
+        }
+        .top-box{
+            height: 50px;
+        }
+        .mbser{
+            margin-top: 20px;
+        }
+        .customer-data {
+            margin-top: 0px;
+        }
+    }
+</style>
+<section class="content-header">
+    <h1>
+        Subscription
+    </h1>
+
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="top-box">
+                <!--<div class="col-md-2">-->
+                        <!--<div class="input-group">-->
+                            <!--<input class="form-control" placeholder="Search..." id="textinput" name="textinput"  type="text"-->
+                                   <!--placeholder="Search Country" ng-model="SearchText"-->
+                                   <!--ng-change="getPaginationList(SearchText)">-->
+
+                        <!--</div>-->
+                <!--</div>-->
+                <div class="col-md-10">
+                    <div class="top-button-area">
+                        <div class="col-md-2 col-sm-4 col-xs-4">
+                            <button type="button" class="btn btn-block btn-success" ng-click="addSubscription()">Add</button>
+                        </div>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="Search..." id="textinput" name="textinput"  type="text"
+                                   placeholder="Search Country" ng-model="SearchText"
+                                   ng-change="getPaginationList(SearchText)">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 customer-data">
+            <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                <thead>
+                <tr>
+                    <th>
+                        Subscription Name
+                    </th>
+                    <th>
+                        Validity
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+
+
+                </thead>
+                <tbody>
+                <tr ng-repeat="subscription in subscriptionList| filter:SearchText">
+                    <td>{{subscription.subscriptionName}}</td>
+                    <td>{{subscription.validity}}</td>
+                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editSubscription(subscription)">Edit</button></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="col-sm-12 pagination_">
+
+                <div class="col-sm-12" style="float:right !important;">
+                    <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}"
+                            ng-disabled="first"
+                            ng-click="getPaginationList('firstPage')" ng-model="first">First
+                    </button>
+                    <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}"
+                            ng-disabled="prev"
+                            ng-click="getPaginationList('prevPage')" ng-model="prev">Prev
+                    </button>
+                    <button type="button" class="btn btn-default hi_btn" name="next" ng-disabled="next"
+                            ng-click="getPaginationList('nextPage')" value="next"
+                            ng-class="{'diabled-class': next}" ng-model="next">Next
+                    </button>
+                    <button type="button" class="btn btn-default hi_btn"
+                            ng-click="getPaginationList('lastPage')" ng-class="{'diabled-class': last}"
+                            ng-disabled="last"
+                            ng-model="last">Last
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="add_subscription_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="country-title">Add Subscription</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">SubscriptionName<span style="color: red">*</span></label>
+                            <div class="col-sm-9">
+                                <input id="SubscriptionName" name="SubscriptionName"
+                                       type="text"  placeholder="SubscriptionName"
+                                       ng-model="subscriptionName" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Validity<span style="color: red">*</span></label>
+                            <div class="col-sm-9">
+                                <input id="Validity" name="Validity"
+                                       allowpattern="[0-9]" num-with-space=""
+                                       type="text"  placeholder="Validity"
+                                       ng-model="validityText" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<label  class="col-sm-3 control-label">SubscriptionFor<span style="color: red">*</span></label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<select name="subscriptionForText" id="subscriptionForText" ng-model="subscriptionForText" class="form-control" required>-->
+                                    <!--<option value="HiSync">Hi Sync</option>-->
+                                    <!--<option value="HiConnect">Hi Connect</option>-->
+                                    <!--<option value="Application">Application</option>-->
+                                    <!--<option value="HiAccount">Hi Account</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div ng-show="subscriptionForText=='Application'" class="form-group">-->
+                            <!--<label  class="col-sm-3 control-label">SelectApplication</label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<select name="" ng-model="application"-->
+                                        <!--ng-options="application.id as application.name for application in actiontypeList "-->
+                                        <!--class="form-control input-md">-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label  class="col-sm-3 control-label">Version<span style="color: red">*</span></label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<select name="version" id="version" ng-model="versionText" class="form-control" required>-->
+                                    <!--<option value="Desktop">Desktop</option>-->
+                                    <!--<option value="Cloud">Cloud</option>-->
+                                    <!--<option value="Mobile">Mobile</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label  class="col-sm-3 control-label">URL</label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input id="applicationurl" name="applicationurl"-->
+                                       <!--ng-pattern="text"-->
+                                       <!--type="text" placeholder="URL"-->
+                                       <!--ng-model="applicationurl"-->
+                                       <!--class="form-control">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label  class="col-sm-3 control-label">Permission</label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input id="permission" name="permission"-->
+                                       <!--allowpattern="[a-z]"-->
+                                       <!--type="text" placeholder="Permission"-->
+                                       <!--ng-model="permissionText"-->
+                                       <!--class="form-control">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label  class="col-sm-3 control-label">AddOnPermission</label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input id="addonPer" name="addonPer"-->
+                                       <!--ng-pattern="text" alpha-with-space-->
+                                       <!--type="text" placeholder="AddOn"-->
+                                       <!--ng-model="addonPerText"-->
+                                       <!--class="form-control">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label  class="col-sm-3 control-label">NoOfCompanies</label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input id="companiesno" name="companiesno"-->
+                                       <!--type="text" number placeholder="No Of Companies"-->
+                                       <!--ng-model="companies"-->
+                                       <!--class="form-control">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label  class="col-sm-3 control-label">NoOfUsers</label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input id="Users" name="Users"-->
+                                       <!--allowpattern="[0-9]" num-with-out-space=""-->
+                                       <!--type="text" placeholder="No Of Users"-->
+                                       <!--ng-model="users"-->
+                                       <!--class="form-control">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">ActualPrice</label>
+                            <div class="col-sm-9">
+                                <input id="actualPrice" name="actualPrice"
+                                       allowpattern="[0-9]" num-with-space=""
+                                       type="text"
+                                       placeholder="Actual Price"
+                                       ng-model="actualPrice"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Status</label>
+                            <div class="col-sm-9">
+                                <select name="statusText" id="statusText" ng-model="statusText" class="form-control" required>
+                                    <option value="Active">Active</option>
+                                    <option value="InActive">InActive</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!--<div class="form-group">-->
+                            <!--<label  class="col-sm-3 control-label">OfferPrice</label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input id="offerPrice" name="offerPrice"-->
+                                       <!--allowpattern="[0-9]" num-with-space=""-->
+                                       <!--type="text"-->
+                                       <!--placeholder="Offer Price"-->
+                                       <!--ng-model="offerPrice"-->
+                                       <!--class="form-control">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                        data-target=".print-me" ng-click="saveNewSubscription('add_subscription_modal')">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="removeSubscriptionDetails()">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,198 @@
+
+<style>
+
+    .table .thead-dark th {
+        color: #fff !important;
+        background-color: #696969 !important;
+        border-color: #ecf0f5 !important;
+    }
+    .table td{
+        border:1px solid #696969 !important;
+    }
+    table>thead>tr>th {
+        padding: 4px !important;
+        background-color: #696969;
+        color: white;
+        font-size: 13px;
+    }
+    @media only screen and (max-width: 768px) {
+        .top-button-area {
+            margin-top: 25px;
+            margin-left: 188px;
+            margin-top: -36px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .col-md-10 {
+            width: 83.33333333%;
+            margin-top: -8px;
+        }
+    }
+
+</style>
+
+<section class="content-header">
+    <h1>
+        Document
+    </h1>
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="top-box">
+                <div class="col-md-2">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="Search..." id="textinput" name="textinput"  type="text"
+                                   placeholder="Search Document" ng-model="countrySearchText"
+                                   ng-change="getDocumentList(documentSearchText)">
+
+                        </div>
+
+                </div>
+                <div class="col-md-10">
+                    <div class="top-button-area">
+                        <div class="col-md-2 col-sm-4">
+                            <button type="button"  class="dropbtn btn btn-primary hi_btn" ng-click="addDocument()"style="width:80%">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 customer-data">
+            <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                <thead>
+                <tr>
+                    <th>
+                        Document Name
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Edit
+                    </th>
+                </tr>
+
+
+                </thead>
+                <tbody>
+                <tr ng-repeat="document in documentList| filter:countrySearchText">
+                    <td>{{document.documentName}}</td>
+                    <td>{{document.status}}</td>
+
+                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editDocument(document)">Edit</button></td>
+                    <!--<button type="button" class="btn btn-primary hi_btn"  ng-click="deletecustomer(customer.customerId)">Delete</button></td>-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="add_new_document_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="country-title">Add Document</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+                        <input type="hidden" ng-model="document" value="{{document.id}}"/>
+
+                        <div class="form-group">
+                            <label class=" col-sm-9 control-label">Name<span style="color:red;">*</span> </label>
+                            <div class=" col-sm-9" style="position:relative;">
+                                <input id="name" type="text" name="name" placeholder="Name" ng-model="documentName"  class="form-control input-md">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6" ng-repeat="f in fileList" style="margin-left: 96px !important;">
+                                <label class="col-sm-6 control-label">File</label>
+                                <div  class="col-sm-3">
+                                    <input type="file" onchange="angular.element(this).scope().showFileName(event)" ng-click="setId(f.id)"/><br />
+                                </div>
+                                <div style="text-align:right; width:155%;" ng-if="fileList.length>1 && $index!=0" >
+                                    <input type="button"  value="X"  ng-click="removeFile($index)">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="button" value="Add New"
+                                       ng-click="addNewFile()">
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label class="col-sm-9 control-label"
+                                   for="">Email Subject</label>
+                            <div class="col-sm-9" style="position:relative;">
+                                                        <textarea id="emailsubject" name="emailsubject"
+                                                                  placeholder="Email Subject"
+                                                                  ng-model="emailSubject"
+                                                                  class="form-control input-md">
+                                                        </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-9 control-label"
+                                   for="">Email Body</label>
+                            <div class="col-sm-9" style="position:relative;">
+                                                        <textarea id="emailbody" name="emailbody"
+                                                                  placeholder="Email Body"
+                                                                  ng-model="emailBody"
+                                                                  class="form-control input-md">
+                                                        </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-9 control-label"
+                                   for="">Sms</label>
+                            <div class="col-sm-9" style="position:relative;">
+                                                        <textarea id="sms" name="sms"
+                                                                  placeholder="Sms"
+                                                                  ng-model="sms"
+                                                                  class="form-control input-md">
+                                                        </textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-9 control-label" for="">Status</label>
+                            <div class="col-sm-9">
+                                <select name="StatusText" id="StatusText" ng-model="statusss"
+                                        ng-init="status='Active'" class="form-control input-md">
+                                    <option value="">Select</option>
+                                    <option value="Active">Active</option>
+                                    <option value="InActive">InActive</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                        data-target=".print-me" ng-click="saveDocument('add_new_document_modal')">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="removeCountryDetails()">Close</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

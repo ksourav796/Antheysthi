@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    .rep_list_info .custom_info {
+        margin: 15px 0px;
+        text-align: center;
+        border: 1px solid #ccc;
+        background: #fff;
+        padding: 20px 10px;
+        height: 136px;
+    }
+    .rep_list_info .custom_info img{
+        width: 30%;
+    }
+    .rep_info {
+        text-align: center;
+        color: #333;
+        font-weight: bold;
+    }
+    @media (min-width: 992px) {
+        .col-md-3 {
+            width: 22% !important;
+        }
+    }
+</style>
+
+<body>
+<div class="container-fluid" style="width: 100%;">
+    <div class="container cus_main_row">
+
+        <div class="row">
+            <h1></h1>
+        </div>
+        <div class="row">
+            <div ng-repeat="create in createPAgeList">
+                <div class="col-md-3 col-sm-6 rep_list_info">
+                    <a ng-click="masterName(create.moduleName)">
+                        <div class="custom_info">
+                            <i class="fa fa-phone fa-5x" aria-hidden="true"></i>
+                            <div class="rep_info">{{create.moduleName}}</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

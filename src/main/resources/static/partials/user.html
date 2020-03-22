@@ -1,0 +1,299 @@
+
+<style>
+
+    .table .thead-dark th {
+        color: #fff !important;
+        background-color: #696969 !important;
+        border-color: #ecf0f5 !important;
+    }
+    .table td{
+        border:1px solid #696969 !important;
+    }
+    table>thead>tr>th {
+        padding: 4px !important;
+        background-color: #696969;
+        color: white;
+        font-size: 13px;
+    }
+    @media only screen and (max-width: 767px) {
+        .top-button-area {
+            margin-top: -10px!important;
+        }
+        .top-box{
+            height: 50px;
+        }
+        .mbser{
+            margin-top: 20px;
+        }
+        .customer-data {
+            margin-top: 30px;
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        .top-button-area {
+            margin-top: 0px;
+        }
+    }
+</style>
+<section class="content-header">
+    <h1>
+        User
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="top-box">
+                <div class="col-md-10">
+                    <div class="top-button-area">
+                        <div class="col-md-2 col-sm-4 col-xs-6">
+                            <button type="button"  class="dropbtn btn btn-primary hi_btn" ng-click="AddUser()" style="width:80%">Add</button>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-6">
+                            <button type="button" class="dropbtn btn btn-primary hi_btn" ng-click="goBack()">Back</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12 input-group">
+                        <input id="searchText" name="textinput" type="text" autocomplete="off"
+                               placeholder="search ..." ng-model="resName"
+                               class="form-control input-md mbser"
+                               ng-change="getUserList() ">
+
+                    </div>
+                </div>
+                <!--<div class="col-md-2">-->
+                    <!--<div class="input-group">-->
+                        <!--<input id="searchText" name="textinput" type="text" autocomplete="off"-->
+                               <!--placeholder="search ..." ng-model="resName"-->
+                               <!--class="form-control input-md"-->
+                               <!--ng-change="getUserList() ">-->
+
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 customer-data" style="overflow-x:auto">
+            <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Telephone Number
+                    </th>
+                    <th>
+                        Email Id
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                   </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="user in userList| filter:resName">
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.phone}}</td>
+                    <td>{{user.email}}</td>
+
+                    <td><button type="button" class="btn btn-primary hi_btn" ng-hide="user.firstName=='superadmin'"  ng-click="editUSer(user)">Edit</button>
+                    <button type="button" class="btn btn-primary hi_btn"  ng-click="getUserPermissions(user)">Permissions</button>  </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="add_new_user_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" >
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="user-title">Add User</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+                        <div class="form-group">
+                            <label class="col-md-4 col-sm-4 control-label">Role Name<span style="color: red">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <select id="userRole" name="userRole" ng-model="userRole" ng-disabled="operation=='Edit'" ng-options="userRole.roleName as userRole.roleName for userRole in userRoleList" class="form-control input-md">
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-md-4 col-sm-4 control-label">First Name<span style="color: red">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input id="FullName" name="FullName" alpha-with-space=""
+                                       type="text" placeholder="FullName"
+                                       ng-model="FullNameText" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-md-4 col-sm-4 control-label">Last Name</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input id="lastName" name="lastName" alpha-with-space=""
+                                       type="text" placeholder="lastName"
+                                       ng-model="lastName" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-md-4 col-sm-4 control-label">Email Address<span style="color:red;">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input id="Email" name="Email"
+                                       type="text" placeholder="Email"
+                                       ng-model="email" maxlength="125"
+                                       class="form-control">
+                                <p class="error" ng-show="mail.Email.$error.pattern">Enter Valid MailID</p>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-md-4 col-sm-4 control-label">Telephone Number</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input id="TeleNum" name="TeleNum" num-with-out-space=""
+                                       type="text" placeholder="TelePhoneNumber"
+                                       ng-model="TeleNumText" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-md-4 col-sm-4 control-label">Address</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input id="Address" name="Address" alphanum-with-space=""
+                                       type="text" placeholder="Address"
+                                       ng-model="userAddress" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 col-sm-4 control-label">Country<span style="color: red">*</span></label>
+                            <div class=" col-md-6 col-sm-6" style="position:relative;">
+                                <select id="country" name="cuisines" ng-change="getStatewebList(country)" ng-model="country" ng-options="AAAA.countryId as
+AAAA.countryName for AAAA in countryList" class="form-control input-md">
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 col-sm-4  control-label">State<span style="color: red">*</span></label>
+                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                <select id="state" name="state" ng-change="getCitywebList(state)" ng-model="state" ng-options="BBBB.stateId as
+BBBB.stateName for BBBB in statewebListttt" class="form-control input-md">
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 col-sm-4 control-label">City<span style="color: red">*</span></label>
+                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                <select id="city" name="city"  ng-change="getLocationwebList(city)"  ng-model="city" ng-options="CCCC.cityId as
+CCCC.cityName for CCCC in citywebListttt" class="form-control input-md">
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-md-4 col-sm-4 control-label">ZipCode</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input id="zipCode" name="zipCode" num-with-out-space=""
+                                       type="text" placeholder="ZipCode"
+                                       ng-model="zipCode" maxlength="6"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-md-4 col-sm-4 control-label">Notes</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input id="notes" name="notes" alpha-with-space=""
+                                       type="text" placeholder="Notes"
+                                       ng-model="notes" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-md-4 col-sm-4 control-label">User Name<span style="color: red">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input id="UserName" name="UserName"
+                                       type="text" placeholder="User Name"
+                                       ng-model="UserNameText" maxlength="15"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-md-4 col-sm-4 control-label">Password<span style="color: red">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input id="password" name="password"
+                                       type="password" placeholder="password"
+                                       ng-model="PasswordText" maxlength="15"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 col-sm-4 control-label">Status</label>
+                            <div class="col-md-6 col-sm-6">
+                                <select name="Status" id="Status" ng-model="statuses" class="form-control" required>
+                                    <option value="">Select</option>
+                                    <option value="Active">Active</option>
+                                    <option value="InActive">InActive</option>
+                                </select>
+                            </div>
+                        </div>
+
+                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                                data-target=".print-me" ng-click="saveUser('add_new_user_modal')">Save
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                                ng-click="removeuserDetails()">Close
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade " tabindex="-1" id="add_permissions_modal_1check" role="dialog" data-backdrop="static"
+     aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-md edtper" style="width: 750px;">
+        <div class="modal-content checkout">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 id="User-title" class="modal-title">Edit Permission</h4>
+            </div>
+            <div class="row row_ch_per_info" style=" height: 500px; overflow-y: auto;">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div ng-repeat="(key, value) in allUserpermissions">
+                        <input type="checkbox" class="regular-checkbox" value=""
+                               ng-model="value" id="createpage" ng-change="getchangePermissions(key,value)" />
+                        <label for=""></label><span
+                            class="check_span_info">{{key}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-9 col-sm-9 text-right">
+                    <button type="submit" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                            data-target=".print-me" ng-click="saveUserPermissions();">Save
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

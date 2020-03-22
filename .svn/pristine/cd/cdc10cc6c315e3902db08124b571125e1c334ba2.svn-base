@@ -1,0 +1,14 @@
+package com.hyva.restopos.rest.repository;
+
+import com.hyva.restopos.rest.entities.Country;
+import com.hyva.restopos.rest.entities.SmsServer;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface SmsServerRepository extends JpaRepository<SmsServer,Long> {
+
+
+}

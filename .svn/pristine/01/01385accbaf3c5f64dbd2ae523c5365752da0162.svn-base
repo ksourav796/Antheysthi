@@ -1,0 +1,232 @@
+<style>
+
+    .table .thead-dark th {
+        color: #fff !important;
+        background-color: #696969 !important;
+        border-color: #ecf0f5 !important;
+    }
+    .table td{
+        border:1px solid #696969 !important;
+    }
+    table>thead>tr>th {
+        padding: 4px !important;
+        background-color: #696969;
+        color: white;
+        font-size: 13px;
+    }
+    @media only screen and (max-width: 768px) {
+        .top-button-area {
+            margin-top: 25px;
+            margin-left: 188px;
+            margin-top: -43px;
+        }
+    }
+    @media (min-width: 992px) {
+        .col-md-10 {
+            width: 83.33333333%;
+            margin-top: -8px;
+        }
+    }
+
+</style>
+
+<section class="content-header">
+    <h1>
+        Currency
+    </h1>
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="top-box">
+                <div class="col-md-2">
+                    <div class="col-sm-12">
+                        <p class="input-group" style="display: block;">
+                            <input id="search_academic" name="textinput" type="text"
+                                   placeholder="Search" ng-model="SearchText" class="form-control input-md"
+                                   ng-keyup="$event.keyCode == 13 ? getPaginationList(SearchText) : null"/>
+                        </p>
+
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="top-button-area">
+                        <div class="col-md-2 col-sm-4">
+                            <button type="button"  class="dropbtn btn btn-primary hi_btn" ng-click="addNewCurrencyPopulate()" style="width:80%">Add</button>
+                        </div>
+                        <!--<div class="col-md-2 col-sm-4">-->
+                        <!--<button type="button" class="btn btn-block btn-success" id="colButnw"  data-toggle="modal"-->
+                        <!--ng-model="inactiveStatus" data-target=".print-me"-->
+                        <!--ng-click="inactiveButton()">{{ButtonStatus}}</button>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2 col-sm-4">-->
+                        <!--<button type="button" class="btn btn-block btn-success" ng-click="importCountry()">Import</button>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 customer-data">
+            <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                <thead>
+                <tr>
+                    <th>
+                        Currrency Name
+                    </th>
+                    <th>
+                        Currrency Code
+                    </th>
+                    <th>
+                        Currrency Symbol
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+
+
+                </thead>
+                <tbody id="parentTable">
+                <input type="hidden" ng-model="currencyId" value="{{currencyList1.currencyId}}"/>
+                <tr ng-repeat="currency in currencyList1|filter:searchText">
+                    <td>{{currency.currencyName}}</td>
+                    <td>{{currency.currencyCode}}</td>
+                    <td>{{currency.currencySymbol}}</td>
+                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editCurrency(currency)">Edit</button></td>
+                </tr>
+                <!--<tr ng-if="searchText!=''&&(currencyList1|filter:searchText).length==0">-->
+                    <!--<td colspan="5" style="color: red; font-weight: bold">No Records Found</td>-->
+                <!--</tr>-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade addCustomer" tabindex="-1" id="add_new_Currency_modal" role="dialog"
+     data-backdrop="static"
+     aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content checkout">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 id="currency-title" class="modal-title">Add Currency</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <form class="form-horizontal" name="form">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label  class="col-sm-3 control-label">CurrencyName<span style="color: red">*</span></label>
+                                    <div class="col-sm-9">
+                                        <input id="address" name="CurrencyName"
+                                               ng-pattern="/[aA-zZ\s]$/" alpha-with-space
+                                               type="text" placeholder="CurrencyName"
+                                               ng-model="CurrrencyNameText" maxlength="125"
+                                               class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" col-sm-3 control-label" for="">Currency Code<span style="color: red"></span></label>
+                                    <div class=" col-sm-9">
+                                        <input id="CurrencyCode" name="CurrencyCode" num-with-out-space=""
+                                               type="text" placeholder="CurrencyCode"
+                                               ng-model="CurrrencyCodeText" maxlength="40"
+                                               class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class=" col-sm-3 control-label" for="">Currency Symbol
+                                        <span style="color: red"></span></label>
+                                    <div class=" col-sm-9">
+                                        <input id="CurrencySymbol" name="CurrencySymbol"
+                                               type="text" placeholder="CurrencySymbol"
+                                               ng-model="CurrrencySymbolText" maxlength="40"
+                                               class="form-control"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class=" col-sm-3 control-label" for="">Description
+                                        <span style="color: red"></span></label>
+                                    <div class=" col-sm-9">
+                                        <input id="CurrencyDescription" name="CurrencyDescription"
+                                               type="text" placeholder="CurrencyDescription"
+                                               ng-model="CurrrencyDescriptionText" maxlength="40"
+                                               class="form-control" ></div>
+                                </div>
+                                <!--<div class="form-group">-->
+                                    <!--<label class=" col-sm-3 control-label" for="">Currency Symbol Place-->
+                                        <!--<span style="color: red"></span></label>-->
+                                    <!--<div class=" col-sm-9" style="position:relative;">-->
+                                        <!--<input id="SymbolPlace" name="SymbolPlace"-->
+                                               <!--type="text" placeholder="SymbolPlace"-->
+                                               <!--ng-model="CurrrencySymbolPlaceText" maxlength="40"-->
+                                               <!--class="form-control"></div>-->
+                                <!--</div>-->
+                                <!--<div class="form-group">-->
+                                    <!--<label class=" col-sm-3 control-label" for="">Currency Account Code-->
+                                        <!--<span style="color: red"></span></label>-->
+                                    <!--<div class=" col-sm-9" style="position:relative;">-->
+                                        <!--<input id="AccountCodeq" name="AccountCode"  num-with-out-space=""-->
+                                               <!--type="text" placeholder="AccountCode"-->
+                                               <!--ng-model="AccountCodeText" maxlength="40"-->
+                                               <!--class="form-control"></div>-->
+                                <!--</div>-->
+                                <!--<div class="form-group">-->
+                                    <!--<label class=" col-sm-3 control-label" for="">Location Id-->
+                                        <!--<span style="color: red"></span></label>-->
+                                    <!--<div class=" col-sm-9" style="position:relative;">-->
+                                        <!--<input id="AccountCode" name="AccountCode"  num-with-out-space=""-->
+                                               <!--type="text" placeholder="AccountCode"-->
+                                               <!--ng-model="LocatioIdText" maxlength="40"-->
+                                               <!--class="form-control">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="form-group">-->
+                                    <!--<label class=" col-sm-3 control-label" for="">UserAccount_Id-->
+                                        <!--<span style="color: red"></span></label>-->
+                                    <!--<div class=" col-sm-9" style="position:relative;">-->
+                                        <!--<input id="AccountId" name="AccountId"  num-with-out-space=""-->
+                                               <!--type="text" placeholder="AccountId"-->
+                                               <!--ng-model="AccountIdText" maxlength="40"-->
+                                               <!--class="form-control">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+
+                                <div class="form-group">
+                                    <label  class="col-sm-3 control-label">Status</label>
+                                    <div class="col-sm-9">
+                                        <select name="StatusText" id="custStatus" ng-model="StatusText" class="form-control" required>
+                                            <option value="Active">Active</option>
+                                            <option value="InActive">InActive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled="isDisabled"
+                            data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                            ng-click="saveCurrency()"> Save </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="removeCurrencyDetails()">Close</button>
+                </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+</div>

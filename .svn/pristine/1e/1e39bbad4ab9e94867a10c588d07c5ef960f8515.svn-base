@@ -1,0 +1,97 @@
+<style>
+    .form-horizontal .control-label {
+        padding-top: 7px;
+        margin-bottom: 0;
+        text-align: unset!important;
+    }
+</style>
+<div class="modal-header">
+    <h3 id = "student-title" class="modal-title">Company Information</h3><br><br>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <form class="form-horizontal" name="school">
+
+                    <fieldset>
+                        <div class="tab-content">
+                            <div class="col-md-12 col-xs-12">
+                                <input type="hidden" id="id" ng-model="id">
+                                <div class="col-sm-6 col-xs-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="">Organization Name<span style="color:red;">*</span></label>
+                                    <div class="col-md-8" style="position:relative;">
+                                        <input id="companyName" name="companyName"  maxlength="60"
+                                               type="text"
+                                               ng-model="CompanyName"  placeholder="Organization Name"
+                                               class="form-control input-md" >
+                                    </div>
+                                </div></div>
+                                <div class="col-sm-6 col-xs-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="">Email<span style="color:red;">*</span></label>
+                                    <div class="col-md-8" style="position:relative;">
+                                        <input id="Email" name="Email"  maxlength="50"
+                                               type="text" placeholder=Email
+                                               ng-model="email"
+                                               class="form-control input-md" >
+                                    </div>
+                                </div></div>
+                                <div class="col-sm-6 col-xs-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for=""> Organization Link<span style="color:red;">*</span></label>
+                                    <div class="col-md-8" style="position:relative;">
+                                        <input id="companyLink" name="companyLink"  maxlength="50"
+                                               type="text" placeholder="https://www.example.com"
+                                               ng-model="CompanyLink"
+                                               class="form-control input-md" >
+                                    </div>
+                                </div></div>
+                                <div class="col-sm-6 col-xs-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="">Organization Address<span style="color:red;">*</span></label>
+                                    <div class="col-md-8" style="position:relative;">
+                                        <textarea id="address" name="address"
+                                                  type="address" maxlength="500"
+                                                  ng-model="address" alphanum-with-space=""
+                                                  class="form-control input-md" >
+                                        </textarea>
+                                    </div>
+                                </div></div>
+                                <div class="col-sm-6 col-xs-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for=""> Organization GSTIN<span style="color:red;">*</span></label>
+                                    <div class="col-md-8" style="position:relative;">
+                                        <input id="gst" name="gst" maxlength="11"
+                                               type="gst" max="16"
+                                               ng-model="gst" alphanum-without-space=""
+                                               class="form-control input-md" >
+                                    </div>
+                                </div></div>
+                                <div class="col-sm-6 col-xs-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="">Attach File</label>
+                                        
+                                    <input type='file' accept='image/*' id="imageLoad" ng-model-instant
+                                           onchange="angular.element(this).scope().imageUpload(event)"><br>
+                                    <img class="image-preview"
+                                         style="width: 61px;height:50px;margin-left: 275px;" src={{fileName}}>
+                                    <br>
+                                </div></div>
+
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal"
+                                        data-target=".print-me" ng-click="saveGeneralSettingDetails()">Save
+                                </button>
+                                <button type="button" class="btn btn-primary hi_btn"  ng-click="BackGeneral()">Close</button>
+                            </div>
+
+                        </div>
+                    </fieldset>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</html>

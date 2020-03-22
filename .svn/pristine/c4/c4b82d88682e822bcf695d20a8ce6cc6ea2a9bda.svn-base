@@ -1,0 +1,302 @@
+
+<style>
+
+    .table .thead-dark th {
+        color: #fff !important;
+        background-color: #696969 !important;
+        border-color: #ecf0f5 !important;
+    }
+    .table td{
+        border:1px solid #696969 !important;
+    }
+    table>thead>tr>th {
+        padding: 4px !important;
+        background-color: #696969;
+        color: white;
+        font-size: 13px;
+    }
+    @media only screen and (max-width: 767px) {
+        .top-button-area {
+            margin-top: -10px!important;
+        }
+        .top-box{
+            height: 50px;
+        }
+        .mbser{
+            margin-top: 20px;
+        }
+        .customer-data {
+            margin-top: 30px;
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        .top-button-area {
+            margin-top: 0px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .col-md-10 {
+            width: 83.33333333%;
+            margin-top: -8px;
+        }
+    }
+
+</style>
+
+<section class="content-header">
+    <h1>
+        Discount
+    </h1>
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="top-box">
+                <div class="col-md-10">
+                    <div class="col-sm-4 col-xs-12 input-group">
+                        <label  class="col-sm-3 control-label">Item Name</label>
+                        <input class="form-control mbser" placeholder="Search..." id="textinput" name="textinput"  type="text" ng-model="SearchText"
+                               ng-change="getPaginationList(SearchText)">
+
+                        <label  class="col-sm-3 control-label">Min Price</label>
+                        <input class="form-control mbser" placeholder="Search..." id="textinput" name="textinput"  type="text"
+                              ng-model="SearchText"
+                               ng-change="getPaginationList(SearchText)">
+
+                        <label  class="col-sm-3 control-label">Max Price</label>
+                        <input class="form-control mbser" placeholder="Search..." id="textinput" name="textinput"  type="text"
+                               ng-model="SearchText"
+                               ng-change="getPaginationList(SearchText)">
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 customer-data">
+            <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                <thead>
+                <tr>
+                    <th>
+                        Item Name
+                    </th>
+                    <th>
+                        Total Count
+                    </th>
+                    <th>
+                        Min Price
+                    </th>
+                    <th>
+                        Max Price
+                    </th>
+                </tr>
+
+
+                </thead>
+                <tbody>
+                <tr ng-repeat="discount in DiscountList">
+                    <td>{{discount.countryName}}</td>
+                    <td><button type="button" ng-click="openRestaurantCountList()"></button>{{discount.countryName}}</td>
+                    <td>{{discount.countryName}}</td>
+                    <td>{{discount.countryName}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="col-sm-12 pagination_">
+
+                <div class="col-sm-12" style="float:right !important;">
+                    <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}"
+                            ng-disabled="first"
+                            ng-click="getPaginationList('firstPage')" ng-model="first">First
+                    </button>
+                    <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}"
+                            ng-disabled="prev"
+                            ng-click="getPaginationList('prevPage')" ng-model="prev">Prev
+                    </button>
+                    <button type="button" class="btn btn-default hi_btn" name="next" ng-disabled="next"
+                            ng-click="getPaginationList('nextPage')" value="next"
+                            ng-class="{'diabled-class': next}" ng-model="next">Next
+                    </button>
+                    <button type="button" class="btn btn-default hi_btn"
+                            ng-click="getPaginationList('lastPage')" ng-class="{'diabled-class': last}"
+                            ng-disabled="last"
+                            ng-model="last">Last
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="open_Restaurant_count">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="country-title">Restaurant List</h4>
+            </div>
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12 customer-data">
+                        <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                            <thead>
+                            <tr>
+                                <th>
+                                    Item Name
+                                </th>
+                                <th>
+                                    Restaurant Name
+                                </th>
+                                <th>
+                                     Price
+                                </th>
+                                <th>
+                                    Offer
+                                </th>
+                            </tr>
+
+
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="discount in DiscountList|filter:SearchText">
+                                <td>{{discount.countryName}}</td>
+                                <td>{{discount.countryName}}</td>
+                                <td>{{discount.countryName}}</td>
+                                <td><button type="button" ng-click="openMultiOffer()"></button>Multi</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade addCustomer" tabindex="-1" id="add_new_multi_Offer" role="dialog"
+     data-backdrop="static"
+     aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-md col" style="width:940px !important;">
+        <div class="modal-content checkout" style="width:940px !important;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 id="chapter-title" class="modal-title">aaa</h4>
+            </div>
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12 customer-data">
+                        <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                            <thead>
+                            <tr>
+                                <th>
+                                    Day
+                                </th>
+                                <th>
+                                    Shift
+                                </th>
+                                <th>
+                                    Discount
+                                </th>
+                                <th>
+                                    To Date
+                                </th>
+                                <th>
+                                    From Date
+                                </th>
+                                <th>
+                                    Max Person
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="offer in DiscountList">
+                                <td><select id="day" name="day"
+                                            ng-model="offer.day"
+                                            ng-options="country.countryId as
+											country.countryName for country in countryList"
+                                            class="form-control input-md">
+                                    <option value="">Select</option>
+                                </select></td>
+                                <td><select id="shift" name="shift"
+                                            ng-model="offer.shift"
+                                            ng-options="country.countryId as
+											country.countryName for country in countryList"
+                                            class="form-control input-md">
+                                    <option value="">Select</option>
+                                </select></td>
+                                <td><input id="discount" name="discount"
+                                           type="text" placeholder="Discount" maxlength="30"
+                                           ng-model="offer.discount" num-with-out-space
+                                           class="form-control input-md"></td>
+                                <td>    <input type="text" id="toDate"
+                                               style="width: 50% !important;  display: inline-block; float: left;"
+                                               ng-model="offer.toDate" class="form-control"
+                                               uib-datepicker-popup="{{format}}"
+                                               is-open="offer.open"
+                                               datepicker-options="dateOptions"
+                                               close-text="Close"
+                                               alt-input-formats="altInputFormats" readonly/>
+                                    <span class="input-group-btn" style="width: 13%;">
+                                                    <button type="button" class="btn btn-default"
+                                                            ng-click="openA($event,offer)"
+                                                            style="margin-left: 98px;margin-top: -37px;">
+                                                    <i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span></td>
+                                <td><input type="text" id="fromDate"
+                                           style="width: 50% !important;  display: inline-block; float: left;"
+                                           ng-model="offer.fromDate" class="form-control"
+                                           uib-datepicker-popup="{{format}}"
+                                           is-open="offer.open1"
+                                           datepicker-options="dateOptions"
+                                           close-text="Close"
+                                           alt-input-formats="altInputFormats" readonly/>
+                                    <span class="input-group-btn" style="width: 13%;">
+                                                    <button type="button" class="btn btn-default"
+                                                            ng-click="openB($event,offer)"
+                                                            style="margin-left: 98px;margin-top: -37px;">
+                                                    <i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span></td>
+                                <td><input id="maxPerson" name="maxPerson"
+                                           type="text" placeholder="maxPerson" maxlength="30"
+                                           ng-model="offer.maxPerson" num-with-out-space
+                                           class="form-control input-md"></td>
+                                <td> <div style="text-align:right; width:155%;" ng-if="fileList.length>1 && $index!=0" >
+                                    <input type="button"  value="remove"  ng-click="removeFile($index)">
+                                </div></td>
+                            </tr>
+                            <div class="col-md-2">
+                                <input type="button" value="Add New"
+                                       ng-click="addNewFile()">
+                            </div>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled=""
+                        data-target=".print-me" id="submit123"
+                        ng-click="saveOffer(q)">Save
+                </button>
+                <button type="button" class="btn btn-primary hi_btn" ng-click="removeMenuList()" data-dismiss="modal">Close
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+

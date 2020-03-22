@@ -1,0 +1,242 @@
+<section class="content-header">
+    <h1>
+        UserRole
+    </h1>
+
+</section>
+<style>
+    @media only screen and (max-width: 767px) {
+        .edtper{
+            width: 100%!important;
+        }
+        .table{
+            width: 500px !important;
+        }
+
+        .top-button-area {
+            margin-top: 0px!important;
+        }
+        .top-box{
+            height: 50px;
+        }
+        .mbser{
+            margin-top: 20px;
+        }
+        .customer-data {
+            margin-top: 30px;
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        .top-button-area {
+            margin-top: 0px;
+        }
+
+    }
+
+    @media (min-width: 992px) {
+        .col-md-10 {
+            width: 83.33333333%;
+            margin-top: -8px;
+        }
+    }
+</style>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="top-box">
+                <div class="col-md-10">
+                    <div class="top-button-area">
+                        <div class="col-md-2 col-sm-4 col-xs-4">
+                            <button type="button"  class="dropbtn btn btn-primary hi_btn" ng-click="addRole()" style="width:80%">Add</button>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-4">
+                            <button type="button"  class="dropbtn btn btn-primary hi_btn" id="colButnw"  data-toggle="modal"
+                                    ng-model="inactiveStatus" data-target=".print-me"
+                                    ng-click="inactiveButton()">{{ButtonStatus}}</button>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-4">
+                            <button type="button" class="dropbtn btn btn-primary hi_btn" ng-click="goBack()">Back</button>
+                        </div>
+                        <div class="col-sm-4 col-xs-12 input-group">
+                            <input class="form-control mbser" placeholder="Search..." id="textinput" name="textinput"  type="text"
+                                   placeholder="Search " ng-model="SearchText"
+                                   ng-change="getPaginatedUserRoleList(SearchText)">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 customer-data" style="overflow-x:auto">
+            <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                <thead>
+                <tr>
+                    <th>
+                        RoleName
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+
+
+                </thead>
+                <tbody>
+                <tr ng-repeat="role in roleList| filter:SearchText">
+                    <td>{{role.roleName}}</td>
+                    <td>{{role.roleStatus}}</td>
+
+                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editRole(role)">Edit</button>
+                    <button type="button" class="btn btn-primary hi_btn"  ng-click="permissions(role)">Permissions</button>  </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="col-sm-12 pagination_">
+
+                <div class="col-sm-12" style="float:right !important;">
+                    <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}"
+                            ng-disabled="first"
+                            ng-click="getPaginatedUserRoleList('firstPage')" ng-model="first">First
+                    </button>
+                    <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}"
+                            ng-disabled="prev"
+                            ng-click="getPaginatedUserRoleList('prevPage')" ng-model="prev">Prev
+                    </button>
+                    <button type="button" class="btn btn-default hi_btn" name="next" ng-disabled="next"
+                            ng-click="getPaginatedUserRoleList('nextPage')" value="next"
+                            ng-class="{'diabled-class': next}" ng-model="next">Next
+                    </button>
+                    <button type="button" class="btn btn-default hi_btn"
+                            ng-click="getPaginatedUserRoleList('lastPage')" ng-class="{'diabled-class': last}"
+                            ng-disabled="last"
+                            ng-model="last">Last
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="add_new_Role_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><b>&times;</b></span></button>
+                <h4 id="country-title">Add UserRole</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">UserRole<span style="color: red">*</span></label>
+                            <div class="col-sm-9">
+                                <input id="userrole" name="userrole" alpha-with-space=""
+                                       type="text" placeholder="User Role"
+                                       ng-model="roleName" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Status</label>
+                            <div class="col-sm-9">
+                                <select name="status" id="status" ng-model="status" class="form-control" required>
+                                    <option value="Active">Active</option>
+                                    <option value="InActive">InActive</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                        -data-target=".print-me" ng-click="saveRole()">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="removeRoleDetails()">Close</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade " tabindex="-1" id="add_permissions_modal_1check" role="dialog" data-backdrop="static"
+     aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-md edtper" style="width: 750px;">
+        <div class="modal-content checkout">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 id="User-title" class="modal-title">Edit Permission</h4>
+            </div>
+            <!--<div class="row row_ch_per_info" style=" height: 500px; overflow-y: auto;">-->
+                <!--<div class="col-md-12 col-sm-12 col-xs-12">-->
+                    <!--<div ng-repeat="(key, value) in allpermissions">-->
+                        <!--<input type="checkbox" class="regular-checkbox" value=""-->
+                               <!--ng-model="value" id="createpage" ng-change="getchangePermissions(key,value)" />-->
+                        <!--<label for=""></label><span-->
+                            <!--class="check_span_info">{{key}}</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <input type="checkbox" class="regular-checkbox"
+                       ng-model="userObj.userAccessRights.masters"
+                       id="masters" ng-true-value="true" ng-false-value="false"/>
+                <label for="masters"></label><span
+                    class="check_span_info">Admin</span>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-6"
+                 ng-hide="!userObj.userAccessRights.masters">
+                <div class="row margin_0px">
+                    <div class="col-md-3 col-sm-3 col-xs-6">
+                        <input type="checkbox" class="regular-checkbox"
+                               ng-init="userObj.userAccessRights.country=true"
+                               ng-model="userObj.userAccessRights.country" id="country" ng-true-value="true"
+                               ng-false-value="false"/>
+                        <label for=""></label><span class="check_span_info"> Country </span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-6">
+                        <input type="checkbox" class="regular-checkbox"
+                               ng-init="userObj.userAccessRights.country=true"
+                               ng-model="userObj.userAccessRights.country" id="country" ng-true-value="true"
+                               ng-false-value="false"/>
+                        <label for=""></label><span class="check_span_info"> Add </span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-6">
+                        <input type="checkbox" class="regular-checkbox"
+                               ng-init="userObj.userAccessRights.country=true"
+                               ng-model="userObj.userAccessRights.country" id="country" ng-true-value="true"
+                               ng-false-value="false"/>
+                        <label for=""></label><span class="check_span_info"> Edit </span>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-6">
+                        <input type="checkbox" class="regular-checkbox"
+                               ng-init="userObj.userAccessRights.country=true"
+                               ng-model="userObj.userAccessRights.country" id="country" ng-true-value="true"
+                               ng-false-value="false"/>
+                        <label for=""></label><span class="check_span_info"> List </span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-9 col-sm-9 text-right">
+                    <button type="submit" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                            data-target=".print-me" ng-click="savePermissions();">Save
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,2602 @@
+
+<style>
+
+    .table .thead-dark th {
+        color: #fff !important;
+        background-color: #696969 !important;
+        border-color: #ecf0f5 !important;
+    }
+    .table td{
+        border:1px solid #696969 !important;
+    }
+    table>thead>tr>th {
+        padding: 4px !important;
+        background-color: #696969;
+        color: white;
+        font-size: 13px;
+    }
+    .form-horizontal .control-label{
+        font-size: 12px;
+        text-align: left;
+    }
+    .form-group {
+        margin-bottom: 15px!important;
+    }
+    .mb-15{
+        margin-bottom: 15px;
+    }
+    .mb-25{
+        margin-bottom: 25px;
+    }
+    .customrad {
+        font-weight: 500;
+        display: inline-block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 16px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        margin-right: 15px;
+    }
+
+    /* Hide the browser's default radio button */
+    .customrad input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    /* Create a custom radio button */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border-radius: 50%;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .customrad:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .customrad input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .customrad input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .customrad .checkmark:after {
+        top: 6px;
+        left: 6px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+    }
+    /* Create a custom checkbox */
+
+    .customchk {
+        display: inline-block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 14px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        font-weight: 700;
+        margin-right: 15px;
+    }
+
+    /* Hide the browser's default checkbox */
+    .customchk input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    /* Create a custom checkbox */
+    .checkmarks {
+        position: absolute;
+        top: 0px;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .customchk:hover input ~ .checkmarks {
+        background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .customchk input:checked ~ .checkmarks {
+        background-color: #2196F3;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmarks:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .customchk input:checked ~ .checkmarks:after {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .customchk .checkmarks:after {
+        left: 8px;
+        top: 4px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+    @media only screen and (max-width: 767px) {
+        .top-button-area {
+            margin-top: -10px!important;
+        }
+        .top-box{
+            height: 50px;
+        }
+        .mbser {
+            margin-top: 20px;
+        }
+        @media (min-width: 768px) {
+            .col-sm-9 {
+                width: 83%;
+            }
+        }
+
+        .customer-data {
+            margin-top: 30px;
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        .top-button-area {
+            margin-top: 0px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .col-md-10 {
+            width: 83.33333333%;
+            margin-top: -8px;
+        }
+    }
+
+</style>
+<!--<div class="modal fade" id="add_new_enquiryForm_modal">-->
+    <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                    <!--<span aria-hidden="true">&times;</span></button>-->
+                <!--<h4 id="enquiry-title">Add Enquiry Form </h4>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; /.modal-content &ndash;&gt;-->
+        <!--</div>-->
+        <!--&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+    <!--</div>-->
+<!--</div>-->
+<div class="panel-body">
+    <div class="row">
+
+        <div class="col-md-12 col-sm-12">
+            <form class="form-horizontal" name="enquiry">
+                <fieldset>
+                    <div class="box-body">
+                        <h2 id="enquiry-title" style="padding-top: 0px;margin-top: 0px;margin-bottom: 25px;"> Enquiry Form </h2>
+
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                <label class="control-label col-sm-3" style="padding: 0px;">Enquiry Date</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group date">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                    ng-model="enquiryDate" style="height: 35px;"
+                                    is-open="popup2.opened" readonly datepicker-options="dateOptions"
+                                    ng-required="true"
+                                    close-text="Close" alt-input-formats="altInputFormats"/>
+                                    <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open2()"><i
+                                             class="glyphicon glyphicon-calendar"></i></button>
+                                   </span>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                <label class="control-label col-sm-3" style="padding: 0px;">Enquiry No</label>
+                                <div class="col-sm-9">
+                                    <input id="enquiryNo" name="enquiryNo" readonly ng-model="enquiryNo" class="form-control">
+                                </div>
+                            </div>
+                            <div style="clear: both"></div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                <div class="col-sm-3" style="padding: 0px;">
+                                    <label class="control-label" >First Name<span style="color: red">*</span></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input id="firstName" name="firstName"
+                                           alpha-with-space
+                                           type="text" placeholder="First Name" ng-model-options="{debounce:1000}"
+                                           ng-model="firstName" maxlength="125"
+                                           class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                <div class="col-sm-3" style="padding: 0px;">
+                                    <label class="control-label" >Last Name</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input id="LastName" name="LastName"
+                                           alpha-with-space
+                                           type="text" placeholder="Last Name"
+                                           ng-model="lastName" maxlength="125"
+                                           class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                <div class="col-sm-3" style="padding: 0px;">
+                                    <label class="control-label" >Caller Location<span style="color: red">*</span></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input id="callerLocation" name="callerLocation"
+                                           type="text" placeholder="CallerLocation"
+                                           ng-model="callerLocation" maxlength="125"
+                                           class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                <div class="col-sm-3" style="padding: 0px;">
+                                    <label class="control-label" >Service Location<span style="color: red">*</span></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <select id="serviceLocation" name="serviceLocation" ng-model="serviceLocation"
+                                            ng-options="serviceLocation.servicelName as serviceLocation.servicelName for serviceLocation in serviceLocationList"
+                                            class="form-control input-md">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                <div class="col-sm-3" style="padding: 0px;">
+                                    <label class="control-label" >Source Of Enquiry<span style="color: red">*</span></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <select id="sourceOfEnquiry" name="sourceOfEnquiry" ng-model="sourceOfEnquiry"
+                                            ng-options="sourceOfEnquiry.sourceName as sourceOfEnquiry.sourceName for sourceOfEnquiry in sourceOfEnquiryList"
+                                            class="form-control input-md">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                <div ng-repeat="phone in phoneNumberList">
+                                    <div class="col-sm-3" style="padding: 0px;">
+                                        <label class="control-label" >Phone Number<span style="color: red">*</span></label>
+                                    </div>
+                                    <div class="col-sm-9" style="padding: 0px;margin-bottom: 10px;">
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 0px;">
+                                            <div class="col-sm-9">
+                                                <input id="phoneNumber" name="phoneNumber"
+                                                       type="text" placeholder="PhoneNumber"
+                                                        num-with-out-space maxlength="10"
+                                                       ng-model="phone.phoneNumber"
+                                                       class="form-control"/>
+                                            </div>
+                                            <div class="col-sm-1"
+                                                 ng-if="phoneNumberList.length>1 && $index!=0">
+                                                <input type="button" value="X" ng-click="removePhoneNumberList($index)">
+                                            </div>
+                                            <div class="col-sm-1"
+                                                 ng-if="phoneNumberList.length<=2 && phoneNumberList.length-1==$index">
+                                                <input type="button" value="+"
+                                                       ng-click="addNewPhoneNumber()">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                <div  ng-repeat="type in typeOfEnquiryList">
+                                    <div class="col-sm-3" style="padding: 0px;">
+                                        <label class="control-label" >Type Of Enquiry<span style="color: red">*</span></label>
+                                    </div>
+                                    <div class="col-sm-9" style="padding: 0px;margin-bottom: 10px;">
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 0px;">
+                                            <div class="col-sm-9">
+                                                <select id="typeOfEnquiryList" name="typeOfEnquiryList" ng-model="type.typeOfEnquiry" ng-change="getServiceTypeList(type.typeOfEnquiry,type)" ng-options="type.name as type.name for type in enquiryTypeList" class="form-control input-md">
+                                                    <option value="">Select</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-1"
+                                                 ng-if="typeOfEnquiryList.length>1 && $index!=0" >
+                                                <input type="button" value="X" ng-click="removetypeOfEnquiryList($index)" style="margin-left: -15px;">
+                                            </div>
+                                            <div class="col-sm-1" style="margin-left: -15px"
+                                            ng-if="typeOfEnquiryList.length-1==$index">
+                                                <input type="button" value="+"
+                                                       ng-click="addNewTypeOfEnquiry()">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                <div class="form-group" ng-repeat="type in typeOfEnquiryList">
+                                <div  ng-show="type.typeOfEnquiry!='Others'">
+                                    <div class="col-sm-3" style="padding: 0px;">
+                                        <label class="control-label">Choose Service Type</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <select id="serviceType" name="serviceType" ng-change="openInternationalHum(type,type.serviceType,$index)" ng-model="type.serviceType" ng-options="service.serviceType as service.serviceType for service in type.serviceTypeList" class="form-control input-md">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div  ng-show="type.typeOfEnquiry=='Others'">
+                                    <div class="col-sm-3" style="padding: 0px;">
+                                        <label  class=" control-label">Others</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input id="others" name="others"
+                                               type="text" placeholder="others"
+                                               ng-model="others"
+                                               class="form-control">
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                <div class="">
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-4" style="padding-left: 0px;">Country<span style="color: red">*</span></label>
+                                        <div class="col-sm-8" style="padding: 0px 21px;">
+                                            <select id="country" name="cuisines" ng-change="getStatewebList(country)" ng-model="country" ng-options="AAAA.countryId as AAAA.countryName for AAAA in countryList" class="form-control input-md">
+                                                <option value="">Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-4" >State<span style="color: red">*</span></label>
+                                        <div class="col-sm-8">
+                                            <select id="state" name="state" ng-change="getCitywebList(state)" ng-model="state" ng-options="BBBB.stateId as BBBB.stateName for BBBB in statewebListttt" class="form-control input-md">
+                                                <option value="">Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-4" >City<span style="color: red">*</span></label>
+                                        <div class="col-sm-8" style=" margin-left: -32px;">
+                                            <select id="city" name="city"   ng-model="city" ng-options="CCCC.cityId as CCCC.cityName for CCCC in citywebListttt" class="form-control input-md">
+                                                <option value="">Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                <div class="col-sm-3" style="padding: 0px;">
+                                    <label class="control-label" >Zipcode</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input id="Zipcode" name="Zipcode" num-with-out-space
+                                           type="text" placeholder="Zipcode"
+                                           ng-model="zipcode" maxlength="6"
+                                           class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                <div class="col-sm-3" style="padding: 0px;">
+                                    <label class="control-label" >Email<span style="color: red">*</span></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input id="emailId" name="emailId" ng-change="getEnquiryListBasedOn()"
+                                           type="email" placeholder="Email" maxlength="50"
+                                           ng-model="emailId" ng-pattern="word" ng-model-options="{debounce:1000}"
+                                           class="form-control input-md">
+                                    <p class="error" ng-show="enquiry.emailId.$error.pattern">Enter Valid MailID</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                <div class="col-sm-3" style="padding: 0px;">
+                                    <label class="control-label" >Call Status</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <select name="custStatus" id="custStatus" ng-model="callStatus" ng-options="call.name as call.name for call in callStatusList" class="form-control" required>
+                                        <option value="">Select</option>
+                                        <!--<option value="Service_UnAvailable">Service_UnAvailable</option>-->
+                                        <!--<option value="General_Enquiry">General_Enquiry</option>-->
+                                        <!--<option value="Service_Initiated">Service_Initiated</option>-->
+                                        <!--<option value="IVR_DROP">IVR_DROP</option>-->
+                                    </select>
+                                </div>
+                            </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group" ng-show="callStatus=='General_Enquiry'">
+                            <div class="col-sm-3" style="padding: 0px;">
+                                <label class="control-label" >CallStatusDetails</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <select name="callStatusDetails" id="callStatusDetails" ng-model="callStatusDetails" class="form-control" required>
+                                    <option value="">Select</option>
+                                    <option value="perplanning">PRE-PLANNING</option>
+                                    <option value="transportationOfAshes">Transportation of Ashes</option>
+                                </select>
+                            </div>
+                        </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                <div class="col-sm-3" style="padding: 0px;">
+                                    <label class="control-label" >Call Info</label>
+                                </div>
+                                <div class="col-sm-9">
+                                     <textarea id="callinfo" name="callinfo"
+                                               type="text" placeholder="Callinfo"
+                                               ng-model="callinfo"
+                                               class="form-control">
+                                </textarea>
+                                </div>
+                            </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                            <div  ng-repeat="special in specialRequestList">
+                                <div class="col-sm-2" style="padding: 0px;">
+                                    <label class="control-label" >Special Requirements</label>
+                                </div>
+                                <div class="col-sm-10" style="margin-left: -45px;padding: 0px;width: 85%;">
+                                    <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 0px;">
+                                    <div class="col-sm-10" style="margin-bottom: 10px;">
+                                    <textarea id="specialRequirements" name="specialRequirements"
+                                    type="text" placeholder="Special Requirements"
+                                    ng-model="special.specialRequirements"
+                                    class="form-control"></textarea>
+                                    </div>
+                                    <div class="col-sm-1"
+                                    ng-if="specialRequestList.length>1 && $index!=0" style="margin-left:0px;">
+                                    <input type="button" value="X" ng-click="removeFile($index)">
+                                    </div>
+                                    <div class="col-sm-1" style="margin-left:-25px;" ng-if="specialRequestList.length-1==$index">
+                                    <input type="button" value="+"
+                                    ng-click="addNewFile()">
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <!--<div class="col-md-12 col-sm-12 col-xs-12 form-group">-->
+                                <!--<div  ng-repeat="special in specialRequestList">-->
+                                    <!--<div class="col-sm-3" style="padding: 0px;">-->
+                                        <!--<label class="control-label" >Special Requirements</label>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-sm-9" style="padding: 0px;margin-bottom: 10px;">-->
+
+                                        <!--<div class="col-md-12 col-sm-12 col-xs-12" style="padding: 0px;">-->
+                                            <!--<div class="col-sm-9">-->
+                                                <!--<textarea id="specialRequirements" name="specialRequirements"-->
+                                                <!--type="text" placeholder="Special Requirements"-->
+                                                <!--ng-model="special.specialRequirements"-->
+                                                          <!--class="form-control"></textarea>-->
+                                            <!--</div>-->
+                                            <!--<div class="col-sm-1"-->
+                                                 <!--ng-if="specialRequestList.length>1 && $index!=0" >-->
+                                                <!--<input type="button" value="X" ng-click="removeFile($index)">-->
+                                            <!--</div>-->
+                                            <!--<div class="col-sm-1">-->
+                                                <!--<input type="button" value="+"-->
+                                                       <!--ng-click="addNewFile()">-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+
+                            <!--</div>-->
+
+                    </div>
+                </fieldset>
+
+
+
+            </form>
+        </div>
+
+    </div>
+    <div class="modal-footer" ng-show="(operation=='edit'||operation=='create')">
+        <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                data-target=".print-me" ng-click="saveEnqForm('save&draft')">Save As Draft</button>
+        <button type="submit" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                data-target=".print-me" ng-click="saveEnqForm('save')">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="goBack()">Close</button>
+
+    </div>
+    <div class="modal-footer" ng-show="operation=='addCall'">
+        <button type="submit" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                data-target=".print-me" ng-click="saveEnqFormAddCall()">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="goBack()">Close</button>
+
+    </div>
+</div>
+<div class="modal fade" id="add_new_hearse_Van" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="country-title">Hearse Van Service</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Date of Service</label>
+                            <div class="col-sm-9 mb-15">
+                                <div class="input-group date">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                           ng-model="serviceTypeDetails.dateOfServicehv"
+                                           is-open="popup1.opened" readonly datepicker-options="dateOptions"
+                                           ng-required="true"
+                                           close-text="Close" alt-input-formats="altInputFormats"/>
+                                    <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open1()"><i
+                                            class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            <label class="control-label col-sm-3">Time Of Service</label>
+                            <div class="col-sm-9 mb-15" >
+                                <input id="timeOfService" name="timeOfService"
+                                       type="time" placeholder="Time"
+                                       ng-model="serviceTypeDetails.timeOfServicehv"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Cost Of Service(INR)</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="costOfService" name="costOfService" num-with-out-space
+                                       type="text" placeholder="ex:23"
+                                       ng-model="serviceTypeDetails.costOfServicehv" maxlength="6"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <h4><strong>Pick Up Address</strong><span style="color: red">*</span></h4>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3"> Street Address</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="pickupAddress" name="pickupAddress"
+                                       type="text" placeholder="Pickup Address"
+                                       ng-model="serviceTypeDetails.pickupAddresshv"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Zipcode</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="pickupzipcode" name="pickupzipcode" placeholder="Zipcode" maxlength="6"  ng-model="serviceTypeDetails.pickupzipcodehv" num-with-out-space class="form-control input-md">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Stop Over Address</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="stopOverAddress" name="stopOverAddress"
+                                       type="text" placeholder="Stop Over Address"
+                                       ng-model="serviceTypeDetails.stopOverAddresshv"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Zipcode</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="stopOverZipcode" name="stopOverZipcode" placeholder="Zipcode" maxlength="6"  ng-model="serviceTypeDetails.stopOverZipcodehv" num-with-out-space class="form-control input-md">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Floor No</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="floorNo" name="floorNo" ng-model="serviceTypeDetails.floorNohv" placeholder="Floor No" maxlength="3" class="form-control input-md">                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Is Service Lift Available?</label>
+                            <div class="col-sm-9 mb-15">
+                                <label class="control-label">
+                                    <input id="serviceLift1" name="serviceLift1" type="radio" value="yes"   ng-model="serviceTypeDetails.serviceLifthv">Yes
+                                </label>
+                                <label class="control-label">
+                                    <input id="serviceLift" name="serviceLift" type="radio" value="no"   ng-model="serviceTypeDetails.serviceLifthv">No
+                                </label>
+                            </div>
+                        </div>
+                        <h4><strong>Destination Address</strong><span style="color: red">*</span> </h4>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Street Address</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="destinationAddress" name="destinationAddress"
+                                       type="text" placeholder="Street Address"
+                                       ng-model="serviceTypeDetails.destinationAddresshv"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Zipcode</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="stopOverZipcode" name="stopOverZipcode" placeholder="Zipcode" maxlength="6"  ng-model="serviceTypeDetails.destinationZipcodehv" num-with-out-space class="form-control input-md">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Stop Over Address</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="stopOverAddress" name="stopOverAddress"
+                                       type="text" placeholder="Stop Over Address"
+                                       ng-model="serviceTypeDetails.destinationStopOverAddresshv"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Zipcode</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="stopOverZipcode" name="stopOverZipcode" placeholder="Zipcode" maxlength="6"  ng-model="serviceTypeDetails.destinationstopOverZipcodehv" num-with-out-space class="form-control input-md">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Floor No</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="floorNo" name="floorNo" ng-model="serviceTypeDetails.destinationfloorNohv" placeholder="Floor No" maxlength="3" class="form-control input-md">                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Is Service Lift Available?</label>
+                            <div class="col-sm-9 mb-15">
+                                <label class="control-label">
+                                    <input id="serviceLift2" name="serviceLift2" type="radio" value="yes"   ng-model="serviceTypeDetails.destinationserviceLifthv" >Yes
+                                </label>
+                                <label class="control-label">
+                                    <input id="serviceLift3" name="serviceLift3" type="radio" value="no"  ng-model="serviceTypeDetails.destinationserviceLifthv">No
+                                </label>
+                            </div>
+                        </div>
+                        <h4><strong>Client Name</strong></h4>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">First Name</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="firstName" name="firstName"
+                                       alpha-with-space
+                                       type="text" placeholder="First Name"
+                                       ng-model="serviceTypeDetails.clientfirstNamehv" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Last Name</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="LastName" name="LastName"
+                                       alpha-with-space
+                                       type="text" placeholder="Last Name"
+                                       ng-model="serviceTypeDetails.clientlastNamehv" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <!-- <div class="form-group">
+                             <label  class="col-sm-3 control-label">Area Code</label>
+                             <div class="col-sm-9">
+                                 <input id="AreaCode" name="AreaCode"
+                                        type="text" placeholder="Area Code"
+                                        ng-model="areaCode" maxlength="6"
+                                        class="form-control">
+                             </div>
+                         </div>
+                         - -->
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Phone Number</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="phoneNumber" name="phoneNumber"
+                                       num-with-out-space
+                                       type="text" placeholder="PhoneNumber"
+                                       ng-model="serviceTypeDetails.clientphoneNumberhv" maxlength="10"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Assistance Details</label>
+                            <div class="col-sm-9 mb-15">
+                                <select name="assistanceDetails" id="assistanceDetails" ng-model="serviceTypeDetails.assistanceDetailshv" class="form-control" required>
+                                    <option value="">Select</option>
+                                    <option value="KolkataVendors">Kolkata Vendors</option>
+                                    <option value="BangaloreVendors">Bangalore Vendors</option>
+                                    <option value="HyderabadVendors">Hyderabad Vendors</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-show="serviceTypeDetails.assistanceDetailshv">
+                            <label  class="col-sm-3 control-label">Assistance Contact</label>
+                            <div class="col-sm-9 mb-15">
+                                <!--<div class="form-group">-->
+                                <!--<label  class="col-sm-3 control-label">Area Code</label>-->
+                                <!--<div class="col-sm-9">-->
+                                <!--<input id="AreaCode" name="AreaCode"-->
+                                <!--type="text" placeholder="Area Code"-->
+                                <!--ng-model="areaCode" maxlength="6"-->
+                                <!--class="form-control">-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!-- - -->
+                                <div class="col-sm-9">
+                                    <input id="assistanceContact" name="assistanceContact"
+                                           num-with-out-space
+                                           type="text" placeholder="Assistance Contact"
+                                           ng-model="serviceTypeDetails.assistanceContacthv" maxlength="10"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <h4><strong>Choose Additional Service</strong><span style="color: red">*</span> </h4>
+                        <div class="form-group">
+                            <div class="col-sm-12" style="padding-left: 0px;">
+                                <div class="control-label col-sm-4">
+                                    <label class="customchk">Decoration
+                                        <input id="additionalService" name="additionalService" type="checkbox" checked="checked"  ng-model="serviceTypeDetails.additionalServiceDecorationhv" >
+                                        <span class="checkmarks"></span>
+                                    </label>
+                                </div>
+                                <div class="col-sm-8" ng-show="serviceTypeDetails.additionalServiceDecorationhv">
+                                    <label class="control-label col-sm-2">Cost</label>
+                                    <div class="col-sm-10 mb-15" >
+                                        <input id="DecorationCost" name="DecorationCost"
+                                               num-with-out-space
+                                               type="text" placeholder="Decoration Cost"
+                                               ng-model="serviceTypeDetails.decorationCosthv" maxlength="10"
+                                               class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12" style="padding-left: 0px;">
+                                <div class="control-label col-sm-4">
+                                    <label class="customchk">Funeral Helper
+                                        <input id="additionalService" name="additionalService" type="checkbox"   ng-model="serviceTypeDetails.additionalServicefuneralhv">
+                                        <span class="checkmarks"></span>
+                                    </label>
+
+                                </div>
+                                <div class="col-sm-8" ng-show="serviceTypeDetails.additionalServicefuneralhv">
+                                    <label class="control-label col-sm-2">Cost</label>
+                                    <div class="col-sm-10 mb-15">
+                                        <input id="funeralHelperCost" name="funeralHelperCost"
+                                               num-with-out-space
+                                               type="text" placeholder="Funeral Helper Cost" maxlength="10"
+                                               ng-model="serviceTypeDetails.funeralHelperCosthv"
+                                               class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--<div class="col-sm-9 mb-15">-->
+                        <!--<label class="customchk">Decoration-->
+                        <!--<input id="additionalService" name="additionalService" type="checkbox" checked="checked"  ng-model="additionalServiceDecoration" >-->
+                        <!--<span class="checkmarks"></span>-->
+                        <!--</label>-->
+                        <!--<label class="customchk">Funeral Helper-->
+                        <!--<input id="additionalService" name="additionalService" type="checkbox"   ng-model="additionalServicefuneral">-->
+                        <!--<span class="checkmarks"></span>-->
+                        <!--</label>-->
+
+                        <!--</div>-->
+                    </div>
+                    <!--<div class="form-group" ng-show="additionalServiceDecoration">-->
+                    <!--<label class="control-label col-sm-3">Decoration Cost</label>-->
+                    <!--<div class="col-sm-9 mb-15">-->
+                    <!--<input id="DecorationCost" name="DecorationCost"-->
+                    <!--num-with-out-space-->
+                    <!--type="text" placeholder="DecorationCost"-->
+                    <!--ng-model="decorationCost" maxlength="10"-->
+                    <!--class="form-control">-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group" ng-show="additionalServicefuneral">-->
+                    <!--<label class="control-label col-sm-3">Funeral Helper Cost</label>-->
+                    <!--<div class="col-sm-9 mb-15">-->
+                    <!--<input id="funeralHelperCost" name="funeralHelperCost"-->
+                    <!--num-with-out-space-->
+                    <!--type="text" placeholder="Funeral Helper Cost" maxlength="10"-->
+                    <!--ng-model="funeralHelperCost"-->
+                    <!--class="form-control">-->
+                    <!--</div>-->
+                    <!--</div>-->
+                </div>
+
+
+
+
+
+                <!--<label  class="col-sm-3 control-label">Destination Address</label>-->
+                <!--<div class="form-group">-->
+                <!--<label  class="col-sm-3 control-label">Street Address</label>-->
+                <!--<div class="col-sm-9">-->
+                <!--<input id="destinationAddress" name="destinationAddress"-->
+                <!--type="text" placeholder="Street Address"-->
+                <!--ng-model="destinationAddress"-->
+                <!--class="form-control">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                <!--<label class="col-sm-3  control-label">Zipcode</label>-->
+                <!--<div class=" col-sm-9">-->
+                <!--<input id="destinationZipcode" name="destinationZipcode" placeholder="Zipcode"   ng-model="destinationZipcode" class="form-control input-md">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<label  class="col-sm-3 control-label">Client Name</label>-->
+                <!--<div class="form-group">-->
+                <!--<label  class="col-sm-3 control-label">First Name</label>-->
+                <!--<div class="col-sm-9">-->
+                <!--<input id="firstName" name="firstName"-->
+                <!--alpha-with-space-->
+                <!--type="text" placeholder="First Name"-->
+                <!--ng-model="clientfirstName" maxlength="125"-->
+                <!--class="form-control">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                <!--<label  class="col-sm-3 control-label">Last Name</label>-->
+                <!--<div class="col-sm-9">-->
+                <!--<input id="LastName" name="LastName"-->
+                <!--alpha-with-space-->
+                <!--type="text" placeholder="Last Name"-->
+                <!--ng-model="clientlastName" maxlength="125"-->
+                <!--class="form-control">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                <!--<label  class="col-sm-3 control-label">Phone Number</label>-->
+                <!--<div class="col-sm-9">-->
+                <!--<input id="phoneNumber" name="phoneNumber"-->
+                <!--num-with-out-space-->
+                <!--type="text" placeholder="PhoneNumber"-->
+                <!--ng-model="clientphoneNumber" maxlength="10"-->
+                <!--class="form-control">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                <!--<label  class="col-sm-3 control-label">ASSISTANCE DETAILS</label>-->
+                <!--<div class="col-sm-9">-->
+                <!--<select name="assistanceDetails" id="assistanceDetails" ng-model="assistanceDetails" class="form-control" required>-->
+                <!--<option value="">Select</option>-->
+                <!--<option value="KolkataVendors">Kolkata Vendors</option>-->
+                <!--<option value="BangaloreVendors">Bangalore Vendors</option>-->
+                <!--<option value="HyderabadVendors">Hyderabad Vendors</option>-->
+                <!--</select>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--&lt;!&ndash;<div class="form-group" ng-show="assistanceDetails=='vendors'">&ndash;&gt;-->
+                <!--&lt;!&ndash;<label  class="col-sm-3 control-label"></label>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="col-sm-9">&ndash;&gt;-->
+                <!--&lt;!&ndash;<select name="custStatus" id="custStatus" ng-model="StatusText" class="form-control" required>&ndash;&gt;-->
+                <!--&lt;!&ndash;<option value="">Select</option>&ndash;&gt;-->
+                <!--&lt;!&ndash;<option value="KolkataVendors">Kolkata Vendors</option>&ndash;&gt;-->
+                <!--&lt;!&ndash;<option value="BangaloreVendors">Bangalore Vendors</option>&ndash;&gt;-->
+                <!--&lt;!&ndash;<option value="HyderabadVendors">Hyderabad Vendors</option>&ndash;&gt;-->
+                <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--<div class="form-group" ng-show="assistanceDetails">-->
+                <!--<label  class="col-sm-3 control-label">ASSISTANCE Contact</label>-->
+                <!--<div class="col-sm-9">-->
+                <!--<input id="assistanceContact" name="assistanceContact"-->
+                <!--num-with-out-space-->
+                <!--type="text" placeholder="Assistance Contact"-->
+                <!--ng-model="assistanceContact" maxlength="10"-->
+                <!--class="form-control">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                <!--<label class="col-sm-3  control-label">Choose Additional Service</label>-->
+                <!--<div class=" col-sm-9">-->
+                <!--<input id="additionalService" name="additionalService" type="radio"   ng-model="additionalService">Decoration-->
+                <!--<input id="additionalService" name="additionalService" type="radio"   ng-model="additionalService">Funeral Helper-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group" >-->
+                <!--<label  class="col-sm-3 control-label">Decoration Cost</label>-->
+                <!--<div class="col-sm-9">-->
+                <!--<input id="DecorationCost" name="DecorationCost"-->
+                <!--num-with-out-space-->
+                <!--type="text" placeholder="DecorationCost"-->
+                <!--ng-model="decorationCost" maxlength="10"-->
+                <!--class="form-control">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group" >-->
+                <!--<label  class="col-sm-3 control-label">Funeral Helper Cost</label>-->
+                <!--<div class="col-sm-9">-->
+                <!--<input id="funeralHelperCost" name="funeralHelperCost"-->
+                <!--num-with-out-space-->
+                <!--type="text" placeholder="Funeral Helper Cost" maxlength="10"-->
+                <!--ng-model="funeralHelperCost"-->
+                <!--class="form-control">-->
+                <!--</div>-->
+                <!--</div>-->
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                        data-target=".print-me" ng-click="saveHearseVan()">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="add_new_Freezer_Box" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="country-title">Freezer Box Service(use this form for preservation requests at home)</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+
+                        <!--<div class="form-group">-->
+                        <!--<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">-->
+                        <!--<label>Date of Service</label>-->
+                        <!--</div>-->
+                        <!--<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 input-group date">-->
+                        <!--<p class="input-group" style="width: 35%;">-->
+                        <!--<input type="text" class="form-control" uib-datepicker-Popup="{{format}}"-->
+                        <!--ng-model="dateOfService" style="height: 35px;"-->
+                        <!--is-open="popup1.opened" readonly datepicker-options="dateOptions"-->
+                        <!--ng-required="true"-->
+                        <!--close-text="Close" alt-input-formats="altInputFormats"/>-->
+                        <!--<span class="input-group-btn">-->
+                        <!--<button type="button" class="btn btn-default" ng-click="open1()"><i-->
+                        <!--class="glyphicon glyphicon-calendar"></i></button>-->
+                        <!--</span>-->
+                        <!--</p>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Date of Service</label>
+                            <div class="col-sm-9 mb-15">
+                                <div class="input-group date">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                           ng-model="serviceTypeDetails.dateOfService" style="height: 35px;"
+                                           is-open="popup1.opened" readonly datepicker-options="dateOptions"
+                                           ng-required="true"
+                                           close-text="Close" alt-input-formats="altInputFormats"/>
+                                    <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open1()"><i
+                                            class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group" >
+                            <label class="control-label col-sm-3">Time Of Service</label>
+                            <div class="col-sm-9 mb-15" >
+                                <input id="timeOfService" name="timeOfService"
+                                       type="time" placeholder="Time"
+                                       ng-model="serviceTypeDetails.timeOfService"
+                                       class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Cost Of Service(INR)</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="costOfService" name="costOfService" num-with-out-space
+                                       type="text" placeholder="ex:23"
+                                       ng-model="serviceTypeDetails.costOfService" maxlength="6"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <h4><strong>Freezer Box Installation Address</strong><span style="color: red">*</span> </h4>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Street Address</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="pickupAddress" name="pickupAddress"
+                                       type="text" placeholder="Street Address"
+                                       ng-model="serviceTypeDetails.freezerboxAddress"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3  control-label">Zipcode</label>
+                            <div class=" col-sm-9 mb-15">
+                                <input id="pickupzipcode" name="pickupzipcode" placeholder="Zipcode" maxlength="6"  ng-model="serviceTypeDetails.freezerboxzipcode" class="form-control input-md">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3  control-label">Installation Floor No</label>
+                            <div class=" col-sm-9 mb-15">
+                                <input id="floorNo" name="floorNo" ng-model="serviceTypeDetails.floorNo" placeholder="Floor No" maxlength="3" class="form-control input-md">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3  control-label">Is Service Lift Available ?</label>
+                            <div class=" col-sm-9 mb-25">
+                                <label class="customrad">
+                                    <input id="serviceLift" name="serviceLift" type="radio"   ng-model="serviceTypeDetails.serviceLift" >Yes
+                                </label>
+                                <label class="customrad">
+                                    <input id="serviceLift" name="serviceLift" type="radio"   ng-model="serviceTypeDetails.serviceLift">No
+                                </label>
+                                <!--<input id="serviceLift" name="serviceLift" type="radio"   ng-model="serviceLift" >Yes-->
+                                <!--<input id="serviceLift" name="serviceLift" type="radio"   ng-model="serviceLift">No-->
+                            </div>
+                        </div>
+                        <h4><strong>Client Name</strong><span style="color: red">*</span></h4>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">First Name</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="firstName" name="firstName"
+                                       alpha-with-space
+                                       type="text" placeholder="First Name"
+                                       ng-model="serviceTypeDetails.clientfirstName" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Last Name</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="LastName" name="LastName"
+                                       alpha-with-space
+                                       type="text" placeholder="Last Name"
+                                       ng-model="serviceTypeDetails.clientlastName" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <h4><strong>Client Contact</strong><span style="color: red">*</span></h4>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Area Code</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="AreaCode" name="AreaCode"
+                                       type="text" placeholder="Area Code"
+                                       ng-model="serviceTypeDetails.clientAreaCode" maxlength="6"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        -
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Phone Number</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="phoneNumber" name="phoneNumber"
+                                       num-with-out-space
+                                       type="text" placeholder="PhoneNumber"
+                                       ng-model="serviceTypeDetails.clientphoneNumber" maxlength="10"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">ASSISTANCE DETAILS</label>
+                            <div class="col-sm-9 mb-15">
+                                <select name="assistanceDetails" id="assistanceDetails" ng-model="serviceTypeDetails.assistanceDetails" class="form-control" required>
+                                    <option value="">Select</option>
+                                    <option value="KolkataVendors">Kolkata Vendors</option>
+                                    <option value="BangaloreVendors">Bangalore Vendors</option>
+                                    <option value="HyderabadVendors">Hyderabad Vendors</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--<div class="form-group" ng-show="assistanceDetails=='vendors'">-->
+                        <!--<label  class="col-sm-3 control-label"></label>-->
+                        <!--<div class="col-sm-9">-->
+                        <!--<select name="custStatus" id="custStatus" ng-model="StatusText" class="form-control" required>-->
+                        <!--<option value="">Select</option>-->
+                        <!--<option value="KolkataVendors">Kolkata Vendors</option>-->
+                        <!--<option value="BangaloreVendors">Bangalore Vendors</option>-->
+                        <!--<option value="HyderabadVendors">Hyderabad Vendors</option>-->
+                        <!--</select>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <div  ng-show="serviceTypeDetails.assistanceDetails">
+                            <div class="form-group">
+                                <label  class="col-sm-3 control-label">Area Code</label>
+                                <div class="col-sm-9 mb-15">
+                                    <input id="AreaCode" name="AreaCode"
+                                           type="text" placeholder="Area Code"
+                                           ng-model="serviceTypeDetails.clientAreaCode" maxlength="6"
+                                           class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-3 control-label">ASSISTANCE Contact</label>
+
+
+                                <div class="col-sm-9">
+                                    <input id="assistanceContact" name="assistanceContact"
+                                           num-with-out-space
+                                           type="text" placeholder="Assistance Contact"
+                                           ng-model="serviceTypeDetails.assistanceContact" maxlength="10"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                        data-target=".print-me" ng-click="saveFreezerbox()">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="add_new_Embalming" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="country-title">Embalming
+                    (This form is used to preserve the HUM for more than one day.)</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+
+                        <!--<div class="form-group">-->
+                        <!--<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">-->
+                        <!--<label>Date of Service</label>-->
+                        <!--</div>-->
+                        <!--<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 input-group date">-->
+
+                        <!--<input type="text" class="form-control" uib-datepicker-Popup="{{format}}"-->
+                        <!--ng-model="dateOfService"-->
+                        <!--is-open="popup1.opened" readonly datepicker-options="dateOptions"-->
+                        <!--ng-required="true"-->
+                        <!--close-text="Close" alt-input-formats="altInputFormats"/>-->
+                        <!--<span class="input-group-btn">-->
+                        <!--<button type="button" class="btn btn-default" ng-click="open1()"><i-->
+                        <!--class="glyphicon glyphicon-calendar"></i></button>-->
+                        <!--</span>-->
+                        <!---->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label  class="col-sm-3 control-label">Time Of Service</label>-->
+                        <!--<div class="col-sm-9">-->
+                        <!--<input id="timeOfService" name="timeOfService"-->
+                        <!--type="time" placeholder="Time"-->
+                        <!--ng-model="timeOfService"-->
+                        <!--class="form-control">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Date of Service</label>
+                            <div class="col-sm-9 mb-15">
+                                <div class="input-group date">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                           ng-model="serviceTypeDetails.dateOfService" style="height: 35px;"
+                                           is-open="popup1.opened" readonly datepicker-options="dateOptions"
+                                           ng-required="true"
+                                           close-text="Close" alt-input-formats="altInputFormats"/>
+                                    <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open1()"><i
+                                            class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group" >
+                            <label class="control-label col-sm-3">Time Of Service</label>
+                            <div class="col-sm-9 mb-15" >
+                                <input id="timeOfService" name="timeOfService"
+                                       type="time" placeholder="Time"
+                                       ng-model="serviceTypeDetails.timeOfService"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Cost Of Service(INR)</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="costOfService" name="costOfService" num-with-out-space
+                                       type="text" placeholder="ex:23"
+                                       ng-model="serviceTypeDetails.costOfService" maxlength="6"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <h4><strong>Embalming Service Address</strong><span style="color: red">*</span></h4>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Street Address</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="pickupAddress" name="pickupAddress"
+                                       type="text" placeholder="Street Address"
+                                       ng-model="serviceTypeDetails.embalmingAddress"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3  control-label">Zipcode</label>
+                            <div class=" col-sm-9 mb-15">
+                                <input id="pickupzipcode" name="pickupzipcode" placeholder="Zipcode" maxlength="6"  ng-model="serviceTypeDetails.embalmingzipcode" class="form-control input-md">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3  control-label">Floor No</label>
+                            <div class=" col-sm-9 mb-15">
+                                <input id="floorNo" name="floorNo" ng-model="serviceTypeDetails.floorNo" placeholder="Floor No" maxlength="3" class="form-control input-md">
+                            </div>
+                        </div>
+                        <h4><strong>Client Name</strong><span style="color: red">*</span></h4>
+
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">First Name</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="firstName" name="firstName"
+                                       alpha-with-space
+                                       type="text" placeholder="First Name"
+                                       ng-model="serviceTypeDetails.clientfirstName" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Last Name</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="LastName" name="LastName"
+                                       alpha-with-space
+                                       type="text" placeholder="Last Name"
+                                       ng-model="serviceTypeDetails.clientlastName" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <h4><strong>Client Contact</strong><span style="color: red">*</span></h4>
+
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Area Code</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="AreaCode" name="AreaCode"
+                                       type="text" placeholder="Area Code"
+                                       ng-model="serviceTypeDetails.clientAreaCode" maxlength="6"
+                                       class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Phone Number</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="phoneNumber" name="phoneNumber"
+                                       num-with-out-space
+                                       type="text" placeholder="PhoneNumber"
+                                       ng-model="serviceTypeDetails.clientphoneNumber" maxlength="10"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">ASSISTANCE DETAILS</label>
+                            <div class="col-sm-9 mb-25">
+                                <select name="assistanceDetails" id="assistanceDetails" ng-model="serviceTypeDetails.assistanceDetails" class="form-control" required>
+                                    <option value="">Select</option>
+                                    <option value="KolkataVendors">Kolkata Vendors</option>
+                                    <option value="BangaloreVendors">Bangalore Vendors</option>
+                                    <option value="HyderabadVendors">Hyderabad Vendors</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="serviceTypeDetails.assistanceDetails">
+
+                            <div class="form-group">
+                                <label  class="col-sm-3 control-label">Area Code</label>
+                                <div class="col-sm-9 mb-15">
+                                    <input id="AreaCode" name="AreaCode"
+                                           type="text" placeholder="Area Code"
+                                           ng-model="serviceTypeDetails.clientAreaCode" maxlength="6"
+                                           class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label  class="col-sm-3 control-label">ASSISTANCE Contact</label>
+                                <div class="col-sm-9">
+                                    <input id="assistanceContact" name="assistanceContact"
+                                           num-with-out-space
+                                           type="text" placeholder="Assistance Contact"
+                                           ng-model="serviceTypeDetails.assistanceContact" maxlength="10"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                        data-target=".print-me" ng-click="saveEmbalming()">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="add_new_Domestic_Hum_Road" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="country-title">Domestic Hum Road Transport</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Date of Service</label>
+                            <div class="col-sm-9 mb-15">
+                                <div class="input-group date">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                           ng-model="serviceTypeDetails.dateOfService"
+                                           is-open="popup1.opened" readonly datepicker-options="dateOptions"
+                                           ng-required="true"
+                                           close-text="Close" alt-input-formats="altInputFormats"/>
+                                    <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open1()"><i
+                                            class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Time Of Service</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="timeOfService" name="timeOfService"
+                                       type="time" placeholder="Time"
+                                       ng-model="serviceTypeDetails.timeOfService"
+                                       class="form-control" style="width: 41%;">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Cost Of Service(INR)</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="costOfService" name="costOfService" num-with-out-space
+                                       type="text" placeholder="ex:23"
+                                       ng-model="serviceTypeDetails.costOfService" maxlength="6"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <h4><strong>Source City Address</strong></h4>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Street Address</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="sourceCityAddress" name="sourceCityAddress"
+                                       type="text" placeholder="Source City Address"
+                                       ng-model="serviceTypeDetails.sourceCityAddress"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3  control-label">City</label>
+                            <div class=" col-sm-9 mb-15">
+                                <select id="sourceCity" name="sourceCity"   ng-model="serviceTypeDetails.sourceCity" ng-options="city.id as
+city.cityName for city in cityList" class="form-control input-md">
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <h4><strong>Destination City Address</strong></h4>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Street Address</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="destinationCityAddress" name="destinationCityAddress"
+                                       type="text" placeholder="Destination City Address"
+                                       ng-model="serviceTypeDetails.destinationCityAddress"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3  control-label">City</label>
+                            <div class=" col-sm-9 mb-15">
+                                <select id="destinationCity" name="destinationCity"   ng-model="serviceTypeDetails.destinationCity" ng-options="city.id as
+city.cityName for city in cityList" class="form-control input-md">
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <h4><strong>Client Name</strong></h4>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">First Name</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="firstName" name="firstName"
+                                       alpha-with-space
+                                       type="text" placeholder="First Name"
+                                       ng-model="serviceTypeDetails.clientfirstName" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Last Name</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="LastName" name="LastName"
+                                       alpha-with-space
+                                       type="text" placeholder="Last Name"
+                                       ng-model="serviceTypeDetails.clientlastName" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Phone Number</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="phoneNumber" name="phoneNumber"
+                                       num-with-out-space
+                                       type="text" placeholder="Phone Number" maxlength="10"
+                                       ng-model="serviceTypeDetails.clientphoneNumber"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">ASSISTANCE DETAILS</label>
+                            <div class="col-sm-9 mb-15">
+                                <select name="assistanceDetails" id="assistanceDetails" ng-model="serviceTypeDetails.assistanceDetails" class="form-control" required>
+                                    <option value="">Select</option>
+                                    <option value="vendors">Vendors</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="serviceTypeDetails.assistanceDetails=='vendors'">
+                            <label  class="col-sm-3 control-label"></label>
+                            <div class="col-sm-9 mb-15">
+                                <select name="assistanceDetailsVendors" id="assistanceDetailsVendors" ng-model="serviceTypeDetails.assistanceDetailsVendors" class="form-control" required>
+                                    <option value="">Select</option>
+                                    <option value="KolkataVendors">Kolkata Vendors</option>
+                                    <option value="BangaloreVendors">Bangalore Vendors</option>
+                                    <option value="HyderabadVendors">Hyderabad Vendors</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="serviceTypeDetails.assistanceDetails">
+                            <label  class="col-sm-3 control-label">ASSISTANCE Contact</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="assistanceContact" name="assistanceContact"
+                                       num-with-out-space
+                                       type="text" placeholder="Assistance Contact" maxlength="10"
+                                       ng-model="serviceTypeDetails.assistanceContact"
+                                       class="form-control">
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                        data-target=".print-me" ng-click="saveDomesticHumRoad()">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="removeCountryDetails()">Close</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="add_new_Domestic_Hum_Air" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="country-title">Domestic Hum Air Transport</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Date of Service</label>
+                            <div class="col-sm-9 mb-15">
+                                <div class="input-group date">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                           ng-model="serviceTypeDetails.dateOfService"
+                                           is-open="popup1.opened" readonly datepicker-options="dateOptions"
+                                           ng-required="true"
+                                           close-text="Close" alt-input-formats="altInputFormats"/>
+                                    <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open1()"><i
+                                            class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Time Of Service</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="timeOfService" name="timeOfService"
+                                       type="time" placeholder="Time"
+                                       ng-model="serviceTypeDetails.timeOfService"
+                                       class="form-control" style="width: 41%;">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Cost Of Service(INR)</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="costOfService" name="costOfService" num-with-out-space
+                                       type="text" placeholder="ex:23"
+                                       ng-model="serviceTypeDetails.costOfService" maxlength="6"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Flight Details & Time</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="filghtdetails" name="filghtdetails"
+                                       type="text"
+                                       ng-model="serviceTypeDetails.filghtdetails"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <h4><strong>Source City Address</strong><span style="color: red">*</span> </h4>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Street Address</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="sourceCityAddress" name="sourceCityAddress"
+                                       type="text" placeholder="Source City Address"
+                                       ng-model="serviceTypeDetails.sourceCityAddress"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3  control-label">City</label>
+                            <div class=" col-sm-9 mb-15">
+                                <select id="sourceCity" name="sourceCity"   ng-model="serviceTypeDetails.sourceCity" ng-options="city.id as
+city.cityName for city in cityList" class="form-control input-md">
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <h4><strong>Destination City Address</strong></h4>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Street Address</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="destinationCityAddress" name="destinationCityAddress"
+                                       type="text" placeholder="Destination City Address"
+                                       ng-model="serviceTypeDetails.destinationCityAddress"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3  control-label">City</label>
+                            <div class=" col-sm-9 mb-15">
+                                <select id="destinationCity" name="destinationCity"   ng-model="serviceTypeDetails.destinationCity" ng-options="city.id as
+city.cityName for city in cityList" class="form-control input-md">
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label ">Book Passenger Tickets ?</label>
+                            <div class="col-sm-9 mb-15">
+                                <label class="control-label">
+                                    <input id="passengerTickets" name="passengerTickets" type="radio" value="yes"   ng-model="serviceTypeDetails.passengerTickets">Yes
+                                </label>
+                                <label class="control-label">
+                                    <input id="passengerTickets" name="passengerTickets" type="radio" value="no"  ng-model="serviceTypeDetails.passengerTickets">No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="serviceTypeDetails.passengerTickets=='yes'">
+                            <label  class="col-sm-3 control-label">No. Of Passenger Tickets</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="noOfPassengers" name="noOfPassengers" num-with-out-space
+                                       type="text" placeholder="No Of Passenger Tickets"
+                                       ng-model="serviceTypeDetails.noOfPassengers" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <h4><strong>Client Name</strong></h4>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">First Name</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="firstName" name="firstName"
+                                       alpha-with-space
+                                       type="text" placeholder="First Name"
+                                       ng-model="serviceTypeDetails.clientfirstName" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Last Name</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="LastName" name="LastName"
+                                       alpha-with-space
+                                       type="text" placeholder="Last Name"
+                                       ng-model="serviceTypeDetails.clientlastName" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Area Code</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="areaCode" name="areaCode"
+                                       type="text" placeholder="Area Code"
+                                       ng-model="serviceTypeDetails.clientAreaCode" maxlength="6"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Phone Number</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="phoneNumber" name="phoneNumber"
+                                       num-with-out-space
+                                       type="text" placeholder="Phone Number" maxlength="10"
+                                       ng-model="serviceTypeDetails.clientphoneNumber"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Assistance Details</label>
+                            <div class="col-sm-9 mb-15">
+                                <select name="assistanceDetails" id="assistanceDetails" ng-model="serviceTypeDetails.assistanceDetails" class="form-control" required>
+                                    <option value="">Select</option>
+                                    <option value="vendors">Vendors</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="serviceTypeDetails.assistanceDetails=='vendors'">
+                            <label  class="col-sm-3 control-label"></label>
+                            <div class="col-sm-9 mb-15">
+                                <select name="assistanceDetailsVendors" id="assistanceDetailsVendors" ng-model="serviceTypeDetails.assistanceDetailsVendors" class="form-control" required>
+                                    <option value="">Select</option>
+                                    <option value="KolkataVendors">Kolkata Vendors</option>
+                                    <option value="BangaloreVendors">Bangalore Vendors</option>
+                                    <option value="HyderabadVendors">Hyderabad Vendors</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="serviceTypeDetails.assistanceDetails">
+                            <label  class="col-sm-3 control-label">ASSISTANCE Contact</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="assistanceContact" name="assistanceContact"
+                                       num-with-out-space
+                                       type="text" placeholder="Assistance Contact" maxlength="10"
+                                       ng-model="serviceTypeDetails.assistanceContact"
+                                       class="form-control">
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                        data-target=".print-me" ng-click="saveDomesticHumAir()">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="add_new_Cuffin_Packing" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="country-title">Coffin Packing</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+
+                        <!--<div class="form-group">-->
+                            <!--<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">-->
+                                <!--<label>Date of Service</label>-->
+                            <!--</div>-->
+                            <!--<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 input-group date">-->
+
+                                    <!--<input type="text" class="form-control" uib-datepicker-Popup="{{format}}"-->
+                                           <!--ng-model="dateOfService"-->
+                                           <!--is-open="popup1.opened" readonly datepicker-options="dateOptions"-->
+                                           <!--ng-required="true"-->
+                                           <!--close-text="Close" alt-input-formats="altInputFormats"/>-->
+                                    <!--<span class="input-group-btn">-->
+                                     <!--<button type="button" class="btn btn-default" ng-click="open1()"><i-->
+                                             <!--class="glyphicon glyphicon-calendar"></i></button>-->
+                                <!--</span>-->
+                               <!---->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label  class="col-sm-3 control-label">Time Of Service</label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input id="timeOfService" name="timeOfService"-->
+                                       <!--type="time" placeholder="Time"-->
+                                       <!--ng-model="timeOfService"-->
+                                       <!--class="form-control">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Date of Service</label>
+                            <div class="col-sm-9 mb-15">
+                                <div class="input-group date">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                           ng-model="serviceTypeDetails.dateOfService" style="height: 35px;"
+                                           is-open="popup1.opened" readonly datepicker-options="dateOptions"
+                                           ng-required="true"
+                                           close-text="Close" alt-input-formats="altInputFormats"/>
+                                    <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open1()"><i
+                                            class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group" >
+                            <label class="control-label col-sm-3">Time Of Service</label>
+                            <div class="col-sm-9 mb-15" >
+                                <input id="timeOfService" name="timeOfService"
+                                       type="time" placeholder="Time"
+                                       ng-model="serviceTypeDetails.timeOfService"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Cost Of Service(INR)</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="costOfService" name="costOfService" num-with-out-space
+                                       type="text" placeholder="ex:23"
+                                       ng-model="serviceTypeDetails.costOfService" maxlength="6"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <h4><strong>Client Location Address</strong><span style="color: red">*</span></h4>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Street Address</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="pickupAddress" name="pickupAddress"
+                                       type="text" placeholder="Street Address"
+                                       ng-model="serviceTypeDetails.coffinAddress"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3  control-label">Zipcode</label>
+                            <div class=" col-sm-9 mb-15">
+                                <input id="pickupzipcode" name="pickupzipcode" placeholder="Zipcode" maxlength="6"  ng-model="serviceTypeDetails.coffinzipcode" class="form-control input-md">
+                            </div>
+                        </div>
+                        <h4><strong>Client Name</strong><span style="color: red">*</span></h4>
+
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">First Name</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="firstName" name="firstName"
+                                       alpha-with-space
+                                       type="text" placeholder="First Name"
+                                       ng-model="serviceTypeDetails.clientfirstName" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Last Name</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="LastName" name="LastName"
+                                       alpha-with-space
+                                       type="text" placeholder="Last Name"
+                                       ng-model="serviceTypeDetails.clientlastName" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <h4><strong>Client Contact</strong><span style="color: red">*</span></h4>
+
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Area Code</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="AreaCode" name="AreaCode"
+                                       type="text" placeholder="Area Code"
+                                       ng-model="serviceTypeDetails.clientAreaCode" maxlength="6"
+                                       class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Phone Number</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="phoneNumber" name="phoneNumber"
+                                       num-with-out-space
+                                       type="text" placeholder="PhoneNumber"
+                                       ng-model="serviceTypeDetails.clientphoneNumber" maxlength="10"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">ASSISTANCE DETAILS</label>
+                            <div class="col-sm-9 mb-25">
+                                <select name="assistanceDetails" id="assistanceDetails" ng-model="serviceTypeDetails.assistanceDetails" class="form-control" required>
+                                    <option value="">Select</option>
+                                    <option value="KolkataVendors">Kolkata Vendors</option>
+                                    <option value="BangaloreVendors">Bangalore Vendors</option>
+                                    <option value="HyderabadVendors">Hyderabad Vendors</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="serviceTypeDetails.assistanceDetails">
+
+                            <div class="form-group">
+                                <label  class="col-sm-3 control-label">Area Code</label>
+                                <div class="col-sm-9 mb-15">
+                                    <input id="AreaCode" name="AreaCode"
+                                           type="text" placeholder="Area Code"
+                                           ng-model="serviceTypeDetails.clientAreaCode" maxlength="6"
+                                           class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                            <label  class="col-sm-3 control-label">ASSISTANCE Contact</label>
+                            <div class="col-sm-9">
+                                <input id="assistanceContact" name="assistanceContact"
+                                       num-with-out-space
+                                       type="text" placeholder="Assistance Contact"
+                                       ng-model="serviceTypeDetails.assistanceContact" maxlength="10"
+                                       class="form-control">
+                            </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                        data-target=".print-me" ng-click="saveCoffinBox()">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="add_new_PetCremation" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="country-title">Pet Cremation
+                (Use this form for cremation/burial of pets)</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Date of Service</label>
+                            <div class="col-sm-9 mb-15">
+                                <div class="input-group date">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                           ng-model="serviceTypeDetails.dateOfServicep" style="height: 35px;"
+                                           is-open="popup1.opened" readonly datepicker-options="dateOptions"
+                                           ng-required="true"
+                                           close-text="Close" alt-input-formats="altInputFormats"/>
+                                    <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open1()"><i
+                                            class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group" >
+                            <label class="control-label col-sm-3">Time Of Service</label>
+                            <div class="col-sm-9 mb-15" >
+                                <input id="timeOfService" name="timeOfService"
+                                       type="time" placeholder="Time"
+                                       ng-model="serviceTypeDetails.timeOfServicep"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Cost Of Service(INR)</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="costOfService" name="costOfService" num-with-out-space
+                                       type="text" placeholder="ex:23"
+                                       ng-model="serviceTypeDetails.costOfServicep" maxlength="6"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <h4><strong>Client Location Address</strong><span style="color: red">*</span></h4>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Street Address</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="pickupAddress" name="pickupAddress"
+                                       type="text" placeholder="Street Address"
+                                       ng-model="serviceTypeDetails.clientAddressp"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3  control-label">City</label>
+                            <div class=" col-sm-9">
+                                <select id="sourceCity" name="sourceCity"   ng-model="serviceTypeDetails.sourceCityp" ng-options="city.id as
+city.cityName for city in cityList" class="form-control input-md">
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <h4><strong>Pet Burial/Cremation Ground Address</strong><span style="color: red">*</span></h4>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Street Address</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="pickupAddress" name="pickupAddress"
+                                       type="text" placeholder="Street Address"
+                                       ng-model="serviceTypeDetails.petaddressp"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3  control-label">City</label>
+                            <div class=" col-sm-9">
+                                <select id="sourceCity" name="sourceCity"   ng-model="serviceTypeDetails.petcityp" ng-options="city.id as
+city.cityName for city in cityList" class="form-control input-md">
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <h4><strong>Client Name</strong><span style="color: red">*</span></h4>
+
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">First Name</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="firstName" name="firstName"
+                                       alpha-with-space
+                                       type="text" placeholder="First Name"
+                                       ng-model="serviceTypeDetails.clientfirstNamep" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Last Name</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="LastName" name="LastName"
+                                       alpha-with-space
+                                       type="text" placeholder="Last Name"
+                                       ng-model="serviceTypeDetails.clientlastNamep" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <h4><strong>Client Contact</strong><span style="color: red">*</span></h4>
+
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Area Code</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="AreaCode" name="AreaCode"
+                                       type="text" placeholder="Area Code"
+                                       ng-model="serviceTypeDetails.clientAreaCodep" maxlength="6"
+                                       class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">Phone Number</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="phoneNumber" name="phoneNumber"
+                                       num-with-out-space
+                                       type="text" placeholder="PhoneNumber"
+                                       ng-model="serviceTypeDetails.clientphoneNumberp" maxlength="10"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">ASSISTANCE DETAILS</label>
+                            <div class="col-sm-9 mb-25">
+                                <select name="assistanceDetails" id="assistanceDetails" ng-model="serviceTypeDetails.assistanceDetailsp" class="form-control" required>
+                                    <option value="">Select</option>
+                                    <option value="KolkataVendors">Kolkata Vendors</option>
+                                    <option value="BangaloreVendors">Bangalore Vendors</option>
+                                    <option value="HyderabadVendors">Hyderabad Vendors</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="serviceTypeDetails.assistanceDetailsp">
+
+                            <!--<div class="form-group">-->
+                                <!--<label  class="col-sm-3 control-label">Area Code</label>-->
+                                <!--<div class="col-sm-9 mb-15">-->
+                                    <!--<input id="AreaCode" name="AreaCode"-->
+                                           <!--type="text" placeholder="Area Code"-->
+                                           <!--ng-model="serviceTypeDetails.clientAreaCodep" maxlength="6"-->
+                                           <!--class="form-control">-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <div class="form-group">
+                            <label  class="col-sm-3 control-label">ASSISTANCE Contact</label>
+                            <div class="col-sm-9">
+                                <input id="assistanceContact" name="assistanceContact"
+                                       num-with-out-space
+                                       type="text" placeholder="Assistance Contact"
+                                       ng-model="serviceTypeDetails.assistanceContactp" maxlength="10"
+                                       class="form-control">
+                            </div>
+                            </div>
+                        </div>
+                        <h4><strong>Choose Additional Service</strong><span style="color: red">*</span> </h4>
+                        <div class="form-group">
+                            <div class="col-sm-12" style="padding-left: 0px;">
+                                <div class="control-label col-sm-4">
+                                    <label class="customchk">Decoration
+                                        <input id="additionalService" name="additionalService" type="checkbox" checked="checked"  ng-model="serviceTypeDetails.additionalServiceDecorationp" >
+                                        <span class="checkmarks"></span>
+                                    </label>
+                                </div>
+                                <div class="col-sm-8" ng-show="serviceTypeDetails.additionalServiceDecorationp">
+                                    <label class="control-label col-sm-2">Cost</label>
+                                    <div class="col-sm-10 mb-15" >
+                                        <input id="DecorationCost" name="DecorationCost"
+                                               num-with-out-space
+                                               type="text" placeholder="Decoration Cost"
+                                               ng-model="serviceTypeDetails.decorationCostp" maxlength="10"
+                                               class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12" style="padding-left: 0px;">
+                                <div class="control-label col-sm-4">
+                                    <label class="customchk">Funeral Helper
+                                        <input id="additionalService" name="additionalService" type="checkbox"   ng-model="serviceTypeDetails.additionalServicefuneralp">
+                                        <span class="checkmarks"></span>
+                                    </label>
+
+                                </div>
+                                <div class="col-sm-8" ng-show="serviceTypeDetails.additionalServicefuneralp">
+                                    <label class="control-label col-sm-2">Cost</label>
+                                    <div class="col-sm-10 mb-15">
+                                        <input id="funeralHelperCost" name="funeralHelperCost"
+                                               num-with-out-space
+                                               type="text" placeholder="Funeral Helper Cost" maxlength="10"
+                                               ng-model="serviceTypeDetails.funeralHelperCostp"
+                                               class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Are you looking</label>
+                            <div class="col-sm-9 mb-15">
+                                <label class="control-label">
+                                    <input id="lastripple" name="lastripple" type="radio" value="yes"   ng-model="serviceTypeDetails.lastripplep">Yes
+                                </label>
+                                <label class="control-label">
+                                    <input id="lastripple" name="lastripple" type="radio" value="no"   ng-model="serviceTypeDetails.lastripplep">No
+                                </label>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<label class="control-label col-sm-3">Are you looking for Last Ripple assistance ?</label>-->
+                            <!--<div class="col-sm-9 mb-15">-->
+                                <!--<label class="control-label">-->
+                                    <!--<input id="lastripple" name="lastripple" type="radio" value="yes"   ng-model="serviceTypeDetails.lastripplep">Yes-->
+                                <!--</label>-->
+                                <!--<label class="control-label">-->
+                                    <!--<input id="lastripple" name="lastripple" type="radio" value="no"  ng-model="serviceTypeDetails.lastripplep">No-->
+                                <!--</label>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group">
+                            <label  class="control-label col-sm-3">Pet Ashes To Plant Package Type</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="petashes" name="petashes"
+                                       type="text"
+                                       ng-model="serviceTypeDetails.petashesp"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="control-label col-sm-3">Cost Of the Package </label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="costOfPackage" name="costOfPackage"
+                                       type="text"
+                                       ng-model="serviceTypeDetails.costOfPackagep"
+                                       class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                        data-target=".print-me" ng-click="savePetCremation()">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="add_new_ambulance" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 id="country-title">Ambulance Service</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Date of Service</label>
+                            <div class="col-sm-9 mb-15">
+                                <div class="input-group date">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                           ng-model="serviceTypeDetails.dateOfServiceam"
+                                           is-open="popup1.opened" readonly datepicker-options="dateOptions"
+                                           ng-required="true"
+                                           close-text="Close" alt-input-formats="altInputFormats"/>
+                                    <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open1()"><i
+                                            class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            <label class="control-label col-sm-3">Time Of Service</label>
+                            <div class="col-sm-9 mb-15" >
+                                <input id="timeOfService" name="timeOfService"
+                                       type="time" placeholder="Time"
+                                       ng-model="serviceTypeDetails.timeOfServiceam"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Cost Of Service(INR)</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="costOfService" name="costOfService" num-with-out-space
+                                       type="text" placeholder="ex:23"
+                                       ng-model="serviceTypeDetails.costOfServiceam" maxlength="6"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <h4><strong>Pick Up Address</strong><span style="color: red">*</span></h4>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3"> Street Address</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="pickupAddress" name="pickupAddress"
+                                       type="text" placeholder="Pickup Address"
+                                       ng-model="serviceTypeDetails.pickupAddressam"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Zipcode</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="pickupzipcode" name="pickupzipcode" placeholder="Zipcode" maxlength="6"  ng-model="serviceTypeDetails.pickupzipcodeam" num-with-out-space class="form-control input-md">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Stop Over Address</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="stopOverAddress" name="stopOverAddress"
+                                       type="text" placeholder="Stop Over Address"
+                                       ng-model="serviceTypeDetails.stopOverAddressam"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Zipcode</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="stopOverZipcode" name="stopOverZipcode" placeholder="Zipcode" maxlength="6"  ng-model="serviceTypeDetails.stopOverZipcodeam" num-with-out-space class="form-control input-md">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                            <div class="col-sm-3" style="padding: 0px;">
+                                <label class="control-label" >Ambulance Type</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <select id="ambulancetype" name="ambulancetype" ng-model="serviceTypeDetails.ambulancetypeam"
+                                        ng-options="ambulancetype.name as ambulancetype.name for ambulancetype in ambulanceList"
+                                        class="form-control input-md">
+                                    <option value="">Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <h4><strong>Destination Address</strong><span style="color: red">*</span> </h4>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Street Address</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="destinationAddress" name="destinationAddress"
+                                       type="text" placeholder="Street Address"
+                                       ng-model="serviceTypeDetails.destinationAddressam"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Zipcode</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="stopOverZipcode" name="stopOverZipcode" placeholder="Zipcode" maxlength="6"  ng-model="serviceTypeDetails.destinationZipcodeam" num-with-out-space class="form-control input-md">
+                            </div>
+                        </div>
+
+                        <h4><strong>Client Name</strong></h4>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">First Name</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="firstName" name="firstName"
+                                       alpha-with-space
+                                       type="text" placeholder="First Name"
+                                       ng-model="serviceTypeDetails.clientfirstNameam" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Last Name</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="LastName" name="LastName"
+                                       alpha-with-space
+                                       type="text" placeholder="Last Name"
+                                       ng-model="serviceTypeDetails.clientlastNameam" maxlength="125"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <!-- <div class="form-group">
+                             <label  class="col-sm-3 control-label">Area Code</label>
+                             <div class="col-sm-9">
+                                 <input id="AreaCode" name="AreaCode"
+                                        type="text" placeholder="Area Code"
+                                        ng-model="areaCode" maxlength="6"
+                                        class="form-control">
+                             </div>
+                         </div>
+                         - -->
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Phone Number</label>
+                            <div class="col-sm-9 mb-15">
+                                <input id="phoneNumber" name="phoneNumber"
+                                       num-with-out-space
+                                       type="text" placeholder="PhoneNumber"
+                                       ng-model="serviceTypeDetails.clientphoneNumberam" maxlength="10"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Assistance Details</label>
+                            <div class="col-sm-9 mb-15">
+                                <select name="assistanceDetails" id="assistanceDetails" ng-model="serviceTypeDetails.assistanceDetailsam" class="form-control" required>
+                                    <option value="">Select</option>
+                                    <option value="KolkataVendors">Kolkata Vendors</option>
+                                    <option value="BangaloreVendors">Bangalore Vendors</option>
+                                    <option value="HyderabadVendors">Hyderabad Vendors</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-show="serviceTypeDetails.assistanceDetailsam">
+                            <label  class="col-sm-3 control-label">Assistance Contact</label>
+                            <div class="col-sm-9 mb-15">
+                                <!--<div class="form-group">-->
+                                <!--<label  class="col-sm-3 control-label">Area Code</label>-->
+                                <!--<div class="col-sm-9">-->
+                                <!--<input id="AreaCode" name="AreaCode"-->
+                                <!--type="text" placeholder="Area Code"-->
+                                <!--ng-model="areaCode" maxlength="6"-->
+                                <!--class="form-control">-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!-- - -->
+                                <div class="col-sm-9">
+                                    <input id="assistanceContact" name="assistanceContact"
+                                           num-with-out-space
+                                           type="text" placeholder="Assistance Contact"
+                                           ng-model="serviceTypeDetails.assistanceContactam" maxlength="10"
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--<div class="col-sm-9 mb-15">-->
+                        <!--<label class="customchk">Decoration-->
+                        <!--<input id="additionalService" name="additionalService" type="checkbox" checked="checked"  ng-model="additionalServiceDecoration" >-->
+                        <!--<span class="checkmarks"></span>-->
+                        <!--</label>-->
+                        <!--<label class="customchk">Funeral Helper-->
+                        <!--<input id="additionalService" name="additionalService" type="checkbox"   ng-model="additionalServicefuneral">-->
+                        <!--<span class="checkmarks"></span>-->
+                        <!--</label>-->
+
+                        <!--</div>-->
+                    </div>
+                    <!--<div class="form-group" ng-show="additionalServiceDecoration">-->
+                    <!--<label class="control-label col-sm-3">Decoration Cost</label>-->
+                    <!--<div class="col-sm-9 mb-15">-->
+                    <!--<input id="DecorationCost" name="DecorationCost"-->
+                    <!--num-with-out-space-->
+                    <!--type="text" placeholder="DecorationCost"-->
+                    <!--ng-model="decorationCost" maxlength="10"-->
+                    <!--class="form-control">-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group" ng-show="additionalServicefuneral">-->
+                    <!--<label class="control-label col-sm-3">Funeral Helper Cost</label>-->
+                    <!--<div class="col-sm-9 mb-15">-->
+                    <!--<input id="funeralHelperCost" name="funeralHelperCost"-->
+                    <!--num-with-out-space-->
+                    <!--type="text" placeholder="Funeral Helper Cost" maxlength="10"-->
+                    <!--ng-model="funeralHelperCost"-->
+                    <!--class="form-control">-->
+                    <!--</div>-->
+                    <!--</div>-->
+                </div>
+
+
+
+
+
+                <!--<label  class="col-sm-3 control-label">Destination Address</label>-->
+                <!--<div class="form-group">-->
+                <!--<label  class="col-sm-3 control-label">Street Address</label>-->
+                <!--<div class="col-sm-9">-->
+                <!--<input id="destinationAddress" name="destinationAddress"-->
+                <!--type="text" placeholder="Street Address"-->
+                <!--ng-model="destinationAddress"-->
+                <!--class="form-control">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                <!--<label class="col-sm-3  control-label">Zipcode</label>-->
+                <!--<div class=" col-sm-9">-->
+                <!--<input id="destinationZipcode" name="destinationZipcode" placeholder="Zipcode"   ng-model="destinationZipcode" class="form-control input-md">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<label  class="col-sm-3 control-label">Client Name</label>-->
+                <!--<div class="form-group">-->
+                <!--<label  class="col-sm-3 control-label">First Name</label>-->
+                <!--<div class="col-sm-9">-->
+                <!--<input id="firstName" name="firstName"-->
+                <!--alpha-with-space-->
+                <!--type="text" placeholder="First Name"-->
+                <!--ng-model="clientfirstName" maxlength="125"-->
+                <!--class="form-control">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                <!--<label  class="col-sm-3 control-label">Last Name</label>-->
+                <!--<div class="col-sm-9">-->
+                <!--<input id="LastName" name="LastName"-->
+                <!--alpha-with-space-->
+                <!--type="text" placeholder="Last Name"-->
+                <!--ng-model="clientlastName" maxlength="125"-->
+                <!--class="form-control">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                <!--<label  class="col-sm-3 control-label">Phone Number</label>-->
+                <!--<div class="col-sm-9">-->
+                <!--<input id="phoneNumber" name="phoneNumber"-->
+                <!--num-with-out-space-->
+                <!--type="text" placeholder="PhoneNumber"-->
+                <!--ng-model="clientphoneNumber" maxlength="10"-->
+                <!--class="form-control">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                <!--<label  class="col-sm-3 control-label">ASSISTANCE DETAILS</label>-->
+                <!--<div class="col-sm-9">-->
+                <!--<select name="assistanceDetails" id="assistanceDetails" ng-model="assistanceDetails" class="form-control" required>-->
+                <!--<option value="">Select</option>-->
+                <!--<option value="KolkataVendors">Kolkata Vendors</option>-->
+                <!--<option value="BangaloreVendors">Bangalore Vendors</option>-->
+                <!--<option value="HyderabadVendors">Hyderabad Vendors</option>-->
+                <!--</select>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--&lt;!&ndash;<div class="form-group" ng-show="assistanceDetails=='vendors'">&ndash;&gt;-->
+                <!--&lt;!&ndash;<label  class="col-sm-3 control-label"></label>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="col-sm-9">&ndash;&gt;-->
+                <!--&lt;!&ndash;<select name="custStatus" id="custStatus" ng-model="StatusText" class="form-control" required>&ndash;&gt;-->
+                <!--&lt;!&ndash;<option value="">Select</option>&ndash;&gt;-->
+                <!--&lt;!&ndash;<option value="KolkataVendors">Kolkata Vendors</option>&ndash;&gt;-->
+                <!--&lt;!&ndash;<option value="BangaloreVendors">Bangalore Vendors</option>&ndash;&gt;-->
+                <!--&lt;!&ndash;<option value="HyderabadVendors">Hyderabad Vendors</option>&ndash;&gt;-->
+                <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--<div class="form-group" ng-show="assistanceDetails">-->
+                <!--<label  class="col-sm-3 control-label">ASSISTANCE Contact</label>-->
+                <!--<div class="col-sm-9">-->
+                <!--<input id="assistanceContact" name="assistanceContact"-->
+                <!--num-with-out-space-->
+                <!--type="text" placeholder="Assistance Contact"-->
+                <!--ng-model="assistanceContact" maxlength="10"-->
+                <!--class="form-control">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                <!--<label class="col-sm-3  control-label">Choose Additional Service</label>-->
+                <!--<div class=" col-sm-9">-->
+                <!--<input id="additionalService" name="additionalService" type="radio"   ng-model="additionalService">Decoration-->
+                <!--<input id="additionalService" name="additionalService" type="radio"   ng-model="additionalService">Funeral Helper-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group" >-->
+                <!--<label  class="col-sm-3 control-label">Decoration Cost</label>-->
+                <!--<div class="col-sm-9">-->
+                <!--<input id="DecorationCost" name="DecorationCost"-->
+                <!--num-with-out-space-->
+                <!--type="text" placeholder="DecorationCost"-->
+                <!--ng-model="decorationCost" maxlength="10"-->
+                <!--class="form-control">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group" >-->
+                <!--<label  class="col-sm-3 control-label">Funeral Helper Cost</label>-->
+                <!--<div class="col-sm-9">-->
+                <!--<input id="funeralHelperCost" name="funeralHelperCost"-->
+                <!--num-with-out-space-->
+                <!--type="text" placeholder="Funeral Helper Cost" maxlength="10"-->
+                <!--ng-model="funeralHelperCost"-->
+                <!--class="form-control">-->
+                <!--</div>-->
+                <!--</div>-->
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                        data-target=".print-me" ng-click="saveHearseVan()">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="add_new" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" ng-click="closeData()">&times;</span></button>
+                <h4 id="country-title">{{servceName}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="row" id="cus_step1">
+
+                        <div class="form-group" ng-repeat="key in keyList" ng-init="parentIndex=$index">
+                            <!--<div class="form-group" ng-repeat="val in keyValuesList">-->
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" ng-show="key.type=='date'">
+                                <label>{{key.field}}</label>
+                            </div>
+                            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 input-group date" ng-show="key.type=='date'">
+                                <p class="input-group" style="width: 35%;">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                           ng-model="key.values" style="height: 35px;"
+                                           is-open="popup1.opened" readonly datepicker-options="dateOptions"
+                                           ng-required="true"
+                                           close-text="Close" alt-input-formats="altInputFormats"/>
+                                    <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open1()"><i
+                                             class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                </p>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" ng-show="key.type=='input'" >
+                                <label>{{key.field}}</label>
+                            </div>
+                            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 input-group date" ng-show="key.type=='input'">
+                                <input id="input" name="input"
+                                       type="text"
+                                       ng-model="key.values" maxlength="125"
+                                       class="form-control">
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" ng-show="key.type=='textarea'" >
+                                <label>{{key.field}}</label>
+                            </div>
+                            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 input-group date" ng-show="key.type=='textarea'">
+                                <textarea id="input" name="input"
+                                          type="text"
+                                          ng-model="key.values" maxlength="125"
+                                          class="form-control">
+                                </textarea>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" ng-show="key.type=='radio'" >
+                                <label>{{key.field}}</label>
+                            </div>
+                            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 input-group date" ng-show="key.type=='radio'" ng-repeat="val in key.valueList">
+                                <div class=" col-sm-9" >
+                                    <input id="serviceLift" name="key.values{{$index}}" type="radio" ng-value="val.value"   ng-model="key.values">{{val.value}}
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" ng-show="key.type=='checkbox'" >
+                                <label>{{key.field}}</label>
+                            </div>
+                            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 input-group date" ng-show="key.type=='checkbox'" ng-repeat="val in key.valueList">
+                                <div class=" col-sm-9">
+                                    <input id="checkbox" name="key.values" type="checkbox" value="val.value"  ng-model="val.values" >{{val.value}}
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12"  ng-show="key.type=='select'" >
+                                <label>{{key.field}}</label>
+                            </div>
+                            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 input-group date" ng-show="key.type=='select'">
+                                <div class=" col-sm-9">
+                                    <select name="assistanceDetails" id="assistanceDetails" ng-options="s.value as s.value for s in key.valueList" ng-model="key.values" class="form-control" required>
+                                        <option value="">Select</option>
+                                        <option value="key.value">{{key.value}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                        data-target=".print-me" ng-click="saveFields()">Save</button>
+                <button type="button" class="btn btn-default" ng-click="closeData()" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
